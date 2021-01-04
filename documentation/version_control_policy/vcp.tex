@@ -4,9 +4,59 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titling}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=none,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
 \pagenumbering{gobble}
-\author{Perry David Ralston Jr.}
-\title{Version Control Policy}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Version Control Policy}
+\rhead{The High Five}
+
 \begin{document}
-\maketitle
+\section*{Policy}
+	\begin{list}{•}{}
+		\item No work should be completed directly on the master branch, regardless of how small\\
+		\item All pull requests must be approved by no less than 2 people other than the requestee\\
+		\item Merged branches should be deleted\\
+		\item Branches will have concise and descriptive names\\
+		\item In the event of accidental master branch corruption, do not attempt to fix alone nor immediately, reach out to the group so we can best determine the resolution 
+	\end{list}
+\section*{Helpful Commands}	
+	\textbf{Clone the Repository}\\
+	Copy the repository locally. Will make a directory in the current working directory to be the local root of the git repo.
+	\lstinputlisting[language=bash]{codefiles/gitclone}\pagebreak
+	\textbf{List Branches}\\
+	Useful for seeing what branch you are currently on, marked with an asterisk, and what branches are available
+	\lstinputlisting[language=bash]{codefiles/gitbranch}
+\section*{General Notes}
+	I would suggest using the GitHub Desktop app as the gui makes it easy to create, checkout, commit etc with the repo in a nice gui. There are a couple limitations with it, but the benefits outweight the cons by a lot. Of course there are many IDE's that have built in git funtionality as well. If you are comfortable with the command line, then please feel free to add more to this document if you know of something useful. Please use the present styling when making changes to the Latex file.
 \end{document}
