@@ -1,0 +1,5 @@
+The Version Control Policy sourcefiles are in this directory. running miktex with -output-directory=<DIR> 
+was giving me issues so I am hand copy pasting the output pdf into the parent directory and changing its name
+to "Version Control Policy". Please feel free to add on to the file as neccesary, keeping in line with the 
+present styling and organization. DO NOT COMMIT THE COMPILE FILES (.aux etc). I really should add them to the
+gitignore. That will maybe be for a later PR.
