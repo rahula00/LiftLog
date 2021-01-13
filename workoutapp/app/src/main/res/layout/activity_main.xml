@@ -28,7 +28,7 @@
         android:layout_marginEnd="110dp"
         android:layout_marginRight="110dp"
         android:text="App Name?"
-        android:textColor="#ff7aff24"
+        android:textColor="@color/black"
         android:textSize="35dp" />
 
     <EditText
@@ -46,7 +46,7 @@
         android:layout_marginEnd="-3dp"
         android:layout_marginRight="-3dp"
         android:focusable="true"
-        android:hint="Enter Name"
+        android:hint="Username"
         android:textColorHighlight="#ff7eff15"
         android:textColorHint="#ffff25e6" />
 

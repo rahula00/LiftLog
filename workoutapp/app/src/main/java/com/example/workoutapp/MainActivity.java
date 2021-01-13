@@ -35,9 +35,9 @@ public class MainActivity extends Activity  {
                 // TODO: Implement actual redirection to main
                 if(ed1.getText().toString().equals("admin") &&  ed2.getText().toString().equals("admin")) {
                     Toast.makeText(getApplicationContext(), "Redirecting...",Toast.LENGTH_SHORT).show();
-
+                }
                 // If incorrect, reduce allowed logins, print message
-                }else{
+                else{
                     Toast.makeText(getApplicationContext(), "Wrong Credentials",Toast.LENGTH_SHORT).show();
                     counter--;
                     // Used available login attempts, lock login button
