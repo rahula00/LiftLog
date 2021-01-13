@@ -12,11 +12,10 @@ import android.widget.Toast;
 
 
 public class MainActivity extends Activity  {
-    Button b1,b2;
-    EditText ed1,ed2;
+    Button b1;          // Login Button object
+    EditText ed1,ed2;   // The username and password fields
 
-    TextView tx1;
-    int counter = 5;
+    int counter = 5;    // Allowed failed logins
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,29 +26,26 @@ public class MainActivity extends Activity  {
         ed1 = (EditText)findViewById(R.id.editText);
         ed2 = (EditText)findViewById(R.id.editText2);
 
-        b2 = (Button)findViewById(R.id.button2);
-
+        // b1 is login button, checks for clicks on login and checks that the fields are correct
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
+            // Checks if credentials are correct
             public void onClick(View v) {
-                if(ed1.getText().toString().equals("admin") &&
-                        ed2.getText().toString().equals("admin")) {
+                // If correct, prints a appropriate message
+                // TODO: Implement actual redirection to main
+                if(ed1.getText().toString().equals("admin") &&  ed2.getText().toString().equals("admin")) {
                     Toast.makeText(getApplicationContext(), "Redirecting...",Toast.LENGTH_SHORT).show();
+
+                // If incorrect, reduce allowed logins, print message
                 }else{
                     Toast.makeText(getApplicationContext(), "Wrong Credentials",Toast.LENGTH_SHORT).show();
                     counter--;
-
+                    // Used available login attempts, lock login button
+                    // TODO: Decide if we actually want this, I put it here as an example of options
                     if (counter == 0) {
                         b1.setEnabled(false);
                     }
                 }
-            }
-        });
-
-        b2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
             }
         });
     }
