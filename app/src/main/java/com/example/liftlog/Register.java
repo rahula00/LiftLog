@@ -27,10 +27,8 @@ public class Register extends AppCompatActivity {
     ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("Register", "We HERE!");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Log.d("Register", "We HERE!");
         mFullName = findViewById(R.id.fullName);
         mEmail = findViewById(R.id.email);
         mPassword = findViewById(R.id.password);
@@ -38,8 +36,8 @@ public class Register extends AppCompatActivity {
         mRegisterBtn = findViewById(R.id.btnLogin);
         mLoginBtn = findViewById(R.id.textRegister);
         mHomeBtn = findViewById(R.id.homeText);
-        Log.d("Register", "We HERE!");
         fAuth = FirebaseAuth.getInstance();
+        FirebaseAuth.getInstance().signOut();
         progressBar = findViewById(R.id.progressBar);
 
         if(fAuth.getCurrentUser() != null){
