@@ -7,6 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 
 public class Home extends AppCompatActivity {
+    //TODO: Auto login. Just need to get a Firebase session started. Refer to register.java
+    //if(fAuth.getCurrentUser() != null){
+    //            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+    //            finish();
+    //        }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

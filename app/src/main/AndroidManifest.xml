@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login" />
+        <!--TODO: Add 'noHistory' functionality where it belongs so back button works as needed-->
+        <activity android:name=".Login" /> #Add
         <activity android:name=".MainActivity" />
         <activity android:name=".Register"/>
     </application>

@@ -32,9 +32,11 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();    //Allows for the top left back button
+        actionBar.setDisplayHomeAsUpEnabled(true);      //Adds the back button
 
+        //Pulls the relevant data from the XML page
+        //Linked to the relevant field
         mEmail = (EditText)findViewById(R.id.email);
         mPassword = (EditText)findViewById(R.id.password);
         progressBar = findViewById(R.id.progressBar2);
@@ -43,32 +45,40 @@ public class Login extends AppCompatActivity {
         mCreateBtn = findViewById(R.id.textRegister);
         mHomeBtn = findViewById(R.id.txtHome);
 
+        //On click of 'login' button
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                //TODO: PLEASE SANITIZE THIS. FOR THE LOVE OF GOD THIS IS A MISTAKE AS IS!!
                 String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
 
+                //Check for email
+                //TODO: Check for valid email
                 if(TextUtils.isEmpty(email)){
                     mEmail.setError("Email is Required.");
                     return;
                 }
 
+                //Check for password
                 if(TextUtils.isEmpty(password)){
                     mPassword.setError("Password is Required.");
                     return;
                 }
 
+                //Check for password length
+                //TODO:Actual password strength check?
                 if(password.length() < 6){
                     mPassword.setError("Password Must be >= 6 Characters");
                     return;
                 }
 
+                //Spinny bar go BRRRR
                 progressBar.setVisibility(View.VISIBLE);
 
-                // authenticate the user
-
+                //authenticate the user
+                //handshake to firebase database
                 fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -89,6 +99,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        //If user clicks on the create button, move to register page
         mCreateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +107,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        //If user clicks on the home button, move to home page
         mHomeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,13 +115,14 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+
+    //Handle back button and back arrow functionalities.
+    //TODO: Remove back arrow? Add to page stack?
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         startActivity(new Intent(getApplicationContext(), Home.class));
-        return super.onOptionsItemSelected(item);
-    }
+        return super.onOptionsItemSelected(item); }
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), Home.class));
-    }
+        startActivity(new Intent(getApplicationContext(), Home.class)); }
 }
