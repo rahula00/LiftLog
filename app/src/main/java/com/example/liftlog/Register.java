@@ -106,6 +106,9 @@ public class Register extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         startActivity(new Intent(getApplicationContext(), Home.class));
         return super.onOptionsItemSelected(item);
-
+    }
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), Home.class));
     }
 }
