@@ -1,11 +1,13 @@
 package com.example.liftlog;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +31,8 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         mFullName = findViewById(R.id.fullName);
         mEmail = findViewById(R.id.email);
         mPassword = findViewById(R.id.password);
@@ -97,5 +101,11 @@ public class Register extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Home.class));
             }
         });
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        startActivity(new Intent(getApplicationContext(), Home.class));
+        return super.onOptionsItemSelected(item);
+
     }
 }
