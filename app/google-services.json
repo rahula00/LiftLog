@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "1042290606747",
+    "project_id": "liftlog-61736",
+    "storage_bucket": "liftlog-61736.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1042290606747:android:0b01ace9119a59d34c3c3e",
+        "android_client_info": {
+          "package_name": "com.example.liftlog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1042290606747-hki0km788tvpsph1er5ba9bhl5tevf0j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWSGmNbH3f2rAlGgTT_KwJqlqy-ZdebgY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1042290606747-hki0km788tvpsph1er5ba9bhl5tevf0j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1042290606747:android:4968cd371ad936ef4c3c3e",
+        "android_client_info": {
+          "package_name": "com.example.workoutapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1042290606747-hki0km788tvpsph1er5ba9bhl5tevf0j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWSGmNbH3f2rAlGgTT_KwJqlqy-ZdebgY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1042290606747-hki0km788tvpsph1er5ba9bhl5tevf0j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
