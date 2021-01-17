@@ -34,8 +34,8 @@ public class Register extends AppCompatActivity {
 
         //Creates the back arrow top left
         //TODO: Do we actually even want this when android has a back?
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setDisplayHomeAsUpEnabled(true);
 
         //Get matching data from XML front-end
         mFullName = findViewById(R.id.fullName);

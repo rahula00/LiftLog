@@ -32,8 +32,8 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ActionBar actionBar = getSupportActionBar();    //Allows for the top left back button
-        actionBar.setDisplayHomeAsUpEnabled(true);      //Adds the back button
+//        ActionBar actionBar = getSupportActionBar();    //Allows for the top left back button
+//        actionBar.setDisplayHomeAsUpEnabled(true);      //Adds the back button
 
         //Pulls the relevant data from the XML page
         //Linked to the relevant field
