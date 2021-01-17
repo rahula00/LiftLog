@@ -32,11 +32,6 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        //Creates the back arrow top left
-        //TODO: Do we actually even want this when android has a back?
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-
         //Get matching data from XML front-end
         mFullName = findViewById(R.id.fullName);
         mEmail = findViewById(R.id.email);
@@ -113,17 +108,10 @@ public class Register extends AppCompatActivity {
         });
     }
 
-    //Handle back button and back arrow functionalities.
-    //TODO: Remove back arrow? Add to page stack?
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        startActivity(new Intent(getApplicationContext(), Home.class));
-        finish();
-        return super.onOptionsItemSelected(item);
-    }
+    //Handle back buttonfunctionalities.
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), Home.class));
+        startActivity(new Intent(getApplicationContext(), Login.class));
         finish();
     }
 }

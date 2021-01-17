@@ -9,17 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LiftLog">
-        <activity android:name=".Home"
+        <!--TODO: Add 'noHistory' functionality where it belongs so back button works as needed-->
+        <activity android:name=".Login"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--TODO: Add 'noHistory' functionality where it belongs so back button works as needed-->
-        <activity android:name=".Login" /> #Add
         <activity android:name=".MainActivity" />
         <activity android:name=".Register"/>
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
