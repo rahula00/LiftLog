@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Register extends AppCompatActivity {
     EditText mFullName, mEmail, mPassword, mPhone;
     Button mRegisterBtn;
-    TextView mLoginBtn, mHomeBtn;
+    TextView mLoginBtn;
     FirebaseAuth fAuth;
     String userID;
     ProgressBar progressBar;
@@ -44,7 +44,6 @@ public class Register extends AppCompatActivity {
         mPhone = findViewById(R.id.phone);
         mRegisterBtn = findViewById(R.id.btnLogin);
         mLoginBtn = findViewById(R.id.textRegister);
-        mHomeBtn = findViewById(R.id.homeText);
 
         //Open instance of Firebase
         fAuth = FirebaseAuth.getInstance();
@@ -91,6 +90,7 @@ public class Register extends AppCompatActivity {
                         if(task.isSuccessful()){
                             Toast.makeText(Register.this, "User Created.", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            finish();
 
                         }
                         //If it failed, pass in the error that is returned and prompt to go again
@@ -108,12 +108,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Login.class));
-            }
-        });
-        mHomeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Home.class));
+                finish();
             }
         });
     }
@@ -123,10 +118,12 @@ public class Register extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         startActivity(new Intent(getApplicationContext(), Home.class));
+        finish();
         return super.onOptionsItemSelected(item);
     }
     @Override
     public void onBackPressed() {
         startActivity(new Intent(getApplicationContext(), Home.class));
+        finish();
     }
 }

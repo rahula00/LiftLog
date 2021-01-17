@@ -24,7 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Login extends AppCompatActivity {
     EditText mEmail,mPassword;
     Button mLoginBtn;
-    TextView mCreateBtn, mHomeBtn;
+    TextView mCreateBtn;
     ProgressBar progressBar;
     FirebaseAuth fAuth;
 
@@ -43,7 +43,6 @@ public class Login extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         mLoginBtn = findViewById(R.id.btnLogin);
         mCreateBtn = findViewById(R.id.textRegister);
-        mHomeBtn = findViewById(R.id.txtHome);
 
         //On click of 'login' button
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +85,9 @@ public class Login extends AppCompatActivity {
                             Toast.makeText(Login.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
 //                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
                             Intent intent = new Intent(Login.this, MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
+                            finish();
 
                         }else {
                             Toast.makeText(Login.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -104,16 +105,10 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),Register.class));
+                finish();
             }
         });
 
-        //If user clicks on the home button, move to home page
-        mHomeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Home.class));
-            }
-        });
     }
 
     //Handle back button and back arrow functionalities.
@@ -121,8 +116,11 @@ public class Login extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         startActivity(new Intent(getApplicationContext(), Home.class));
+        finish();
         return super.onOptionsItemSelected(item); }
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), Home.class)); }
+        startActivity(new Intent(getApplicationContext(), Home.class));
+        finish();
+    }
 }
