@@ -29,13 +29,4 @@ public class Home extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(),Register.class));
         finish();
     }
-    /**
-     * Back button listener.
-     * Will close the application if the back button pressed twice.
-     */
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        return;
-    }
 }
