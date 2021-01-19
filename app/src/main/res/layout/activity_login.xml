@@ -40,7 +40,7 @@
         android:id="@+id/password"
         android:layout_width="379dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
+        android:layout_marginBottom="124dp"
         android:background="#005E4A4A"
         android:ems="10"
         android:hint="Password"
@@ -78,9 +78,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.683"
+        app:layout_constraintVertical_bias="0.728"
         tools:ignore="MissingConstraints" />
 
     <ProgressBar
