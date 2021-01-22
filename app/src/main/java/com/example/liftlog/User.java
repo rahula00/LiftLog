@@ -1,7 +1,6 @@
 package com.example.liftlog;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class User{
     public String email;
