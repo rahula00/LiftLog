@@ -18,8 +18,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
     EditText mEmail,mPassword;
@@ -27,7 +29,7 @@ public class Login extends AppCompatActivity {
     TextView mCreateBtn;
     ProgressBar progressBar;
     FirebaseAuth fAuth;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +43,8 @@ public class Login extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         mLoginBtn = findViewById(R.id.btnLogin);
         mCreateBtn = findViewById(R.id.textRegister);
+
+
 
         //On click of 'login' button
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
@@ -79,14 +83,23 @@ public class Login extends AppCompatActivity {
                 fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        //If successfully authenticated user with credentials given
+                        //Then check if email is verified
                         if(task.isSuccessful()){
-                            Toast.makeText(Login.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
-//                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                            Intent intent = new Intent(Login.this, MainActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                            finish();
-
+                            FirebaseUser user = fAuth.getCurrentUser();
+                            //If email was verified, then allow login
+                            if(user.isEmailVerified()) {
+                                Toast.makeText(Login.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
+                                progressBar.setVisibility(View.GONE);
+                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                finish();
+                            //If email was unverified, then refuse login and remove instance token
+                            }else {
+                                Toast.makeText(Login.this, "Please Verify Your Account", Toast.LENGTH_LONG).show();
+                                FirebaseAuth.getInstance().signOut();
+                            }
+                        //Was not successful in authenticating the user
+                        //Prints out technical error, TODO:Replace with generic error message rather then the the debug response
                         }else {
                             Toast.makeText(Login.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
