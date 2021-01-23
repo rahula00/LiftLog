@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Register extends AppCompatActivity {
     EditText mEmail, mPassword;
@@ -79,12 +80,18 @@ public class Register extends AppCompatActivity {
                 fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        //If successfully created the user, log in and return message that it worked
+                        //If successfully created the user, send an verification email to that email
                         if(task.isSuccessful()){
-                            Toast.makeText(Register.this, "User Created.", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                            finish();
+                            Toast.makeText(Register.this, "Verification Email Sent", Toast.LENGTH_SHORT).show();
 
+                            //Get the new user and send an email to that email.
+                            //Log out the new user to prevent shenanigans
+                            //Then redirect back to login page
+                            FirebaseUser user = fAuth.getCurrentUser();
+                            user.sendEmailVerification();
+                            fAuth.signOut();
+                            startActivity(new Intent(getApplicationContext(), Login.class));
+                            finish();
                         }
                         //If it failed, pass in the error that is returned and prompt to go again
                         else{
