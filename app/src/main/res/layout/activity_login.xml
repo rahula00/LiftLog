@@ -26,11 +26,11 @@
 
 
     <Button
-        android:background="@drawable/roundedges"
         android:id="@+id/btnLogin"
         android:layout_width="211dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/roundedges"
         android:bottomLeftRadius="50dp"
         android:bottomRightRadius="50dp"
         android:cursorVisible="false"
@@ -43,8 +43,10 @@
         android:topRightRadius="50dp"
         app:backgroundTint="#50dc00"
         app:layout_constraintBottom_toTopOf="@+id/textRegister"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -59,9 +61,10 @@
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.784"
+        app:layout_constraintVertical_bias="0.832"
         tools:ignore="MissingConstraints" />
 
     <ProgressBar
@@ -70,6 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
+        android:indeterminateTint="#50dc00"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,45 +107,49 @@
         android:textColor="#9c9c9c"
         android:textColorHint="#9c9c9c"
         android:textSize="16sp"
+
         android:textStyle="normal"
-        app:layout_constraintBottom_toTopOf="@+id/password"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintHorizontal_bias="0.56"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
         tools:ignore="NotSibling" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/password"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="60dp"
-        android:background="@drawable/roundedges"
-        android:ems="10"
-        android:fontFamily="@font/roboto_bold"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        android:textColor="#9c9c9c"
-        android:textColorHint="#9c9c9c"
-        android:textSize="16sp"
-        android:textStyle="normal"
+        android:layout_marginTop="100dp"
+        app:hintEnabled="false"
         app:layout_constraintBottom_toTopOf="@+id/btnLogin"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintHorizontal_bias="0.568"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
-        tools:ignore="MissingConstraints" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/password"
-        app:layout_constraintEnd_toEndOf="@+id/password"
-        app:layout_constraintHorizontal_bias="0.985"
-        app:layout_constraintStart_toStartOf="@+id/password"
-        app:layout_constraintTop_toTopOf="@+id/password"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
         app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/black">
+        app:passwordToggleTint="#ababab">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="60dp"
+            android:background="@drawable/roundedges"
+            android:ems="10"
+            android:fontFamily="@font/roboto_bold"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textColor="#9c9c9c"
+            android:textColorHint="#9c9c9c"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+            app:layout_constraintTop_toTopOf="@+id/textInputLayout"
+            tools:ignore="MissingConstraints" />
     </com.google.android.material.textfield.TextInputLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
