@@ -24,7 +24,6 @@ import com.google.firebase.auth.FirebaseUser;
 public class Register extends AppCompatActivity {
     EditText mEmail, mPassword;
     Button mRegisterBtn;
-    TextView mLoginBtn;
     FirebaseAuth fAuth;
     String userID;
     ProgressBar progressBar;
@@ -37,7 +36,6 @@ public class Register extends AppCompatActivity {
         mEmail = findViewById(R.id.email);
         mPassword = findViewById(R.id.password);
         mRegisterBtn = findViewById(R.id.btnLogin);
-        mLoginBtn = findViewById(R.id.textRegister);
 
         //Open instance of Firebase
         fAuth = FirebaseAuth.getInstance();
