@@ -29,8 +29,6 @@ public class Login extends AppCompatActivity {
     FirebaseAuth fAuth;
 
 
-    public void showHidePass(View view){}
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

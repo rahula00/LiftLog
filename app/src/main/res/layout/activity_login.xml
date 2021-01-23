@@ -25,48 +25,6 @@
         app:layout_constraintGuide_percent="0.94" />
 
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="12dp"
-        android:ems="10"
-        android:fontFamily="@font/roboto_bold"
-        android:hint="Email"
-        android:background="@drawable/roundedges"
-        android:inputType="textPersonName"
-        android:padding="10dp"
-        android:textColor="#9c9c9c"
-        android:textColorHint="#9c9c9c"
-        android:textSize="16sp"
-        android:textStyle="normal"
-        app:
-        app:layout_constraintBottom_toTopOf="@+id/password"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="@+id/guideline1" />
-
-    <EditText
-        android:id="@+id/password"
-        android:background="@drawable/roundedges"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="80dp"
-        android:ems="10"
-        android:fontFamily="@font/roboto_bold"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        android:textColor="#9c9c9c"
-        android:textColorHint="#9c9c9c"
-        android:textSize="16sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="@+id/guideline1"
-        tools:ignore="MissingConstraints" />
-
     <Button
         android:background="@drawable/roundedges"
         android:id="@+id/btnLogin"
@@ -130,21 +88,60 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/dumbbell_gradient_2" />
 
-    <ImageView
-        android:id="@+id/show_pass_btn"
-        android:onClick="showHidePass"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:adjustViewBounds="true"
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/roundedges"
+        android:ems="10"
+        android:fontFamily="@font/roboto_bold"
+        android:hint="Email"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textColor="#9c9c9c"
+        android:textColorHint="#9c9c9c"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/password"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        tools:ignore="NotSibling" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/password"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/roundedges"
+        android:ems="10"
+        android:fontFamily="@font/roboto_bold"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:textColor="#9c9c9c"
+        android:textColorHint="#9c9c9c"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        tools:ignore="MissingConstraints" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/password"
         app:layout_constraintEnd_toEndOf="@+id/password"
+        app:layout_constraintHorizontal_bias="0.985"
+        app:layout_constraintStart_toStartOf="@+id/password"
         app:layout_constraintTop_toTopOf="@+id/password"
-        app:layout_constraintVertical_bias="0.47"
-        app:srcCompat="@drawable/eyecon" />
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/black">
 
-   
-
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
