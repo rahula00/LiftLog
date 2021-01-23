@@ -21,7 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Register extends AppCompatActivity {
-    EditText mFullName, mEmail, mPassword, mPhone;
+    EditText mEmail, mPassword;
     Button mRegisterBtn;
     TextView mLoginBtn;
     FirebaseAuth fAuth;
@@ -33,10 +33,8 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         //Get matching data from XML front-end
-        mFullName = findViewById(R.id.fullName);
         mEmail = findViewById(R.id.email);
         mPassword = findViewById(R.id.password);
-        mPhone = findViewById(R.id.phone);
         mRegisterBtn = findViewById(R.id.btnLogin);
         mLoginBtn = findViewById(R.id.textRegister);
 
@@ -98,14 +96,7 @@ public class Register extends AppCompatActivity {
             }
         });
 
-        //Listens on buttons to return to home/login and returns you there
-        mLoginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Login.class));
-                finish();
-            }
-        });
+
     }
 
     //Handle back buttonfunctionalities.
