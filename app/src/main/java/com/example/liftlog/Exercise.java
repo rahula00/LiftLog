@@ -5,8 +5,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 
+import java.io.IOException;
+
 public class Exercise {
-    //id & instructions
+    // exercise id & instructions
     public int ID;
     public String instructions;
     // for taking the specific image for the exercise and setting it as an ImageView
@@ -14,10 +16,15 @@ public class Exercise {
     public Bitmap image;
     public ImageView description;
 
-    public Exercise(int id, String directions, String image_path){
+    public Exercise(int id, String directions, String assetName) {
         ID = id;
         instructions = directions;
-        image = BitmapFactory.decodeStream(context.getAssets().open(image_path));
+        // using open() requires this try/catch statement but probably won't throw an error
+        try {
+            image = BitmapFactory.decodeStream(context.getAssets().open(assetName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         description.setImageBitmap(image);
     }
 }
