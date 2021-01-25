@@ -14,9 +14,9 @@ public class User{
     String UID = fAuth.getCurrentUser().getUid();
     public String email;
     public String name;
-    public Calendar date;
+    public Calendar birthDate;
     public boolean sex;
-    public Pair<Float,Float> height;
+    public Pair<Integer,Integer> height;
     public float weight;
 
 
@@ -24,13 +24,14 @@ public class User{
         //random values
         email = "email";
         name = "name";
-        date = Calendar.getInstance();
+        birthDate = Calendar.getInstance();
         sex = true;
-        height = new Pair<Float, Float>(0, 0);
+        height = new Pair<Integer, Integer>(0, 0);
         weight = 0;
     }
 
     void setEmail(String nEmail){
+        //add checking for this
         email = nEmail;
         database.child(UID).child("Email").setValue(email);
     }
@@ -41,21 +42,26 @@ public class User{
     }
 
     void setDate(Integer year, Integer month, Integer day){
-        date.set(year, month, day);
-        database.child(UID).child("Date").setValue(date);
+        //need to add checking for this
+        birthDate.set(year, month, day);
+        database.child(UID).child("Date").setValue(birthDate);
     }
 
-    void setSex(String nSex){
-        sex = nSex.equalsIgnoreCase("Male");
+    void setSex(boolean nSex){
+        sex = nSex;
         database.child(UID).child("Sex").setValue(sex);
     }
 
-    void setHeight(Pair<Float, Float> nHeight){
+    void setHeight(Pair<Integer, Integer> nHeight){
         height = nHeight;
         database.child(UID).child("Height").setValue(height);
     }
 
     void setWeight(float nWeight) {
+        if(nWeight<0){
+            //some std err
+            //exit
+        }
         weight = nWeight;
         database.child(UID).child("Weight").setValue(weight);
     }
