@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.util.Calendar;
+import java.util.regex.Pattern;
 
 public class User{
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -31,9 +32,15 @@ public class User{
     }
 
     void setEmail(String nEmail){
-        //add checking for this
-        email = nEmail;
-        database.child(UID).child("Email").setValue(email);
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+        Pattern p = Pattern.compile(emailRegex);
+        if(p.matcher(nEmail).matches()){
+            email = nEmail;
+            database.child(UID).child("Email").setValue(email);
+        }
     }
 
     void setName(String nName){
@@ -42,9 +49,12 @@ public class User{
     }
 
     void setDate(Integer year, Integer month, Integer day){
-        //need to add checking for this
+        Calendar cal = Calendar.getInstance();
         birthDate.set(year, month, day);
-        database.child(UID).child("Date").setValue(birthDate);
+        //kind of a bad way to check the date. checks if the day they put in was less than the current date
+        if(birthDate.get(Calendar.DAY_OF_YEAR) < cal.get(Calendar.DAY_OF_YEAR) && birthDate.get(Calendar.YEAR) < cal.get(Calendar.YEAR)){
+            database.child(UID).child("Date").setValue(birthDate);
+        }
     }
 
     void setSex(boolean nSex){
@@ -53,16 +63,20 @@ public class User{
     }
 
     void setHeight(Pair<Integer, Integer> nHeight){
-        height = nHeight;
-        database.child(UID).child("Height").setValue(height);
+        //this (nHeight[0].first()) is how its shown to be done when i search it up but AS keeps highlighting it
+        Integer foot = nHeight[0].first();
+        Integer inches = nHeight[0].second();
+        //high doubts you are going to be less than 3 feet and working out
+        if(foot > 3){
+            height = nHeight;
+            database.child(UID).child("Height").setValue(height);
+        }
     }
 
     void setWeight(float nWeight) {
-        if(nWeight<0){
-            //some std err
-            //exit
+        if(nWeight>0) {
+            weight = nWeight;
+            database.child(UID).child("Weight").setValue(weight);
         }
-        weight = nWeight;
-        database.child(UID).child("Weight").setValue(weight);
     }
 }
