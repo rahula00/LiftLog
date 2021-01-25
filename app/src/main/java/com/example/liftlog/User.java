@@ -20,7 +20,6 @@ public class User{
     public Pair<Integer,Integer> height;
     public float weight;
 
-
     public User(){
         //random values
         email = "email";
@@ -63,9 +62,8 @@ public class User{
     }
 
     void setHeight(Pair<Integer, Integer> nHeight){
-        //this (nHeight[0].first()) is how its shown to be done when i search it up but AS keeps highlighting it
-        Integer foot = nHeight[0].first();
-        Integer inches = nHeight[0].second();
+        Integer foot = nHeight.first;
+        Integer inches = nHeight.second;
         //high doubts you are going to be less than 3 feet and working out
         if(foot > 3){
             height = nHeight;
