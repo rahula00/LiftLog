@@ -29,7 +29,7 @@
         android:id="@+id/btnLogin"
         android:layout_width="211dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="160dp"
+        android:layout_marginBottom="158dp"
         android:background="@drawable/roundedges"
         android:bottomLeftRadius="50dp"
         android:bottomRightRadius="50dp"
