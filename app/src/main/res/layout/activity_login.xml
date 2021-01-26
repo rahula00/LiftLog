@@ -112,62 +112,37 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
         tools:ignore="NotSibling" />
 
-    <EditText
-        android:id="@+id/password"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
         android:layout_width="340dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/roundedges"
-        android:ems="10"
-        android:fontFamily="@font/roboto_bold"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        android:textColor="#9c9c9c"
-        android:textColorHint="#9c9c9c"
-        android:textSize="16sp"
-        android:textStyle="normal"
+        android:layout_height="98dp"
+        android:layout_marginTop="92dp"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toBottomOf="@+id/email"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="#ababab">
 
-    <!--    <com.google.android.material.textfield.TextInputLayout-->
-    <!--        android:id="@+id/textInputLayout"-->
-    <!--        android:layout_width="320dp"-->
-    <!--        android:layout_height="50dp"-->
-    <!--        android:layout_marginTop="100dp"-->
-    <!--        app:hintEnabled="false"-->
-    <!--        app:layout_constraintBottom_toTopOf="@+id/btnLogin"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline2"-->
-    <!--        app:layout_constraintHorizontal_bias="0.568"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/guideline1"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/imageView5"-->
-    <!--        app:passwordToggleEnabled="true"-->
-    <!--        app:passwordToggleTint="#ababab">-->
-
-    <!--        <com.google.android.material.textfield.TextInputEditText-->
-    <!--            android:id="@+id/password"-->
-    <!--            android:layout_width="320dp"-->
-    <!--            android:layout_height="50dp"-->
-    <!--            android:layout_marginBottom="60dp"-->
-    <!--            android:background="@drawable/roundedges"-->
-    <!--            android:ems="10"-->
-    <!--            android:fontFamily="@font/roboto_bold"-->
-    <!--            android:hint="Password"-->
-    <!--            android:inputType="textPassword"-->
-    <!--            android:padding="10dp"-->
-    <!--            android:textColor="#9c9c9c"-->
-    <!--            android:textColorHint="#9c9c9c"-->
-    <!--            android:textSize="16sp"-->
-    <!--            android:textStyle="normal"-->
-    <!--            app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"-->
-    <!--            app:layout_constraintEnd_toEndOf="@+id/textInputLayout"-->
-    <!--            app:layout_constraintStart_toStartOf="@+id/textInputLayout"-->
-    <!--            app:layout_constraintTop_toTopOf="@+id/textInputLayout"-->
-    <!--            tools:ignore="MissingConstraints" />-->
-    <!--    </com.google.android.material.textfield.TextInputLayout>-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password"
+            android:layout_width="340dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/roundedges"
+            android:ems="10"
+            android:fontFamily="@font/roboto_bold"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textColor="#9c9c9c"
+            android:textColorHint="#9c9c9c"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintTop_toTopOf="@+id/textInputLayout"
+            tools:ignore="MissingConstraints" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
