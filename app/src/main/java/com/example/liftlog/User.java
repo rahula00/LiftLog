@@ -61,12 +61,10 @@ public class User{
         database.child(UID).child("Sex").setValue(sex);
     }
 
-    void setHeight(Pair<Integer, Integer> nHeight){
-        Integer foot = nHeight.first;
-        Integer inches = nHeight.second;
+    void setHeight(Integer feet, Integer inches){
         //high doubts you are going to be less than 3 feet and working out
-        if(foot > 3){
-            height = nHeight;
+        if(feet > 3){
+            height = new Pair<Integer,Integer>(feet,inches);
             database.child(UID).child("Height").setValue(height);
         }
     }
