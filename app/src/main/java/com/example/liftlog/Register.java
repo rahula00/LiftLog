@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -22,9 +24,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Register extends AppCompatActivity {
-    EditText mFullName, mEmail, mPassword, mPhone;
+    EditText mEmail, mPassword;
     Button mRegisterBtn;
-    TextView mLoginBtn;
     FirebaseAuth fAuth;
     String userID;
     ProgressBar progressBar;
@@ -37,7 +38,6 @@ public class Register extends AppCompatActivity {
         mEmail = findViewById(R.id.email);
         mPassword = findViewById(R.id.password);
         mRegisterBtn = findViewById(R.id.btnLogin);
-        mLoginBtn = findViewById(R.id.textRegister);
 
         //Open instance of Firebase
         fAuth = FirebaseAuth.getInstance();
@@ -103,14 +103,7 @@ public class Register extends AppCompatActivity {
             }
         });
 
-        //Listens on buttons to return to home/login and returns you there
-        mLoginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Login.class));
-                finish();
-            }
-        });
+
     }
 
     //Handle back buttonfunctionalities.
@@ -118,5 +111,19 @@ public class Register extends AppCompatActivity {
     public void onBackPressed() {
         startActivity(new Intent(getApplicationContext(), Login.class));
         finish();
+    }
+
+    // Overrides transition(s).
+    // Allows us to change animations later if we want to.
+    @Override
+    public void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+    }
+
+    // stops flicker when changing pages (even without animation)
+    public void onAnimationEnd(Animation animation) {
+        animation = new TranslateAnimation(0.0f, 0.0f, 0.0f, 0.0f);
+        animation.setDuration(1);
     }
 }
