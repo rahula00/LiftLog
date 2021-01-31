@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+<!--        color of header and selected text-->
+        <item name="colorAccent">@color/green_af</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:textColorPrimary">@color/std_text_color</item>
+        <item name="android:windowBackground">@color/less_black</item>
+    </style>
+
+</resources>
