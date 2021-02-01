@@ -1,6 +1,5 @@
 package com.example.liftlog;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
@@ -13,7 +12,6 @@ public class Exercise {
     public String name;
     public String instructions;
     // for taking the specific image for the exercise and setting it as an ImageView
-    public static Context context;
     public Bitmap image;
     public ImageView description;
 
@@ -23,7 +21,7 @@ public class Exercise {
         instructions = directions;
         // using open() requires this try/catch statement but probably won't throw an error
         try {
-            image = BitmapFactory.decodeStream(context.getAssets().open(assetName));
+            image = BitmapFactory.decodeStream(MyApplication.getAppContext().getAssets().open(assetName));
         } catch (IOException e) {
             e.printStackTrace();
         }
