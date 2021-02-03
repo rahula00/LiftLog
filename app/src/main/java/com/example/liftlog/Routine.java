@@ -1,14 +1,15 @@
 package com.example.liftlog;
 
-import java.util.List;
+import java.util.Queue;
+
 
 public class Routine {
     public int id;
     public String name;
     public String description;
-    public List<Integer> workouts;           //The ids of the workouts in the routine
+    public Queue<Integer> workouts;           //The ids of the workouts in the routine
 
-    public Routine(int id, String routineName, String description, List<Integer> workouts)
+    public Routine(int id, String routineName, String description, Queue<Integer> workouts)
     {
         this.id = id;
         this.name = routineName;
