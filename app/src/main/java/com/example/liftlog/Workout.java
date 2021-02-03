@@ -6,15 +6,15 @@ public class Workout {
     public int id;
     public String name;
     public String description;
-    public List<Integer> triggers;              //The ids of the exercises to increase max weight
-    public List<Integer> exercises;             //The exercise list
+    public List<Integer> triggers;                          //The ids of the exercises to increase max weight
+    public List<ExerciseStats> exercises_stats;             //The exercise list
 
-    public Workout(int id, String workoutName, String description, List<Integer> triggers, List<Integer> exercises)
+    public Workout(int id, String workoutName, String description, List<Integer> triggers, List<ExerciseStats> exercises_stats)
     {
         this.id = id;
         this.name = workoutName;
         this.description = description;
         this.triggers = triggers;
-        this.exercises = exercises;
+        this.exercises_stats = exercises_stats;
     }
 }
