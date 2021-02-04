@@ -11,7 +11,7 @@ public class Routine {
     public String imageUrl;
     public Queue<Integer> workouts;           //The ids of the workouts in the routine
 
-    public Routine(int id, String routineName, String description, String imageUrl, Queue<Integer> workouts)
+    public Routine(int id, String routineName, String description, String imageUrl, Queue<Integer> newWork)
     {
         this.id = id;
         this.name = routineName;
@@ -19,8 +19,15 @@ public class Routine {
         this.imageUrl = imageUrl;
 
         Queue<Integer> queue = new LinkedList<>();
-        queue.addAll(workouts);
+        queue.addAll(newWork);
 
         this.workouts = queue;
+    }
+
+    public Routine copy()
+    {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.addAll(workouts);
+        return new Routine(id, name, description, imageUrl, queue);
     }
 }
