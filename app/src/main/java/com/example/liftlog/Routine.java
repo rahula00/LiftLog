@@ -1,5 +1,6 @@
 package com.example.liftlog;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
 
@@ -16,6 +17,10 @@ public class Routine {
         this.name = routineName;
         this.description = description;
         this.imageUrl = imageUrl;
-        this.workouts = workouts;
+
+        Queue<Integer> queue = new LinkedList<>();
+        queue.addAll(workouts);
+
+        this.workouts = queue;
     }
 }

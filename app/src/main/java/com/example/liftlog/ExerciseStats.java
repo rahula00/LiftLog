@@ -12,4 +12,9 @@ public class ExerciseStats {
         reps = numreps;
         sets = numsets;
     }
+
+    public ExerciseStats copy()
+    {
+        return new ExerciseStats(exercise, weight, reps, sets);
+    }
 }

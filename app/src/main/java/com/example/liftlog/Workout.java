@@ -1,5 +1,7 @@
 package com.example.liftlog;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
@@ -17,5 +19,17 @@ public class Workout {
         this.description = description;
         this.triggers = triggers;
         this.statsList = exercisesStats;
+    }
+
+    public Workout copy()
+    {
+        List<Integer> list = new ArrayList<>();
+        list.addAll(triggers);
+
+        Queue<ExerciseStats> queue = new LinkedList<>();
+        for(ExerciseStats i : statsList)
+            queue.add(i.copy());
+
+        return new Workout(id, name, description, list, queue);
     }
 }
