@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="329dp"
-        android:layout_height="500dp"
+        android:layout_height="450dp"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="@+id/guidelineR"
         app:layout_constraintHorizontal_bias="0.0"
@@ -23,7 +23,7 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="124dp"
             android:background="@drawable/roundedges"
             android:ems="10"
             android:fontFamily="@font/roboto_bold"
@@ -48,10 +48,10 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/roundedges"
             android:clickable="false"
-            android:cursorVisible="false"
-            android:ems="10"
             android:focusable="false"
             android:focusableInTouchMode="false"
+            android:cursorVisible="false"
+            android:ems="10"
             android:fontFamily="@font/roboto_bold"
             android:hint="DOB"
             android:inputType="none"
@@ -95,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.67" />
+            app:layout_constraintGuide_percent="0.65" />
 
         <EditText
             android:id="@+id/height"
@@ -229,6 +229,10 @@
             app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName2" />
 
         <EditText
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:cursorVisible="false"
             android:id="@+id/editTextTextPersonName"
             android:layout_width="50dp"
             android:layout_height="48dp"
@@ -236,12 +240,17 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Male"
-
             android:textColor="@color/std_text_color"
-            app:layout_constraintTop_toBottomOf="@+id/feet"
-            tools:layout_editor_absoluteX="20dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.075"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/feet" />
 
         <EditText
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:cursorVisible="false"
             android:id="@+id/editTextTextPersonName2"
             android:layout_width="75dp"
             android:layout_height="48dp"
@@ -250,8 +259,12 @@
             android:inputType="textPersonName"
             android:text="Female"
             android:textColor="@color/std_text_color"
-            app:layout_constraintTop_toBottomOf="@+id/inches"
-            tools:layout_editor_absoluteX="93dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.362"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inches" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -268,6 +281,65 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.90" />
+
+    <ScrollView
+        android:layout_width="329dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/constraintLayout"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineR"
+        app:layout_constraintStart_toStartOf="@+id/guidelineL">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/dumbbell_gradient_2"
+                tools:layout_editor_absoluteX="18dp"
+                tools:layout_editor_absoluteY="26dp"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineR"
+                app:layout_constraintStart_toStartOf="@+id/guidelineL"/>
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_below="@+id/imageView7"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/dumbbell_gradient_2"
+                tools:layout_editor_absoluteX="18dp"
+                tools:layout_editor_absoluteY="26dp"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineR"
+                app:layout_constraintStart_toStartOf="@+id/guidelineL"/>
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_below="@+id/imageView8"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/dumbbell_gradient_2"
+                tools:layout_editor_absoluteX="18dp"
+                tools:layout_editor_absoluteY="26dp" />
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_below="@+id/imageView9"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/dumbbell_gradient_2"
+                tools:layout_editor_absoluteX="18dp"
+                tools:layout_editor_absoluteY="26dp" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
 
 
 
