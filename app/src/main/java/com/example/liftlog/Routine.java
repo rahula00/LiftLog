@@ -18,16 +18,12 @@ public class Routine {
         this.description = description;
         this.imageUrl = imageUrl;
 
-        Queue<Integer> queue = new LinkedList<>();
-        queue.addAll(workouts);
-
-        this.workouts = queue;
+        this.workouts = new LinkedList<>(workouts);
     }
 
     public Routine copy()
     {
-        Queue<Integer> queue = new LinkedList<>();
-        queue.addAll(workouts);
+        Queue<Integer> queue = new LinkedList<>(workouts);
         return new Routine(id, name, description, imageUrl, queue);
     }
 }

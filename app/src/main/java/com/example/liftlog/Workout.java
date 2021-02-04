@@ -23,8 +23,7 @@ public class Workout {
 
     public Workout copy()
     {
-        List<Integer> list = new ArrayList<>();
-        list.addAll(triggers);
+        List<Integer> list = new ArrayList<>(triggers);
 
         Queue<ExerciseStats> queue = new LinkedList<>();
         for(ExerciseStats i : statsList)
@@ -32,4 +31,6 @@ public class Workout {
 
         return new Workout(id, name, description, list, queue);
     }
+
+
 }
