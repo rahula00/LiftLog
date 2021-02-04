@@ -4,12 +4,16 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -21,6 +25,13 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+
+        ImageView profile = new ImageView(Profile.this);
+        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.resource_default);
+        Bitmap circularBitmap = ImageConverter.getRoundedCroppedBitmap(bitmap, 100);
+        profile.setImageBitmap(circularBitmap);
+
 
         yourEditText = (EditText) findViewById(R.id.dob);
         yourEditText.setOnClickListener(new View.OnClickListener() {
