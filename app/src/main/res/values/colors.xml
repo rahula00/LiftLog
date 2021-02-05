@@ -10,4 +10,5 @@
     <color name="less_black">#FF121212</color>
     <color name="green_af">#FF50dc00</color>
     <color name="std_text_color">#FF9c9c9c</color>
+    <color name="text_box_grey">#FF2f2f2f</color>
 </resources>
