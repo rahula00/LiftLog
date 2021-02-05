@@ -4,27 +4,89 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:adjustViewBounds="true"
+        android:scaleWidth="100%"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/spy__2_" />
+        app:srcCompat="@drawable/dumbbell_gradient_4" />
 
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="40dp"
         android:text="Log Out"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/text_box_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnProfile"
+        android:layout_width="254dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="240dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Profile"
+        android:textSize="18sp"
+        android:visibility="visible"
+        app:backgroundTint="@color/green_af"
+        app:iconTint="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnRoutines"
+        android:layout_width="254dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Routines"
+        android:textSize="18sp"
+        app:backgroundTint="@color/green_af"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnProfile" />
+
+    <Button
+        android:id="@+id/btnProgress"
+        android:layout_width="254dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Progress"
+        android:textSize="18sp"
+        app:backgroundTint="@color/green_af"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRoutines" />
+
+    <Button
+        android:id="@+id/btnMyWorkouts"
+        android:layout_width="254dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="My Workouts"
+        android:textSize="18sp"
+        app:backgroundTint="@color/green_af"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnProgress" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
