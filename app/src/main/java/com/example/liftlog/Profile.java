@@ -4,11 +4,17 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.icu.util.Calendar;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -17,53 +23,91 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 public class Profile extends AppCompatActivity {
+
+
+    // Used to select profile image
+    private void SelectImage(){
+        final CharSequence[] items={"Camera","Gallery", "Cancel"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Profile.this);
+        builder.setTitle("Add Image");
+
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (items[i].equals("Camera")) {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, REQUEST_CAMERA);
+                } else if (items[i].equals("Gallery")) {
+                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    intent.setType("image/*");
+                    //startActivityForResult(intent.createChooser(intent, "Select File"), SELECT_FILE);
+                    startActivityForResult(intent, SELECT_FILE);
+                } else if (items[i].equals("Cancel")) {
+                    dialogInterface.dismiss();
+                }
+            }
+        });
+        builder.show();
+
+    }
+    // Used to select profile image
+    @Override
+    public  void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode,data);
+
+        if(resultCode== Activity.RESULT_OK){
+
+            if(requestCode==REQUEST_CAMERA){
+
+                Bundle bundle = data.getExtras();
+                final Bitmap bmp = (Bitmap) bundle.get("data");
+                ivImage.setImageBitmap(bmp);
+
+            }else if(requestCode==SELECT_FILE){
+
+                Uri selectedImageUri = data.getData();
+                ivImage.setImageURI(selectedImageUri);
+            }
+
+        }
+    }
+
     EditText mName,mDob, mEmail;
     Button mSaveBtn;
     TextView mMaxWeight;
     ProgressBar progressBar;
     FirebaseAuth fAuth;
-
-    ImageView iv;
     Integer REQUEST_CAMERA = 1, SELECT_FILE=0;
-
-
     EditText yourEditText;
     int mYear, mMonth, mDay;
-
-
-//    private void SelectImage() {
-//        final CharSequence[] items = {"Camera", "Gallery", "Cancel"};
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(Profile.this);
-//        builder.setTitle("Add Image");
-//        builder.setItems(items, new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int i) {
-//                if (items[i].equals("Camera")) {
-//                }
-//                else if(items[i].equals("Gallery")) {
-//                }
-//                else if(items[i].equals("Cancel")) {
-//                }
-//            }
-//        })
-//    }
-
+    ImageView ivImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        iv = (ImageView) findViewById(R.id.profile_image);
 
+        ivImage = (ImageView) findViewById(R.id.profile_image);
+        // Used to select profile image
+        ivImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                SelectImage();
+            }
+        });
+
+        //Calendar Select
         yourEditText = (EditText) findViewById(R.id.dob);
         yourEditText.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
