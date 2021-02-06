@@ -5,11 +5,13 @@ public class ExerciseStats {
     public int weight;
     public int reps;
     public int sets;
+    public boolean trigger_max_change;
 
     public ExerciseStats(int id, int weightassigned, int numreps, int numsets){
         exercise = id;
         weight = weightassigned;
         reps = numreps;
         sets = numsets;
+        trigger_max_change = false;
     }
 }
