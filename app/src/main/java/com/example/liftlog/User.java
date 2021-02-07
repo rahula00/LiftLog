@@ -29,7 +29,7 @@ public class User{
     public Pair<Integer,Integer> height;
     public float weight;
     public float routine_id;
-    public Hashtable<Integer, ArrayList<Integer>> user_max;
+    public Hashtable<Integer, ArrayList<Pair<Calendar,Integer>>> user_max;
     public Queue<Workout> user_workout;
 
     public User(String nEmail, String nName, Calendar nBirthDate, boolean nSex, Integer feet, Integer inches, float nWeight, Queue<Workout> QueueWorkout){
@@ -40,9 +40,10 @@ public class User{
         this.sex = nSex;
         this.height = new Pair<Integer, Integer>(feet, inches);
         this.weight = nWeight;
-        ArrayList<Integer> al = new ArrayList<Integer>();
-        al.add(0);
-        this.user_max = new Hashtable<Integer, ArrayList<Integer>>();
+        ArrayList<Pair<Calendar,Integer>> al = new ArrayList<Pair<Calendar,Integer>>();
+        Pair<Calendar, Integer> p = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
+        al.add(p);
+        this.user_max = new Hashtable<Integer, ArrayList<Pair<Calendar, Integer>>>();
         this.user_max.put(0,al);
         this.user_workout = QueueWorkout;
         try{
@@ -103,7 +104,7 @@ public class User{
         database.child(UID).child("Routine_id").setValue(id);
     }
 
-    void setUser_max(Integer id, ArrayList<Integer> weight){
+    void setUser_max(Integer id, ArrayList<Pair<Calendar,Integer>> weight){
         user_max.put(id,weight);
         database.child(UID).child("User_max").setValue(user_max);
     }
