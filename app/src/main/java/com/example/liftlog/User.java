@@ -28,7 +28,7 @@ public class User{
     public Pair<Integer,Integer> height;
     public float weight;
     public float routine_id;
-    public Hashtable<Integer, Integer> user_max;
+    public Hashtable<Integer, int[]> user_max;
     public Queue<Workout> user_workout;
 
     public User(String nEmail, String nName, Calendar nBirthDate, boolean nSex, Integer feet, Integer inches, float nWeight, Queue<Workout> QueueWorkout){
@@ -39,7 +39,7 @@ public class User{
         this.sex = nSex;
         this.height = new Pair<Integer, Integer>(feet, inches);
         this.weight = nWeight;
-        this.user_max = new Hashtable<Integer, Integer>(0,0);
+        this.user_max = new Hashtable<Integer, int[]>(0,0);
         this.user_workout = QueueWorkout;
         try{
             this.image = BitmapFactory.decodeStream(MyApplication.getAppContext().getAssets().open("resource_default.png"));
@@ -99,7 +99,7 @@ public class User{
         database.child(UID).child("Routine_id").setValue(id);
     }
 
-    void setUser_max(Integer id, Integer weight){
+    void setUser_max(Integer id, int[] weight){
         user_max.put(id,weight);
         database.child(UID).child("User_max").setValue(user_max);
     }
