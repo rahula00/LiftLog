@@ -21,7 +21,7 @@ public class User{
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
     String UID = fAuth.getCurrentUser().getUid();
     public String email;
-    public Bitmap image;
+    public Bitmap profile_pic;
     public String name;
     public Calendar birthDate;
     public boolean sex;
@@ -42,7 +42,7 @@ public class User{
         this.user_max = new Hashtable<Integer, int[]>(0,0);
         this.user_workout = QueueWorkout;
         try{
-            this.image = BitmapFactory.decodeStream(MyApplication.getAppContext().getAssets().open("resource_default.png"));
+            this.profile_pic = BitmapFactory.decodeStream(MyApplication.getAppContext().getAssets().open("resource_default.png"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
