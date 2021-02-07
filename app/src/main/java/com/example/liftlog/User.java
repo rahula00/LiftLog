@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Hashtable;
 import java.util.Queue;
@@ -28,7 +29,7 @@ public class User{
     public Pair<Integer,Integer> height;
     public float weight;
     public float routine_id;
-    public Hashtable<Integer, int[]> user_max;
+    public Hashtable<Integer, ArrayList<Integer>> user_max;
     public Queue<Workout> user_workout;
 
     public User(String nEmail, String nName, Calendar nBirthDate, boolean nSex, Integer feet, Integer inches, float nWeight, Queue<Workout> QueueWorkout){
@@ -39,7 +40,10 @@ public class User{
         this.sex = nSex;
         this.height = new Pair<Integer, Integer>(feet, inches);
         this.weight = nWeight;
-        this.user_max = new Hashtable<Integer, int[]>(0,0);
+        ArrayList<Integer> al = new ArrayList<Integer>();
+        al.add(0);
+        this.user_max = new Hashtable<Integer, ArrayList<Integer>>();
+        this.user_max.put(0,al);
         this.user_workout = QueueWorkout;
         try{
             this.profile_pic = BitmapFactory.decodeStream(MyApplication.getAppContext().getAssets().open("resource_default.png"));
@@ -99,7 +103,7 @@ public class User{
         database.child(UID).child("Routine_id").setValue(id);
     }
 
-    void setUser_max(Integer id, int[] weight){
+    void setUser_max(Integer id, ArrayList<Integer> weight){
         user_max.put(id,weight);
         database.child(UID).child("User_max").setValue(user_max);
     }
