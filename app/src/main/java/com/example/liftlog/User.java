@@ -40,11 +40,11 @@ public class User{
         this.sex = nSex;
         this.height = new Pair<Integer, Integer>(feet, inches);
         this.weight = nWeight;
-        ArrayList<Pair<Calendar,Integer>> al = new ArrayList<Pair<Calendar,Integer>>();
-        Pair<Calendar, Integer> p = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
-        al.add(p);
+        ArrayList<Pair<Calendar,Integer>> init_max_list = new ArrayList<Pair<Calendar,Integer>>();
+        Pair<Calendar, Integer> init_max = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
+        init_max_list.add(init_max);
         this.user_max = new Hashtable<Integer, ArrayList<Pair<Calendar, Integer>>>();
-        this.user_max.put(0,al);
+        this.user_max.put(0,init_max_list);
         this.user_workout = QueueWorkout;
         try{
             this.profile_pic = BitmapFactory.decodeStream(MyApplication.getAppContext().getAssets().open("resource_default.png"));
@@ -104,8 +104,11 @@ public class User{
         database.child(UID).child("Routine_id").setValue(id);
     }
 
-    void setUser_max(Integer id, ArrayList<Pair<Calendar,Integer>> weight){
-        user_max.put(id,weight);
+    void setUser_max(Integer id, Integer weight){
+        Pair<Calendar, Integer> new_max = new Pair<Calendar,Integer> (Calendar.getInstance(), weight);
+        ArrayList<Pair<Calendar,Integer>> current_max_list = this.user_max.get(id);
+        current_max_list.add(new_max);
+        this.user_max.put(id,current_max_list);
         database.child(UID).child("User_max").setValue(user_max);
     }
 }
