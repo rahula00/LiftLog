@@ -32,7 +32,7 @@ public class User{
     public Hashtable<Integer, ArrayList<Pair<Calendar,Integer>>> user_max;
     public Queue<Workout> user_workout;
 
-    public User(String nEmail, String nName, Calendar nBirthDate, boolean nSex, Integer feet, Integer inches, float nWeight, Queue<Workout> QueueWorkout){
+    public User(String nEmail, String nName, Calendar nBirthDate, boolean nSex, Integer feet, Integer inches, float nWeight, Queue<Workout> queueWorkout){
         //random values
         this.email = nEmail;
         this.name = nName;
@@ -45,7 +45,7 @@ public class User{
         init_max_list.add(init_max);
         this.user_max = new Hashtable<Integer, ArrayList<Pair<Calendar, Integer>>>();
         this.user_max.put(0,init_max_list);
-        this.user_workout = QueueWorkout;
+        this.user_workout = queueWorkout;
         try{
             this.profile_pic = BitmapFactory.decodeStream(MyApplication.getAppContext().getAssets().open("resource_default.png"));
         } catch (IOException ex) {
@@ -53,7 +53,7 @@ public class User{
         }
    }
 
-    void setEmail(String nEmail){
+    boolean setEmail(String nEmail){
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
                 "[a-zA-Z0-9_+&*-]+)*@" +
                 "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
@@ -62,7 +62,9 @@ public class User{
         if(p.matcher(nEmail).matches()){
             email = nEmail;
             database.child(UID).child("Email").setValue(email);
+            return true;
         }
+        return false;
     }
 
     void setName(String nName){
@@ -70,13 +72,15 @@ public class User{
         database.child(UID).child("Name").setValue(name);
     }
 
-    void setDate(Integer year, Integer month, Integer day){
+    boolean setDate(Integer year, Integer month, Integer day){
         Calendar cal = Calendar.getInstance();
         birthDate.set(year, month, day);
         //kind of a bad way to check the date. checks if the day they put in was less than the current date
         if(birthDate.get(Calendar.DAY_OF_YEAR) < cal.get(Calendar.DAY_OF_YEAR) && birthDate.get(Calendar.YEAR) < cal.get(Calendar.YEAR)){
             database.child(UID).child("Date").setValue(birthDate);
+            return true;
         }
+        return false;
     }
 
     void setSex(boolean nSex){
@@ -84,19 +88,23 @@ public class User{
         database.child(UID).child("Sex").setValue(sex);
     }
 
-    void setHeight(Integer feet, Integer inches){
+    boolean setHeight(Integer feet, Integer inches){
         //high doubts you are going to be less than 3 feet and working out
         if(feet > 3){
             height = new Pair<Integer,Integer>(feet,inches);
             database.child(UID).child("Height").setValue(height);
+            return true;
         }
+        return false;
     }
 
-    void setWeight(float nWeight) {
+    boolean setWeight(float nWeight) {
         if(nWeight>0) {
             weight = nWeight;
             database.child(UID).child("Weight").setValue(weight);
+            return true;
         }
+        return false;
     }
 
     void setRoutine_id(Integer id){
@@ -104,13 +112,15 @@ public class User{
         database.child(UID).child("Routine_id").setValue(id);
     }
 
-    void setUser_max(Integer id, Integer weight){
+    boolean setUser_max(Integer id, Integer weight){
         if(weight>0){
             Pair<Calendar, Integer> new_max = new Pair<Calendar,Integer> (Calendar.getInstance(), weight);
             ArrayList<Pair<Calendar,Integer>> current_max_list = this.user_max.get(id);
             current_max_list.add(new_max);
             this.user_max.put(id,current_max_list);
             database.child(UID).child("User_max").setValue(user_max);
+            return true;
         }
+        return false;
     }
 }
