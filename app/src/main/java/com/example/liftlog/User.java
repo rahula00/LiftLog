@@ -105,10 +105,12 @@ public class User{
     }
 
     void setUser_max(Integer id, Integer weight){
-        Pair<Calendar, Integer> new_max = new Pair<Calendar,Integer> (Calendar.getInstance(), weight);
-        ArrayList<Pair<Calendar,Integer>> current_max_list = this.user_max.get(id);
-        current_max_list.add(new_max);
-        this.user_max.put(id,current_max_list);
-        database.child(UID).child("User_max").setValue(user_max);
+        if(weight>0){
+            Pair<Calendar, Integer> new_max = new Pair<Calendar,Integer> (Calendar.getInstance(), weight);
+            ArrayList<Pair<Calendar,Integer>> current_max_list = this.user_max.get(id);
+            current_max_list.add(new_max);
+            this.user_max.put(id,current_max_list);
+            database.child(UID).child("User_max").setValue(user_max);
+        }
     }
 }
