@@ -9,28 +9,39 @@ public class Workout {
     public int id;
     public String name;
     public String description;
-    public List<Integer> triggers;                          //The ids of the exercises to increase max weight
-    public Queue<ExerciseStats> statsList;               //The exercise list
+    public List<Double> multipliers;
+    public Queue<ExerciseStats> statsList;           //The exercise list
 
-    public Workout(int id, String workoutName, String description, List<Integer> triggers, Queue<ExerciseStats> exercisesStats)
+    public Workout(int id, String workoutName, String description,  List<Double> multipliers, Queue<ExerciseStats> exercisesStats)
     {
         this.id = id;
         this.name = workoutName;
         this.description = description;
-        this.triggers = triggers;
-        this.statsList = exercisesStats;
+        this.multipliers = new ArrayList<>(multipliers);
+
+        Queue<ExerciseStats> queue = new LinkedList<>();
+        for(ExerciseStats i : exercisesStats)
+            queue.add(i.copy());
+
+        this.statsList = queue;
     }
 
     public Workout copy()
     {
-        List<Integer> list = new ArrayList<>(triggers);
+        List<Double> list2 = new ArrayList<>(multipliers);
 
         Queue<ExerciseStats> queue = new LinkedList<>();
         for(ExerciseStats i : statsList)
             queue.add(i.copy());
 
-        return new Workout(id, name, description, list, queue);
+        return new Workout(id, name, description, list2, queue);
     }
 
-
+    public void initialize()
+    {
+        if(statsList.size() == multipliers.size())
+        {
+            return;
+        }
+    }
 }
