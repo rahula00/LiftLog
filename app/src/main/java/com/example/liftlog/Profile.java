@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -81,7 +82,8 @@ public class Profile extends AppCompatActivity {
         }
     }
 
-    EditText mName,mDob, mEmail;
+    EditText mName,mDob, mEmail, mFeet, mInches, mWeight;
+    CheckBox mMale, mFemale;
     Button mSaveBtn;
     TextView mMaxWeight;
     ProgressBar progressBar;
@@ -95,6 +97,43 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        ///////// Current user values
+        String nameText = "NameHint";
+        String dobText = "DobHint";
+        String emailText = "EmailHint";
+        String feetText = "ft";
+        String inchesText = "in";
+        String weightText = "lb";
+        Boolean sex = true;
+        /////////
+
+        ///////// Reference to text/check boxes
+        mName = (EditText) findViewById(R.id.name);
+        mDob = (EditText) findViewById(R.id.dob);
+        mEmail = (EditText) findViewById(R.id.email);
+        mFeet = (EditText) findViewById(R.id.feet);
+        mInches = (EditText) findViewById(R.id.inches);
+        mWeight = (EditText) findViewById(R.id.lbs);
+        mMale = (CheckBox) findViewById(R.id.male);
+        mFemale = (CheckBox) findViewById(R.id.female);
+        /////////
+
+        ///////// Set view texts/checked to user values
+        mName.setText(nameText);
+        mDob.setText(dobText);
+        mEmail.setText(emailText);
+        mFeet.setText(feetText);
+        mInches.setText(inchesText);
+        mWeight.setText(weightText);
+        if(sex) mMale.setChecked(true);
+        else mFemale.setChecked(true);
+        /////////
+
+        
+
+
+
 
 
         ivImage = (ImageView) findViewById(R.id.profile_image);
