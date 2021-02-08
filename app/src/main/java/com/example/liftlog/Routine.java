@@ -33,4 +33,12 @@ public class Routine{
 
         return new Routine(id, name, description, imageUrl, queue);
     }
+
+    Queue<Workout> copyWorkouts()
+    {
+        Queue<Workout> queue = new LinkedList<>();
+        for(Workout i : workouts)
+            queue.add(i.copy());
+        return queue;
+    }
 }
