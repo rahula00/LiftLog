@@ -16,6 +16,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -91,9 +92,6 @@ public class Profile extends AppCompatActivity {
     LinearLayout scroll;
     CheckBox mMale, mFemale;
     Button mSaveBtn;
-    TextView mMaxWeight;
-    ProgressBar progressBar;
-    FirebaseAuth fAuth;
     Integer REQUEST_CAMERA = 1, SELECT_FILE=0;
     EditText yourEditText;
     int mYear, mMonth, mDay;
@@ -104,7 +102,7 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        ///////// Reference to text/check boxes
+        ///////// Reference to text/check boxes, buttons, etc
         mName = (EditText) findViewById(R.id.name);
         mDob = (EditText) findViewById(R.id.dob);
         mEmail = (EditText) findViewById(R.id.email);
@@ -113,24 +111,42 @@ public class Profile extends AppCompatActivity {
         mWeight = (EditText) findViewById(R.id.lbs);
         mMale = (CheckBox) findViewById(R.id.male);
         mFemale = (CheckBox) findViewById(R.id.female);
+        mSaveBtn = (Button) findViewById(R.id.btnSave);
         /////////
 
         //////// layout reference
         scroll = (LinearLayout) findViewById(R.id.linearInScroll);
 
         LayoutInflater inflater = getLayoutInflater();
-        LinearLayout newLayout = (LinearLayout) inflater.inflate(R.layout.exercise_template, scroll,true);
+        ConstraintLayout newLayout = (ConstraintLayout) inflater.inflate(R.layout.exercise_template, scroll,false);
         TextView exerciseName = (TextView) newLayout.findViewById(R.id.exerciseName);
         exerciseName.setText("Bench Press");
-        LinearLayout newLayout2 = (LinearLayout) inflater.inflate(R.layout.exercise_template, scroll,true);
-        TextView exerciseName2 = (TextView) newLayout2.findViewById(R.id.exerciseName);
-        exerciseName2.setText("Back Squat");
-        LinearLayout newLayout3 = (LinearLayout) inflater.inflate(R.layout.exercise_template, scroll,true);
-        TextView exerciseName3 = (TextView) newLayout3.findViewById(R.id.exerciseName);
-        exerciseName3.setText("Deadlift");
-        LinearLayout newLayout4 = (LinearLayout) inflater.inflate(R.layout.exercise_template, scroll,true);
-        TextView exerciseName4 = (TextView) newLayout4.findViewById(R.id.exerciseName);
-        exerciseName4.setText("Overhead Press");
+        scroll.addView(newLayout);
+
+
+        newLayout = (ConstraintLayout) inflater.inflate(R.layout.exercise_template, scroll,false);
+        exerciseName = (TextView) newLayout.findViewById(R.id.exerciseName);
+        exerciseName.setText("Back Squat");
+        scroll.addView(newLayout);
+
+        newLayout = (ConstraintLayout) inflater.inflate(R.layout.exercise_template, scroll,false);
+        exerciseName = (TextView) newLayout.findViewById(R.id.exerciseName);
+        exerciseName.setText("Deadlift");
+        scroll.addView(newLayout);
+
+        newLayout = (ConstraintLayout) inflater.inflate(R.layout.exercise_template, scroll,false);
+        exerciseName = (TextView) newLayout.findViewById(R.id.exerciseName);
+        exerciseName.setText("Overhead Press");
+        scroll.addView(newLayout);
+//        LinearLayout newLayout2 = (LinearLayout) inflater.inflate(R.layout.exercise_template, scroll,false);
+//        TextView exerciseName2 = (TextView) newLayout2.findViewById(R.id.exerciseName);
+//        exerciseName2.setText("Back Squat");
+//        LinearLayout newLayout3 = (LinearLayout) inflater.inflate(R.layout.exercise_template, scroll,true);
+//        TextView exerciseName3 = (TextView) newLayout3.findViewById(R.id.exerciseName);
+//        exerciseName3.setText("Deadlift");
+//        LinearLayout newLayout4 = (LinearLayout) inflater.inflate(R.layout.exercise_template, scroll,true);
+//        TextView exerciseName4 = (TextView) newLayout4.findViewById(R.id.exerciseName);
+//        exerciseName4.setText("Overhead Press");
 
 
 
@@ -186,6 +202,32 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+
+        // Save Btn on click
+        mSaveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                /////////Things being submitted
+                Boolean sexSubmit;
+                String emailSubmit = mEmail.getText().toString().trim();
+                String nameSubmit = mName.getText().toString().trim();
+                String dobSubmit = mDob.getText().toString().trim();
+                String ftSubmit = mFeet.getText().toString().trim();
+                String inchesSubmit = mInches.getText().toString().trim();
+                if(mMale.isChecked()) sexSubmit = true;
+                else if (mFemale.isChecked()) sexSubmit = false;
+                //TODO:else if none checked
+                /////////
+
+                //Check for email
+                if (TextUtils.isEmpty(emailSubmit)) {
+                    mEmail.setError("Email is Required.");
+                    return;
+                }
+
+            }
+        });
 
 
         // Used to select image on click of profile pic
