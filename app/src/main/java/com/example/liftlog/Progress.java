@@ -7,16 +7,14 @@ import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 
-public class Profile extends AppCompatActivity {
-
+public class Progress extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_progress);
     }
 
     //Handle back button functionalities.
-    //IMPORTANT: Need to make sure this can only go to Main Nav Page AFTER the first login
     @Override
     public void onBackPressed() {
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
