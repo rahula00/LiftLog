@@ -71,11 +71,13 @@ public class Profile extends AppCompatActivity {
 
                 Bundle bundle = data.getExtras();
                 final Bitmap bmp = (Bitmap) bundle.get("data");
+                //TODO: associate bitmap w user class
                 ivImage.setImageBitmap(bmp);
 
             }else if(requestCode==SELECT_FILE){
 
                 Uri selectedImageUri = data.getData();
+                //TODO: associate bitmap w user class
                 ivImage.setImageURI(selectedImageUri);
             }
 
@@ -166,9 +168,9 @@ public class Profile extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 // To show current date in the datepicker
                 Calendar mcurrentDate = Calendar.getInstance();
+
                 mYear = mcurrentDate.get(Calendar.YEAR);
                 mMonth = mcurrentDate.get(Calendar.MONTH);
                 mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
