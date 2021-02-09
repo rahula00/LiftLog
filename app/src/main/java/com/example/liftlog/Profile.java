@@ -3,6 +3,7 @@ package com.example.liftlog;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -15,12 +16,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -85,6 +88,7 @@ public class Profile extends AppCompatActivity {
     }
 
     EditText mName,mDob, mEmail, mFeet, mInches, mWeight;
+    LinearLayout scroll;
     CheckBox mMale, mFemale;
     Button mSaveBtn;
     TextView mMaxWeight;
@@ -110,6 +114,29 @@ public class Profile extends AppCompatActivity {
         mMale = (CheckBox) findViewById(R.id.male);
         mFemale = (CheckBox) findViewById(R.id.female);
         /////////
+
+        //////// layout reference
+        scroll = (LinearLayout) findViewById(R.id.linearInScroll);
+
+        LayoutInflater inflater = getLayoutInflater();
+        LinearLayout newLayout = (LinearLayout) inflater.inflate(R.layout.exercise_template, scroll,true);
+        TextView exerciseName = (TextView) newLayout.findViewById(R.id.exerciseName);
+        exerciseName.setText("Bench Press");
+        LinearLayout newLayout2 = (LinearLayout) inflater.inflate(R.layout.exercise_template, scroll,true);
+        TextView exerciseName2 = (TextView) newLayout2.findViewById(R.id.exerciseName);
+        exerciseName2.setText("Back Squat");
+        LinearLayout newLayout3 = (LinearLayout) inflater.inflate(R.layout.exercise_template, scroll,true);
+        TextView exerciseName3 = (TextView) newLayout3.findViewById(R.id.exerciseName);
+        exerciseName3.setText("Deadlift");
+        LinearLayout newLayout4 = (LinearLayout) inflater.inflate(R.layout.exercise_template, scroll,true);
+        TextView exerciseName4 = (TextView) newLayout4.findViewById(R.id.exerciseName);
+        exerciseName4.setText("Overhead Press");
+
+
+
+//        TextView tvContent = (TextView) layout.findViewById(R.id.tvContent);
+
+        ////////
 
         ///////// Current user values, set view texts/checked to user values
         // TODO: grab hints from user

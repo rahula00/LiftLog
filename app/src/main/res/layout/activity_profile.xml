@@ -295,145 +295,14 @@
         app:layout_constraintStart_toStartOf="@+id/guidelineL">
 
         <LinearLayout
+            android:id="@+id/linearInScroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="#000000">
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@android:color/darker_gray"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                />
-                <EditText
-                    android:id="@+id/exerciseName"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:cursorVisible="false"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:padding="0dp"
-                    android:text="Exercise Name"
-                    android:textColor="@color/green_af"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
-                    android:id="@+id/maxWeight"
-                    android:layout_width="35dp"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="number"
-                    android:padding="0dp"
-                    android:hint="____"
-                    android:textColorHint="@color/std_text_color"
-                    android:textColor="@color/std_text_color"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.34"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/maxWeightText" />
-
-                <EditText
-                    android:id="@+id/maxWeightText"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:cursorVisible="false"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="none"
-                    android:padding="0dp"
-                    android:text="Max-Weight"
-                    android:textColor="@color/std_text_color"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/exerciseName" />
-
-                <EditText
-                    android:id="@+id/maxWeightText2"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:ems="10"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:inputType="none"
-                    android:padding="0dp"
-                    android:text="lbs"
-                    android:textColor="@color/std_text_color"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.589"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/maxWeightText" />
-
-                <ImageView
-                    android:id="@+id/imageView11"
-                    android:layout_width="116dp"
-                    android:layout_height="66dp"
-                    android:layout_marginTop="16dp"
-                    android:adjustViewBounds="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/dumbbell_gradient_2" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <ImageView
-                android:id="@+id/imageView7"
-                android:adjustViewBounds="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/dumbbell_gradient_2"
-                tools:layout_editor_absoluteX="18dp"
-                tools:layout_editor_absoluteY="26dp"
-                app:layout_constraintEnd_toStartOf="@+id/guidelineR"
-                app:layout_constraintStart_toStartOf="@+id/guidelineL"/>
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_below="@+id/imageView7"
-                android:adjustViewBounds="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/dumbbell_gradient_2"
-                tools:layout_editor_absoluteX="18dp"
-                tools:layout_editor_absoluteY="26dp"
-                app:layout_constraintEnd_toStartOf="@+id/guidelineR"
-                app:layout_constraintStart_toStartOf="@+id/guidelineL"/>
-            <ImageView
-                android:id="@+id/imageView9"
-                android:layout_below="@+id/imageView8"
-                android:adjustViewBounds="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/dumbbell_gradient_2"
-                tools:layout_editor_absoluteX="18dp"
-                tools:layout_editor_absoluteY="26dp" />
-            <ImageView
-                android:id="@+id/imageView10"
-                android:layout_below="@+id/imageView9"
-                android:adjustViewBounds="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/dumbbell_gradient_2"
-                tools:layout_editor_absoluteX="18dp"
-                tools:layout_editor_absoluteY="26dp" />
 
 
         </LinearLayout>
