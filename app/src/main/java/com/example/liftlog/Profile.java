@@ -130,8 +130,22 @@ public class Profile extends AppCompatActivity {
         else mFemale.setChecked(true);
         /////////
 
-        
 
+        //Unchecks "female" checkbox on click of male checkbox
+        mMale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFemale.setChecked(false);
+            }
+        });
+
+        //Unchecks "male" checkbox on click of female checkbox
+        mFemale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMale.setChecked(false);
+            }
+        });
 
 
 
