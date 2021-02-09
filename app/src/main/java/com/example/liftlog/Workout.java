@@ -1,7 +1,9 @@
 package com.example.liftlog;
 
 import android.util.Log;
+import android.util.Pair;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,27 +41,37 @@ public class Workout {
         return new Workout(id, name, description, list2, queue);
     }
 
-    public void initialize(User u)
+    public void initialize(User user)
     {
+        //Ensure passed in data is usable, lest it crash
+        if(multipliers.size() == 0)
+        {
+            Log.i("workout: "+name, "Null size mult list, breaking.");
+            return;
+        }
         if(statsList.size() == multipliers.size())
         {
             int index = 0;
             for(ExerciseStats e: statsList)
             {
                 double multiplier_value = multipliers.get(index);
-                if(multiplier_value > 3)
+                if(multiplier_value >= 2.5)
                 {
                     e.weight = (int)multiplier_value;
                 }
                 else
                 {
-                    continue;
+                    ArrayList array_holder = user.user_max.get(e.exercise);
+                    Pair pair_holder = (Pair) array_holder.get(array_holder.size() -1);
+                    int max_weight = (int) pair_holder.second;
+                    e.weight = (int) (max_weight * multiplier_value);
                 }
+                index++;
             }
         }
         else
         {
-            Log.i("Workout", "Multipliers and Exercises don't line up");
+            Log.i("workout: "+name, "Multipliers and Exercises don't line up");
         }
     }
 }
