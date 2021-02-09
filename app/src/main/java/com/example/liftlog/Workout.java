@@ -15,6 +15,7 @@ public class Workout {
     public String description;
     public List<Double> multipliers;
     public Queue<ExerciseStats> statsList;           //The exercise list
+    private int threshold = 5;                       //Threshold for weight modifier vs real weight
 
     public Workout(int id, String workoutName, String description,  List<Double> multipliers, Queue<ExerciseStats> exercisesStats)
     {
@@ -49,22 +50,33 @@ public class Workout {
             Log.i("workout: "+name, "Null size mult list, breaking.");
             return;
         }
+        //Ensure the lists match in size, as they should.
         if(statsList.size() == multipliers.size())
         {
             int index = 0;
+            //For every exercisestat in the workout
+            //Assign the correct weight. If the multiplier is > threshold, then assign the given weight directly
+            // If less, then access the users user_max, pull the appropriate exercise max and modify it by the modifier.
             for(ExerciseStats e: statsList)
             {
                 double multiplier_value = multipliers.get(index);
-                if(multiplier_value >= 2.5)
+                if(multiplier_value >= threshold)
                 {
                     e.weight = (int)multiplier_value;
                 }
                 else
                 {
-                    ArrayList array_holder = user.user_max.get(e.exercise);
-                    Pair pair_holder = (Pair) array_holder.get(array_holder.size() -1);
-                    int max_weight = (int) pair_holder.second;
-                    e.weight = (int) (max_weight * multiplier_value);
+                    try
+                    {
+                        ArrayList array_holder = user.user_max.get(e.exercise);
+                        Pair pair_holder = (Pair) array_holder.get(array_holder.size() - 1);
+                        int max_weight = (int) pair_holder.second;
+                        e.weight = (int) (max_weight * multiplier_value);
+                    }
+                    catch(Exception ex)
+                    {
+                        Log.d("workout: "+name, ex.toString());
+                    }
                 }
                 index++;
             }
