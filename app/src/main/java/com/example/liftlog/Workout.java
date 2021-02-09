@@ -1,5 +1,7 @@
 package com.example.liftlog;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -37,11 +39,27 @@ public class Workout {
         return new Workout(id, name, description, list2, queue);
     }
 
-    public void initialize()
+    public void initialize(User u)
     {
         if(statsList.size() == multipliers.size())
         {
-            return;
+            int index = 0;
+            for(ExerciseStats e: statsList)
+            {
+                double multiplier_value = multipliers.get(index);
+                if(multiplier_value > 3)
+                {
+                    e.weight = (int)multiplier_value;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
+        else
+        {
+            Log.i("Workout", "Multipliers and Exercises don't line up");
         }
     }
 }
