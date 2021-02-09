@@ -100,16 +100,6 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        ///////// Current user values
-        String nameText = "NameHint";
-        String dobText = "DobHint";
-        String emailText = "EmailHint";
-        String feetText = "ft";
-        String inchesText = "in";
-        String weightText = "lb";
-        Boolean sex = true;
-        /////////
-
         ///////// Reference to text/check boxes
         mName = (EditText) findViewById(R.id.name);
         mDob = (EditText) findViewById(R.id.dob);
@@ -121,16 +111,36 @@ public class Profile extends AppCompatActivity {
         mFemale = (CheckBox) findViewById(R.id.female);
         /////////
 
-        ///////// Set view texts/checked to user values
+        ///////// Current user values, set view texts/checked to user values
+        // TODO: grab hints from user
+        String nameText = "NameHint";
         mName.setText(nameText);
+
+        String dobText = "DobHint";
         mDob.setText(dobText);
+
+        String emailText = "EmailHint";
         mEmail.setText(emailText);
+
+        String feetText = "ft";
         mFeet.setText(feetText);
+
+        String inchesText = "in";
         mInches.setText(inchesText);
+
+        String weightText = "lb";
         mWeight.setText(weightText);
+
+        Boolean sex = true;
         if(sex) mMale.setChecked(true);
-        else mFemale.setChecked(true);
+        else if(!sex)mFemale.setChecked(true);
+        else{
+            mMale.setChecked(false);
+            mFemale.setChecked(false);
+        }
         /////////
+
+
 
 
         //Unchecks "female" checkbox on click of male checkbox
@@ -151,17 +161,17 @@ public class Profile extends AppCompatActivity {
 
 
 
-
+        // Used to select image on click of profile pic
         ivImage = (ImageView) findViewById(R.id.profile_image);
         // Used to select profile image
         ivImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 SelectImage();
             }
         });
 
+        ////////////////////////
         //Calendar Select
         yourEditText = (EditText) findViewById(R.id.dob);
         yourEditText.setOnClickListener(new View.OnClickListener() {
@@ -196,5 +206,6 @@ public class Profile extends AppCompatActivity {
                 mDatePicker.show();
             }
         });
+        /////////////////////////
     }
 }
