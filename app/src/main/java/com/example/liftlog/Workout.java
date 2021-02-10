@@ -24,11 +24,10 @@ public class Workout {
         this.description = description;
         this.multipliers = new ArrayList<>(multipliers);
 
-        Queue<ExerciseStats> queue = new LinkedList<>();
+        this.statsList = new LinkedList<>();
         for(ExerciseStats i : exercisesStats)
-            queue.add(i.copy());
+            statsList.add(i.copy());
 
-        this.statsList = queue;
     }
 
     public Workout copy()
