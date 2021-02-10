@@ -18,11 +18,10 @@ public class Routine{
         this.description = description;
         this.imageUrl = imageUrl;
 
-        Queue<Workout> queue = new LinkedList<>();
+        this.workouts = new LinkedList<>();
         for(Workout i : workouts)
-            queue.add(i.copy());
+            this.workouts.add(i.copy());
 
-        this.workouts = queue;
     }
 
     Routine copy()
