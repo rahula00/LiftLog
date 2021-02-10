@@ -7,7 +7,7 @@ public class Workout {
     public int id;
     public String name;
     public String description;
-    public Queue<ExerciseStats> statsList;           //The exercise list
+    public Queue<ExerciseStats> statsList;
 
     public Workout(int id, String workoutName, String description,  Queue<ExerciseStats> exercisesStats)
     {

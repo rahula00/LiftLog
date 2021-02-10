@@ -9,7 +9,7 @@ public class Routine{
     public String name;
     public String description;
     public String imageUrl;
-    public Queue<Workout> workouts;           //The workouts in the routine
+    public Queue<Workout> workouts;
 
     public Routine(int new_id, String new_routineName, String new_description, String new_imageUrl, Queue<Workout> new_workouts)
     {
