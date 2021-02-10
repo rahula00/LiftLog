@@ -21,7 +21,6 @@ public class Routine{
         this.workouts = new LinkedList<>();
         for(Workout i : new_workouts)
             this.workouts.add(i.copy());
-
     }
 
     Routine copy()

@@ -1,12 +1,6 @@
 package com.example.liftlog;
 
-import android.util.Log;
-import android.util.Pair;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 public class Workout {
@@ -24,13 +18,10 @@ public class Workout {
         this.statsList = new LinkedList<>();
         for(ExerciseStats i : exercisesStats)
             statsList.add(i.copy());
-
     }
 
     public Workout copy()
     {
         return new Workout(id, name, description, statsList);
     }
-
-
 }
