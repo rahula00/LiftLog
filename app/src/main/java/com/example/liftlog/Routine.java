@@ -9,35 +9,31 @@ public class Routine{
     public String name;
     public String description;
     public String imageUrl;
-    public Queue<Workout> workouts;           //The ids of the workouts in the routine
+    public Queue<Workout> workouts;           //The workouts in the routine
 
-    public Routine(int id, String routineName, String description, String imageUrl, Queue<Workout> workouts)
+    public Routine(int new_id, String new_routineName, String new_description, String new_imageUrl, Queue<Workout> new_workouts)
     {
-        this.id = id;
-        this.name = routineName;
-        this.description = description;
-        this.imageUrl = imageUrl;
+        this.id = new_id;
+        this.name = new_routineName;
+        this.description = new_description;
+        this.imageUrl = new_imageUrl;
 
         this.workouts = new LinkedList<>();
-        for(Workout i : workouts)
+        for(Workout i : new_workouts)
             this.workouts.add(i.copy());
 
     }
 
     Routine copy()
     {
-        Queue<Workout> queue = new LinkedList<>();
-        for(Workout i : workouts)
-            queue.add(i.copy());
-
-        return new Routine(id, name, description, imageUrl, queue);
+        return new Routine(id, name, description, imageUrl, workouts);
     }
 
     Queue<Workout> copyWorkouts()
     {
-        Queue<Workout> queue = new LinkedList<>();
+        Queue<Workout> workout_queue = new LinkedList<>();
         for(Workout i : workouts)
-            queue.add(i.copy());
-        return queue;
+            workout_queue.add(i.copy());
+        return workout_queue;
     }
 }
