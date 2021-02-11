@@ -99,6 +99,10 @@
 
         <EditText
             android:id="@+id/height"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:cursorVisible="false"
             android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -111,6 +115,10 @@
 
         <EditText
             android:id="@+id/weight"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:cursorVisible="false"
             android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="188dp"

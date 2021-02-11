@@ -30,11 +30,26 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 public class Profile extends AppCompatActivity {
+//    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+//    DatabaseReference database = firebaseDatabase.getReference().child("Users");
+//    FirebaseAuth fAuth = FirebaseAuth.getInstance();
+//    String UID = fAuth.getCurrentUser().getUid();
+//    FirebaseUser user = fAuth.getCurrentUser();
+//    /////// User stuff
+//        if (user != null) {
+//        // User is signed in
+//    } else {
+//        // No user is signed in
+//    }
+//    ///////
 
 
     // Used to select profile image
@@ -102,6 +117,11 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+
+
+
+
+
         ///////// Reference to text/check boxes, buttons, etc
         mName = (EditText) findViewById(R.id.name);
         mDob = (EditText) findViewById(R.id.dob);
@@ -138,19 +158,9 @@ public class Profile extends AppCompatActivity {
         exerciseName = (TextView) newLayout.findViewById(R.id.exerciseName);
         exerciseName.setText("Overhead Press");
         scroll.addView(newLayout);
-//        LinearLayout newLayout2 = (LinearLayout) inflater.inflate(R.layout.exercise_template, scroll,false);
-//        TextView exerciseName2 = (TextView) newLayout2.findViewById(R.id.exerciseName);
-//        exerciseName2.setText("Back Squat");
-//        LinearLayout newLayout3 = (LinearLayout) inflater.inflate(R.layout.exercise_template, scroll,true);
-//        TextView exerciseName3 = (TextView) newLayout3.findViewById(R.id.exerciseName);
-//        exerciseName3.setText("Deadlift");
-//        LinearLayout newLayout4 = (LinearLayout) inflater.inflate(R.layout.exercise_template, scroll,true);
-//        TextView exerciseName4 = (TextView) newLayout4.findViewById(R.id.exerciseName);
-//        exerciseName4.setText("Overhead Press");
 
 
 
-//        TextView tvContent = (TextView) layout.findViewById(R.id.tvContent);
 
         ////////
 
@@ -165,13 +175,13 @@ public class Profile extends AppCompatActivity {
         String emailText = "EmailHint";
         mEmail.setText(emailText);
 
-        String feetText = "ft";
+        String feetText = "ftHint";
         mFeet.setText(feetText);
 
-        String inchesText = "in";
+        String inchesText = "inHint";
         mInches.setText(inchesText);
 
-        String weightText = "lb";
+        String weightText = "lbHint";
         mWeight.setText(weightText);
 
         Boolean sex = true;
@@ -219,6 +229,10 @@ public class Profile extends AppCompatActivity {
                 else if (mFemale.isChecked()) sexSubmit = false;
                 //TODO:else if none checked
                 /////////
+
+
+
+
 
                 //Check for email
                 if (TextUtils.isEmpty(emailSubmit)) {
