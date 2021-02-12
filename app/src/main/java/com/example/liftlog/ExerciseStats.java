@@ -14,4 +14,16 @@ public class ExerciseStats {
         sets = numsets;
         trigger_max_change = false;
     }
+    public ExerciseStats(int id, int weightassigned, int numreps, int numsets, boolean trigger){
+        exercise = id;
+        weight = weightassigned;
+        reps = numreps;
+        sets = numsets;
+        trigger_max_change = trigger;
+    }
+
+    public ExerciseStats copy()
+    {
+        return new ExerciseStats(exercise, weight, reps, sets, trigger_max_change);
+    }
 }

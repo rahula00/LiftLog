@@ -2,7 +2,11 @@ package com.example.liftlog;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Pair;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.util.Pair;
+
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,7 +20,7 @@ import java.util.Hashtable;
 import java.util.Queue;
 import java.util.regex.Pattern;
 
-public class User{
+public class User extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference database = firebaseDatabase.getReference().child("Users");
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
@@ -38,19 +42,15 @@ public class User{
         this.name = nName;
         this.birthDate = nBirthDate;
         this.sex = nSex;
-        this.height = new Pair<Integer, Integer>(feet, inches);
+        this.height = new Pair<>(feet, inches);
         this.weight = nWeight;
         ArrayList<Pair<Calendar,Integer>> init_max_list = new ArrayList<Pair<Calendar,Integer>>();
         Pair<Calendar, Integer> init_max = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
         init_max_list.add(init_max);
         this.user_max = new Hashtable<Integer, ArrayList<Pair<Calendar, Integer>>>();
-        this.user_max.put(0,init_max_list);
+        this.user_max.put(0,init_max_list); //0 because the initial id is 0 probably needs a fix
         this.user_workout = queueWorkout;
-        try{
-            this.profile_pic = BitmapFactory.decodeStream(MyApplication.getAppContext().getAssets().open("resource_default.png"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        this.profile_pic = BitmapFactory.decodeResource(getResources(), R.drawable.resource_default);
    }
 
     boolean setEmail(String nEmail){
@@ -122,5 +122,9 @@ public class User{
             return true;
         }
         return false;
+    }
+
+    void setProfile_pic(Bitmap newImage){
+        this.profile_pic = newImage;
     }
 }
