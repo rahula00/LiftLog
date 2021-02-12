@@ -6,10 +6,14 @@ import android.graphics.BitmapFactory;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Pair;
 
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Hashtable;
@@ -118,5 +122,9 @@ public class User extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    void setProfile_pic(Bitmap newImage){
+        this.profile_pic = newImage;
     }
 }
