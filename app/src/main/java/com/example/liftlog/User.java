@@ -50,7 +50,6 @@ public class User extends AppCompatActivity {
         this.user_max = new Hashtable<Integer, ArrayList<Pair<Calendar, Integer>>>();
         this.user_max.put(0,init_max_list); //0 because the initial id is 0 probably needs a fix
         this.user_workout = queueWorkout;
-        this.profile_pic = BitmapFactory.decodeResource(getResources(), R.drawable.resource_default);
    }
 
     boolean setEmail(String nEmail){
