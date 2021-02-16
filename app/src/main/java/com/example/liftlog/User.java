@@ -11,7 +11,7 @@ import java.util.Hashtable;
 import java.util.Queue;
 import java.util.regex.Pattern;
 
-public class User extends AppCompatActivity {
+public class User{
     public String email;
     public Bitmap profile_pic;
     public String name;
