@@ -2,7 +2,6 @@ package com.example.liftlog;
 
 import android.graphics.Bitmap;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Pair;
 
 import java.util.ArrayList;

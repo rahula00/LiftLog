@@ -1,8 +1,12 @@
 package com.example.liftlog;
 
+import androidx.core.util.Pair;
+
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.TimeZone;
@@ -27,7 +31,7 @@ class UserTest {
 
     String email = "123@gmail.com";
     String name = "Name";
-    Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("PST"));
+    Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("America/Los_Angeles"));
     boolean sex = true;
     Integer feet = 5;
     Integer inches = 10;
@@ -39,46 +43,41 @@ class UserTest {
     @Test
     void setEmail() {
         myUser.setEmail("456@gmail.com");
-        System.out.println(myUser.email);
         assertEquals("456@gmail.com", myUser.email);
     }
 
     @Test
     void setName() {
         myUser.setName("New Name");
-        System.out.println(myUser.name);
         assertEquals("New Name", myUser.name);
     }
 
     @Test
     void setDate() {
-        myUser.setDate(2020,2,12);
-        System.out.println(myUser.birthDate.get(Calendar.YEAR));
+        Calendar cale = Calendar.getInstance(TimeZone.getTimeZone("PST"));
+        myUser.setDate(cale.get(Calendar.YEAR),cale.get(Calendar.MONTH),cale.get(Calendar.DAY_OF_MONTH));
+        assertEquals(myUser.birthDate.get(Calendar.YEAR), cale.get(Calendar.YEAR));
+        assertEquals(myUser.birthDate.get(Calendar.MONTH), cale.get(Calendar.MONTH));
+        assertEquals(myUser.birthDate.get(Calendar.DAY_OF_MONTH), cale.get(Calendar.DAY_OF_MONTH));
     }
 
     @Test
     void setSex() {
         myUser.setSex(false);
-        System.out.println(myUser.sex);
         assertEquals(false, myUser.sex);
     }
 
     @Test
     void setHeight() {
         myUser.setHeight(6,10);
-        System.out.println(myUser.height);
+        Pair<Integer, Integer> newHeight = new Pair<Integer, Integer> (6,10);
+        assertEquals(myUser.height, newHeight);
     }
 
     @Test
     void setWeight() {
         myUser.setWeight(180);
-        System.out.println(myUser.weight);
-    }
-
-    @Test
-    void setUser_max() {
-        System.out.println(myUser.user_max);
-        myUser.setUser_max(0,100); //0 because the initial id is 0 probably needs a fix
-        System.out.println(myUser.user_max);
+        float newHeight = 180;
+        assertEquals(myUser.weight, newHeight);
     }
 }
