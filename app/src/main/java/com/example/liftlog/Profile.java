@@ -4,12 +4,14 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.util.Pair;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.icu.util.Calendar;
 import android.media.Image;
 import android.net.Uri;
@@ -35,7 +37,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Locale;
+import java.util.Queue;
+import java.util.TimeZone;
 
 public class Profile extends AppCompatActivity {
 //    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -51,7 +57,37 @@ public class Profile extends AppCompatActivity {
 //    }
 //    ///////
 
+    /////TESTING!!!/////////////////////////////////////////////////////////////////////////
+    public Queue<ExerciseStats> setQueue(){
+        ExerciseStats myExStat = new ExerciseStats(1,0,0,0);
+        Queue<ExerciseStats> esQueue = new LinkedList<ExerciseStats>();
+        esQueue.add(myExStat);
+        return esQueue;
+    }
 
+    public Queue<Workout> setWorkout(Queue<ExerciseStats> stats){
+        Workout myWorkout = new Workout(1,"workoutName", "description", stats);
+        Queue<Workout> workoutQueue = new LinkedList<Workout>();
+        workoutQueue.add(myWorkout);
+        return workoutQueue;
+    }
+
+    String email = "123@gmail.com";
+    String name = "Bob";
+    java.util.Calendar cal = java.util.Calendar.getInstance(TimeZone.getTimeZone("PST"));
+    boolean sex = true;
+    Integer feet = 5;
+    Integer inches = 10;
+    float weight = 160;
+    Queue<ExerciseStats> myStats = setQueue();
+    Queue<Workout> myWorkout = setWorkout(myStats);
+    User myUser = new User(email, name, cal, sex, feet, inches, weight, myWorkout);
+    ////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+    ////PROFILE PIC//////////////////////////////////////////////////////////////////////////////
     // Used to select profile image
     private void SelectImage(){
         final CharSequence[] items={"Camera","Gallery", "Cancel"};
@@ -102,6 +138,9 @@ public class Profile extends AppCompatActivity {
 
         }
     }
+    ////////////////////////////////////////////////////////////////////////////////////////
+
+
 
     EditText mName,mDob, mEmail, mFeet, mInches, mWeight;
     LinearLayout scroll;
@@ -166,27 +205,27 @@ public class Profile extends AppCompatActivity {
 
         ///////// Current user values, set view texts/checked to user values
         // TODO: grab hints from user
-        String nameText = "NameHint";
+        String nameText = myUser.name;
         mName.setText(nameText);
 
         String dobText = "DobHint";
         mDob.setText(dobText);
 
-        String emailText = "EmailHint";
+        String emailText = myUser.email;
         mEmail.setText(emailText);
 
-        String feetText = "ftHint";
+        String feetText = myUser.height.first.toString();
         mFeet.setText(feetText);
 
-        String inchesText = "inHint";
+        String inchesText = myUser.height.second.toString();
         mInches.setText(inchesText);
 
-        String weightText = "lbHint";
+        String weightText = Float.toString(myUser.weight);
         mWeight.setText(weightText);
 
-        Boolean sex = true;
-        if(sex) mMale.setChecked(true);
-        else if(!sex)mFemale.setChecked(true);
+        Boolean userSex = myUser.sex;
+        if(userSex) mMale.setChecked(true);
+        else if(!userSex)mFemale.setChecked(true);
         else{
             mMale.setChecked(false);
             mFemale.setChecked(false);
