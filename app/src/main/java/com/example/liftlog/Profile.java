@@ -27,7 +27,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Queue;
@@ -74,6 +76,7 @@ public class Profile extends AppCompatActivity {
     User myUser = new User(email, name, cal, sex, feet, inches, weight, myWorkout);
     ////////////////////////////////////////////////////////////////////////////////////////
 
+
 //    User myUser = MyApplication.user;
 
 
@@ -119,12 +122,19 @@ public class Profile extends AppCompatActivity {
                 final Bitmap bmp = (Bitmap) bundle.get("data");
                 //TODO: associate bitmap w user class
                 ivImage.setImageBitmap(bmp);
+                newProfile = bmp;
 
             }else if(requestCode==SELECT_FILE){
 
                 Uri selectedImageUri = data.getData();
                 //TODO: associate bitmap w user class
                 ivImage.setImageURI(selectedImageUri);
+                try {
+                    newProfile = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.d("damn", "select file broken");
+                }
             }
 
         }
@@ -141,6 +151,7 @@ public class Profile extends AppCompatActivity {
     EditText yourEditText;
     int mYear, mMonth, mDay;
     ImageView ivImage;
+    Bitmap newProfile = null;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -165,35 +176,35 @@ public class Profile extends AppCompatActivity {
         mSaveBtn = (Button) findViewById(R.id.btnSave);
         /////////
 
-        //////// layout reference
+
+
+
+
+
+
         scroll = (LinearLayout) findViewById(R.id.linearInScroll);
-
-        LayoutInflater inflater = getLayoutInflater();
-        ConstraintLayout newLayout = (ConstraintLayout) inflater.inflate(R.layout.exercise_template, scroll,false);
-        TextView exerciseName = (TextView) newLayout.findViewById(R.id.exerciseName);
-        exerciseName.setText("Bench Press");
-        scroll.addView(newLayout);
+        ///////////////////////////////////////
 
 
-        newLayout = (ConstraintLayout) inflater.inflate(R.layout.exercise_template, scroll,false);
-        exerciseName = (TextView) newLayout.findViewById(R.id.exerciseName);
-        exerciseName.setText("Back Squat");
-        scroll.addView(newLayout);
+        //ai = print out Exercise arrayList
+        for( int aI = 0; aI < (MyApplication.exerciseList).size(); aI++) {
+            String exerciseName = (MyApplication.exerciseList).get(aI).name;
+            Log.d("EXERCISE ARRAY", exerciseName);
+        }
 
-        newLayout = (ConstraintLayout) inflater.inflate(R.layout.exercise_template, scroll,false);
-        exerciseName = (TextView) newLayout.findViewById(R.id.exerciseName);
-        exerciseName.setText("Deadlift");
-        scroll.addView(newLayout);
 
-        newLayout = (ConstraintLayout) inflater.inflate(R.layout.exercise_template, scroll,false);
-        exerciseName = (TextView) newLayout.findViewById(R.id.exerciseName);
-        exerciseName.setText("Overhead Press");
-        scroll.addView(newLayout);
+        // Layout inflater: inflates layout for each element in Array List
+        for( int aI = 0; aI < (MyApplication.exerciseList).size(); aI++) {
+            String exerciseFromArray = (MyApplication.exerciseList).get(aI).name;
+            LayoutInflater inflater = getLayoutInflater();
+            ConstraintLayout newLayout = (ConstraintLayout) inflater.inflate(R.layout.exercise_template, scroll,false);
+            TextView exerciseName = (TextView) newLayout.findViewById(R.id.exerciseName);
+            exerciseName.setText(exerciseFromArray);
+            scroll.addView(newLayout);
+        }
 
 
 
-
-        ////////
 
         ///////// Current user values, set view texts/checked to user values
         // TODO: grab hints from user
@@ -263,6 +274,13 @@ public class Profile extends AppCompatActivity {
             public void onClick(View v) {
 
                 /////////Things being submitted
+
+                // Submit new profile pic if one was chosen
+                if(newProfile != null){
+                    myUser.setProfile_pic(newProfile);
+                }
+
+
                 Boolean sexSubmit = mMale.isChecked();
                 myUser.setSex(sexSubmit);
 
