@@ -4,21 +4,19 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.util.Pair;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.icu.util.Calendar;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -27,17 +25,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Queue;
@@ -84,6 +74,7 @@ public class Profile extends AppCompatActivity {
     User myUser = new User(email, name, cal, sex, feet, inches, weight, myWorkout);
     ////////////////////////////////////////////////////////////////////////////////////////
 
+//    User myUser = MyApplication.user;
 
 
 
@@ -151,6 +142,7 @@ public class Profile extends AppCompatActivity {
     int mYear, mMonth, mDay;
     ImageView ivImage;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -208,11 +200,24 @@ public class Profile extends AppCompatActivity {
         String nameText = myUser.name;
         mName.setText(nameText);
 
-        String dobText = "DobHint";
-        mDob.setText(dobText);
+
+        java.util.Calendar currentDob = myUser.birthDate;
+        int monthHint = currentDob.get(Calendar.MONTH);
+        int dayHint = currentDob.get(Calendar.DAY_OF_MONTH);
+        int yearHint = currentDob.get(Calendar.YEAR);
+        StringBuilder dobHint = new StringBuilder();
+//        SimpleDateFormat formatDob = new SimpleDateFormat("MM-dd-YY");
+//        String dobHint = formatDob.format(currentDob);
+        dobHint.append(monthHint);
+        dobHint.append("/");
+        dobHint.append(dayHint);
+        dobHint.append("/");
+        dobHint.append(yearHint);
+        mDob.setText(dobHint);
+
 
         String emailText = myUser.email;
-        mEmail.setText(emailText);
+        mEmail.setHint(emailText);
 
         String feetText = myUser.height.first.toString();
         mFeet.setText(feetText);
@@ -258,25 +263,32 @@ public class Profile extends AppCompatActivity {
             public void onClick(View v) {
 
                 /////////Things being submitted
-                Boolean sexSubmit;
+                Boolean sexSubmit = mMale.isChecked();
+                myUser.setSex(sexSubmit);
+
                 String emailSubmit = mEmail.getText().toString().trim();
+                if (!TextUtils.isEmpty(emailSubmit)) {
+                    myUser.setEmail(emailSubmit);
+                }
+
                 String nameSubmit = mName.getText().toString().trim();
+                if (!TextUtils.isEmpty(nameSubmit)) {
+                    myUser.setName(nameSubmit);
+                }
+                Log.d("PROFILE", myUser.name);
+
                 String dobSubmit = mDob.getText().toString().trim();
-                String ftSubmit = mFeet.getText().toString().trim();
-                String inchesSubmit = mInches.getText().toString().trim();
-                if(mMale.isChecked()) sexSubmit = true;
-                else if (mFemale.isChecked()) sexSubmit = false;
-                //TODO:else if none checked
-                /////////
+                if (!TextUtils.isEmpty(dobSubmit)) {
+                    myUser.setDate(mYear, mMonth, mDay);
+                }
 
 
-
-
-
-                //Check for email
-                if (TextUtils.isEmpty(emailSubmit)) {
-                    mEmail.setError("Email is Required.");
-                    return;
+                String ftPre = mFeet.getText().toString().trim();
+                String inPre = mInches.getText().toString().trim();
+                int ftSubmit = Integer.parseInt(ftPre);
+                int inSubmit = Integer.parseInt(inPre);
+                if ( (!TextUtils.isEmpty(ftPre)) && (!TextUtils.isEmpty(inPre)) ){
+                    myUser.setHeight(ftSubmit, inSubmit);
                 }
 
             }
@@ -315,8 +327,8 @@ public class Profile extends AppCompatActivity {
                         myCalendar.set(Calendar.MONTH, selectedmonth);
                         myCalendar.set(Calendar.DAY_OF_MONTH, selectedday);
                         //Will be reformatted
-                        String myFormat = "dd/MM/yy";
-                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
+                        String myFormat = "M/dd/yyyy";
+                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                         yourEditText.setText(sdf.format(myCalendar.getTime()));
 
                         mDay = selectedday;
