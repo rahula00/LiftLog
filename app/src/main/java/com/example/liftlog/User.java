@@ -7,6 +7,7 @@ import androidx.core.util.Pair;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Hashtable;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.regex.Pattern;
 
@@ -37,6 +38,23 @@ public class User{
         this.user_max.put(0,init_max_list); //0 because the initial id is 0 probably needs a fix
         this.user_workout = queueWorkout;
    }
+
+    public User(String nEmail){
+        //random values
+        this.email = nEmail;
+        this.name = "";
+        Calendar date = Calendar.getInstance();
+        this.birthDate = date;
+        this.sex = true;
+        this.height = new Pair<>(0, 0);
+        this.weight = 0;
+        ArrayList<Pair<Calendar,Integer>> init_max_list = new ArrayList<Pair<Calendar,Integer>>();
+        Pair<Calendar, Integer> init_max = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
+        init_max_list.add(init_max);
+        this.user_max = new Hashtable<Integer, ArrayList<Pair<Calendar, Integer>>>();
+        this.user_max.put(0,init_max_list); //0 because the initial id is 0 probably needs a fix
+        this.user_workout = new PriorityQueue<>();
+    }
 
     boolean setEmail(String nEmail){
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
