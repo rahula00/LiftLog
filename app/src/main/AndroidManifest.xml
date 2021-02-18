@@ -26,7 +26,10 @@ package="com.example.liftlog">
     </activity>
     <activity android:name=".MainActivity" />
     <activity android:name=".Register" />
-    <activity android:name=".Profile" />
+    <activity
+        android:name=".Profile"
+        android:windowSoftInputMode="adjustPan"/>
+
     <activity android:name=".Routines" />
     <activity android:name=".Progress" />
     <activity android:name=".MyWorkouts" />
