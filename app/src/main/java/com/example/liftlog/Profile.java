@@ -225,7 +225,7 @@ public class Profile extends AppCompatActivity {
         StringBuilder dobHint = new StringBuilder();
 //        SimpleDateFormat formatDob = new SimpleDateFormat("MM-dd-YY");
 //        String dobHint = formatDob.format(currentDob);
-        dobHint.append(monthHint);
+        dobHint.append(monthHint+1);
         dobHint.append("/");
         dobHint.append(dayHint);
         dobHint.append("/");
@@ -315,6 +315,12 @@ public class Profile extends AppCompatActivity {
                     myUser.setHeight(ftSubmit, inSubmit);
                 }
 
+                String weightPre = mWeight.getText().toString().trim();
+                float weightSubmit = Float.parseFloat(weightPre);
+                if ( (!TextUtils.isEmpty(ftPre)) && (!TextUtils.isEmpty(inPre)) ){
+                    myUser.setWeight(weightSubmit);
+                }
+
                 Log.i("Login", "It worked");
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 finish();
@@ -355,7 +361,7 @@ public class Profile extends AppCompatActivity {
                         myCalendar.set(Calendar.MONTH, selectedmonth);
                         myCalendar.set(Calendar.DAY_OF_MONTH, selectedday);
                         //Will be reformatted
-                        String myFormat = "M/dd/yyyy";
+                        String myFormat = "MM/dd/yyyy";
                         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                         yourEditText.setText(sdf.format(myCalendar.getTime()));
 

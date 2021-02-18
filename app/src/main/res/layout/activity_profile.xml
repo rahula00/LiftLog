@@ -181,7 +181,7 @@
             android:ems="10"
             android:fontFamily="@font/roboto_bold"
             android:hint="Lbs"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:paddingStart="15dp"
             android:paddingLeft="15dp"
             android:textColor="#9c9c9c"
