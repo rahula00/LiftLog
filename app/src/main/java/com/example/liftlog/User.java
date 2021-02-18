@@ -37,6 +37,7 @@ public class User{
         this.user_max = new Hashtable<Integer, ArrayList<Pair<Calendar, Integer>>>();
         this.user_max.put(0,init_max_list); //0 because the initial id is 0 probably needs a fix
         this.user_workout = queueWorkout;
+        this.profile_pic = null;
    }
 
     public User(String nEmail){
@@ -54,6 +55,7 @@ public class User{
         this.user_max = new Hashtable<Integer, ArrayList<Pair<Calendar, Integer>>>();
         this.user_max.put(0,init_max_list); //0 because the initial id is 0 probably needs a fix
         this.user_workout = new PriorityQueue<>();
+        this.profile_pic = null;
     }
 
     boolean setEmail(String nEmail){
