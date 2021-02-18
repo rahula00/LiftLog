@@ -64,20 +64,20 @@ public class Profile extends AppCompatActivity {
         return workoutQueue;
     }
 
-    String email = "123@gmail.com";
-    String name = "Bob";
-    java.util.Calendar cal = java.util.Calendar.getInstance(TimeZone.getTimeZone("PST"));
-    boolean sex = true;
-    Integer feet = 5;
-    Integer inches = 10;
-    float weight = 160;
-    Queue<ExerciseStats> myStats = setQueue();
-    Queue<Workout> myWorkout = setWorkout(myStats);
-    User myUser = new User(email, name, cal, sex, feet, inches, weight, myWorkout);
+//    String email = "123@gmail.com";
+//    String name = "Bob";
+//    java.util.Calendar cal = java.util.Calendar.getInstance(TimeZone.getTimeZone("PST"));
+//    boolean sex = true;
+//    Integer feet = 5;
+//    Integer inches = 10;
+//    float weight = 160;
+//    Queue<ExerciseStats> myStats = setQueue();
+//    Queue<Workout> myWorkout = setWorkout(myStats);
+//    User myUser = new User(email, name, cal, sex, feet, inches, weight, myWorkout);
     ////////////////////////////////////////////////////////////////////////////////////////
 
 
-//    User myUser = MyApplication.user;
+    User myUser = MyApplication.user;
 
 
 
@@ -207,7 +207,13 @@ public class Profile extends AppCompatActivity {
 
 
         ///////// Current user values, set view texts/checked to user values
-        // TODO: grab hints from user
+
+        if(myUser.profile_pic != null) {
+            Bitmap test = myUser.profile_pic;
+            //Todo: load iamge from user
+        }
+
+
         String nameText = myUser.name;
         mName.setText(nameText);
 
@@ -308,6 +314,10 @@ public class Profile extends AppCompatActivity {
                 if ( (!TextUtils.isEmpty(ftPre)) && (!TextUtils.isEmpty(inPre)) ){
                     myUser.setHeight(ftSubmit, inSubmit);
                 }
+
+                Log.i("Login", "It worked");
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                finish();
 
             }
         });
