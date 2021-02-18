@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="329dp"
-        android:layout_height="450dp"
+        android:layout_height="445dp"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="@+id/guidelineR"
         app:layout_constraintHorizontal_bias="0.0"
@@ -48,10 +48,10 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/roundedges"
             android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
             android:cursorVisible="false"
             android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:fontFamily="@font/roboto_bold"
             android:hint="DOB"
             android:inputType="none"
@@ -99,13 +99,13 @@
 
         <EditText
             android:id="@+id/height"
-            android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:cursorVisible="false"
             android:layout_width="75dp"
             android:layout_height="wrap_content"
+            android:clickable="false"
+            android:cursorVisible="false"
             android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:fontFamily="@font/roboto_bold"
             android:inputType="textPersonName"
             android:text="Height"
@@ -115,15 +115,15 @@
 
         <EditText
             android:id="@+id/weight"
-            android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:cursorVisible="false"
             android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="188dp"
             android:layout_marginLeft="188dp"
+            android:clickable="false"
+            android:cursorVisible="false"
             android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:fontFamily="@font/roboto_bold"
             android:inputType="textPersonName"
             android:text="Weight"
@@ -239,17 +239,17 @@
 
 
         <EditText
-            android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:cursorVisible="false"
             android:id="@+id/editTextTextPersonName"
             android:layout_width="50dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
+            android:clickable="false"
+            android:cursorVisible="false"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:fontFamily="@font/roboto_bold"
+            android:inputType="textPersonName"
             android:text="Male"
             android:textColor="@color/std_text_color"
             app:layout_constraintEnd_toEndOf="parent"
@@ -258,17 +258,17 @@
             app:layout_constraintTop_toBottomOf="@+id/feet" />
 
         <EditText
-            android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:cursorVisible="false"
             android:id="@+id/editTextTextPersonName2"
             android:layout_width="75dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
+            android:clickable="false"
+            android:cursorVisible="false"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:fontFamily="@font/roboto_bold"
+            android:inputType="textPersonName"
 
             android:text="Female"
             android:textColor="@color/std_text_color"
@@ -309,6 +309,16 @@
             app:layout_constraintStart_toStartOf="@+id/feet"
             app:layout_constraintTop_toBottomOf="@+id/height" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/dark_divider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -330,9 +340,9 @@
         android:layout_width="329dp"
         android:layout_height="200dp"
         android:layout_below="@+id/constraintLayout"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         app:layout_constraintEnd_toStartOf="@+id/guidelineR"
-        app:layout_constraintStart_toStartOf="@+id/guidelineL">
+        app:layout_constraintStart_toStartOf="@+id/guidelineL"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <LinearLayout
             android:id="@+id/linearInScroll"
@@ -341,16 +351,9 @@
             android:orientation="vertical">
 
 
-
-
-
-
         </LinearLayout>
 
     </ScrollView>
-
-
-
 
 
     <Button
@@ -375,5 +378,19 @@
         app:layout_constraintVertical_bias="0.953"
         tools:ignore="HardcodedText" />
 
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="419dp"
+        android:layout_height="146dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/gradient" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
