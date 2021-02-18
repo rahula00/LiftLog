@@ -139,7 +139,7 @@ public class Profile extends AppCompatActivity {
 
         }
     }
-    ////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////F///////////////////////////////////////
 
 
 
@@ -183,35 +183,36 @@ public class Profile extends AppCompatActivity {
 
 
         scroll = (LinearLayout) findViewById(R.id.linearInScroll);
-        ///////////////////////////////////////
-
-
+        ArrayList<Exercise> exerciseArray = (MyApplication.exerciseList);
         //ai = print out Exercise arrayList
-        for( int aI = 0; aI < (MyApplication.exerciseList).size(); aI++) {
-            String exerciseName = (MyApplication.exerciseList).get(aI).name;
+        for( int aI = 0; aI < exerciseArray.size(); aI++) {
+            String exerciseName = exerciseArray.get(aI).name;
             Log.d("EXERCISE ARRAY", exerciseName);
         }
 
 
+        LayoutInflater inflater = getLayoutInflater();
         // Layout inflater: inflates layout for each element in Array List
-        for( int aI = 0; aI < (MyApplication.exerciseList).size(); aI++) {
-            String exerciseFromArray = (MyApplication.exerciseList).get(aI).name;
-            LayoutInflater inflater = getLayoutInflater();
+        for( int aI = 0; aI < exerciseArray.size(); aI++) {
+            String exerciseFromArray = exerciseArray.get(aI).name;
             ConstraintLayout newLayout = (ConstraintLayout) inflater.inflate(R.layout.exercise_template, scroll,false);
             TextView exerciseName = (TextView) newLayout.findViewById(R.id.exerciseName);
             exerciseName.setText(exerciseFromArray);
             scroll.addView(newLayout);
         }
 
-
-
-
-        ///////// Current user values, set view texts/checked to user values
-
-        if(myUser.profile_pic != null) {
-            Bitmap test = myUser.profile_pic;
-            //Todo: load iamge from user
+        //"spacer" view to add extra space below the scroll list (to be able to get to the bottom)
+        if(exerciseArray.size() > 1) {
+            ConstraintLayout spacer = (ConstraintLayout) inflater.inflate(R.layout.spacer, scroll, false);
+            scroll.addView(spacer);
         }
+
+
+
+
+
+
+
 
 
         String nameText = myUser.name;
@@ -331,6 +332,13 @@ public class Profile extends AppCompatActivity {
 
         // Used to select image on click of profile pic
         ivImage = (ImageView) findViewById(R.id.profile_image);
+
+        ///////// Current user values, set view texts/checked to user values
+        if(myUser.profile_pic != null) {
+            Log.d("USER", "setting profile");
+            ivImage.setImageBitmap(myUser.profile_pic);
+        }
+
         // Used to select profile image
         ivImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -375,5 +383,12 @@ public class Profile extends AppCompatActivity {
             }
         });
         /////////////////////////
+    }
+    @Override
+    public void onBackPressed()
+    {
+        // code here to show dialog
+        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        finish();
     }
 }
