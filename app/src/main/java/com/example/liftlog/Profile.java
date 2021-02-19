@@ -30,55 +30,10 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Locale;
-import java.util.Queue;
-import java.util.TimeZone;
 
 public class Profile extends AppCompatActivity {
-//    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-//    DatabaseReference database = firebaseDatabase.getReference().child("Users");
-//    FirebaseAuth fAuth = FirebaseAuth.getInstance();
-//    String UID = fAuth.getCurrentUser().getUid();
-//    FirebaseUser user = fAuth.getCurrentUser();
-//    /////// User stuff
-//        if (user != null) {
-//        // User is signed in
-//    } else {
-//        // No user is signed in
-//    }
-//    ///////
-
-    /////TESTING!!!/////////////////////////////////////////////////////////////////////////
-    public Queue<ExerciseStats> setQueue(){
-        ExerciseStats myExStat = new ExerciseStats(1,0,0,0);
-        Queue<ExerciseStats> esQueue = new LinkedList<ExerciseStats>();
-        esQueue.add(myExStat);
-        return esQueue;
-    }
-
-    public Queue<Workout> setWorkout(Queue<ExerciseStats> stats){
-        Workout myWorkout = new Workout(1,"workoutName", "description", stats);
-        Queue<Workout> workoutQueue = new LinkedList<Workout>();
-        workoutQueue.add(myWorkout);
-        return workoutQueue;
-    }
-
-//    String email = "123@gmail.com";
-//    String name = "Bob";
-//    java.util.Calendar cal = java.util.Calendar.getInstance(TimeZone.getTimeZone("PST"));
-//    boolean sex = true;
-//    Integer feet = 5;
-//    Integer inches = 10;
-//    float weight = 160;
-//    Queue<ExerciseStats> myStats = setQueue();
-//    Queue<Workout> myWorkout = setWorkout(myStats);
-//    User myUser = new User(email, name, cal, sex, feet, inches, weight, myWorkout);
-    ////////////////////////////////////////////////////////////////////////////////////////
-
-
     User myUser = MyApplication.user;
-
 
 
     ////PROFILE PIC//////////////////////////////////////////////////////////////////////////////
@@ -139,7 +94,7 @@ public class Profile extends AppCompatActivity {
 
         }
     }
-    /////////////////////////////////////////////////F///////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -184,6 +139,7 @@ public class Profile extends AppCompatActivity {
 
         scroll = (LinearLayout) findViewById(R.id.linearInScroll);
         ArrayList<Exercise> exerciseArray = (MyApplication.exerciseList);
+
         //ai = print out Exercise arrayList
         for( int aI = 0; aI < exerciseArray.size(); aI++) {
             String exerciseName = exerciseArray.get(aI).name;
@@ -210,29 +166,21 @@ public class Profile extends AppCompatActivity {
 
 
 
-
-
-
-
-
+        ///////////////////// set hints
         String nameText = myUser.name;
         mName.setText(nameText);
-
 
         java.util.Calendar currentDob = myUser.birthDate;
         int monthHint = currentDob.get(Calendar.MONTH);
         int dayHint = currentDob.get(Calendar.DAY_OF_MONTH);
         int yearHint = currentDob.get(Calendar.YEAR);
         StringBuilder dobHint = new StringBuilder();
-//        SimpleDateFormat formatDob = new SimpleDateFormat("MM-dd-YY");
-//        String dobHint = formatDob.format(currentDob);
         dobHint.append(monthHint+1);
         dobHint.append("/");
         dobHint.append(dayHint);
         dobHint.append("/");
         dobHint.append(yearHint);
         mDob.setText(dobHint);
-
 
         String emailText = myUser.email;
         mEmail.setHint(emailText);
@@ -280,7 +228,7 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                /////////Things being submitted
+                /////Things being submitted
 
                 // Submit new profile pic if one was chosen
                 if(newProfile != null){
@@ -347,8 +295,7 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        ////////////////////////
-        //Calendar Select
+        //////////////////////// Calendar Select
         yourEditText = (EditText) findViewById(R.id.dob);
         yourEditText.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
