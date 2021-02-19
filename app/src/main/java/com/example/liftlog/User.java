@@ -1,12 +1,15 @@
 package com.example.liftlog;
 
 import android.graphics.Bitmap;
+import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.util.Pair;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.regex.Pattern;
@@ -53,7 +56,17 @@ public class User{
         Pair<Calendar, Integer> init_max = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
         init_max_list.add(init_max);
         this.user_max = new Hashtable<Integer, ArrayList<Pair<Calendar, Integer>>>();
-        this.user_max.put(0,init_max_list); //0 because the initial id is 0 probably needs a fix
+        //Creates max of "0" for each exercise in array
+        ArrayList<Exercise> exerciseArray = (MyApplication.exerciseList);
+
+        for(int aI = 0; aI < exerciseArray.size(); aI++) {
+            Pair<Calendar, Integer> temp_max = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
+            ArrayList<Pair<Calendar,Integer>> tempList = new ArrayList<Pair<Calendar,Integer>>();
+            tempList.add(temp_max);
+            int exId = exerciseArray.get(aI).ID;
+            this.user_max.put(exId,tempList);
+        }
+
         this.user_workout = new PriorityQueue<>();
         this.profile_pic = null;
     }
@@ -111,11 +124,15 @@ public class User{
     }
 
     boolean setUser_max(Integer id, Integer weight){
+        ArrayList<Pair<java.util.Calendar, Integer>> currentWeightArray = this.user_max.get(id);
+        if(weight == currentWeightArray.get(currentWeightArray.size()-1).second){
+            return true;
+        }
         if(weight>0){
             Pair<Calendar, Integer> new_max = new Pair<Calendar,Integer> (Calendar.getInstance(), weight);
-            ArrayList<Pair<Calendar,Integer>> current_max_list = this.user_max.get(id);
+            ArrayList<Pair<Calendar,Integer>> current_max_list = user_max.get(id);
             current_max_list.add(new_max);
-            this.user_max.put(id,current_max_list);
+            user_max.put(id,current_max_list);
             return true;
         }
         return false;

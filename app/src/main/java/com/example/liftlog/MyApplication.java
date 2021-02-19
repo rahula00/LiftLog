@@ -2,6 +2,7 @@ package com.example.liftlog;
 
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import androidx.core.util.Pair;
 
@@ -24,7 +25,7 @@ public class MyApplication extends Application {
         exerciseList.add(new Exercise(0, "Bench Press", "press"));
         exerciseList.add(new Exercise(1, "Back Squat", "squat"));
         exerciseList.add(new Exercise(2, "Deadlift", "dont die"));
-        exerciseList.add(new Exercise(2, "Overhead Press", "shoulder goes brrr"));
+        exerciseList.add(new Exercise(3, "Overhead Press", "shoulder goes brrr"));
     }
 
 

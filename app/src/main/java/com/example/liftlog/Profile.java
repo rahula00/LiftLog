@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.util.Pair;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -11,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.icu.util.Calendar;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,6 +32,7 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Locale;
 
 public class Profile extends AppCompatActivity {
@@ -88,7 +91,6 @@ public class Profile extends AppCompatActivity {
                     newProfile = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Log.d("damn", "select file broken");
                 }
             }
 
@@ -133,27 +135,43 @@ public class Profile extends AppCompatActivity {
 
 
 
-
-
-
-
+        //Todo: change exerciseArray. Everything below is dependant on this
         scroll = (LinearLayout) findViewById(R.id.linearInScroll);
         ArrayList<Exercise> exerciseArray = (MyApplication.exerciseList);
 
         //ai = print out Exercise arrayList
         for( int aI = 0; aI < exerciseArray.size(); aI++) {
             String exerciseName = exerciseArray.get(aI).name;
-            Log.d("EXERCISE ARRAY", exerciseName);
         }
 
 
+        Hashtable<Integer, ArrayList<Pair<java.util.Calendar, Integer>>> maxHashTable = myUser.user_max;
         LayoutInflater inflater = getLayoutInflater();
         // Layout inflater: inflates layout for each element in Array List
         for( int aI = 0; aI < exerciseArray.size(); aI++) {
+            // get most recent max weight from user
+            int exerciseID = exerciseArray.get(aI).ID;
+            ArrayList<Pair<java.util.Calendar, Integer>> currentWeightArray = maxHashTable.get(exerciseID);
+            Pair<java.util.Calendar, Integer> currentWeightPair = currentWeightArray.get(currentWeightArray.size() - 1);
+            int currentWeight = currentWeightPair.second;
+            for(int temp = 0; temp<currentWeightArray.size(); temp++){
+                int tempLog = currentWeightArray.get(temp).second;
+            }
+
             String exerciseFromArray = exerciseArray.get(aI).name;
             ConstraintLayout newLayout = (ConstraintLayout) inflater.inflate(R.layout.exercise_template, scroll,false);
+
             TextView exerciseName = (TextView) newLayout.findViewById(R.id.exerciseName);
             exerciseName.setText(exerciseFromArray);
+
+            TextView maxWeight = (TextView) newLayout.findViewById(R.id.maxWeight);
+            maxWeight.setText(String.valueOf(currentWeight));
+
+            ImageView exImg = (ImageView) newLayout.findViewById(R.id.exerciseImage);
+            if(exerciseArray.get(aI).image != null) {
+                exImg.setImageBitmap(exerciseArray.get(aI).image);
+            }
+
             scroll.addView(newLayout);
         }
 
@@ -162,6 +180,7 @@ public class Profile extends AppCompatActivity {
             ConstraintLayout spacer = (ConstraintLayout) inflater.inflate(R.layout.spacer, scroll, false);
             scroll.addView(spacer);
         }
+
 
 
 
@@ -248,7 +267,6 @@ public class Profile extends AppCompatActivity {
                 if (!TextUtils.isEmpty(nameSubmit)) {
                     myUser.setName(nameSubmit);
                 }
-                Log.d("PROFILE", myUser.name);
 
                 String dobSubmit = mDob.getText().toString().trim();
                 if (!TextUtils.isEmpty(dobSubmit)) {
@@ -270,7 +288,20 @@ public class Profile extends AppCompatActivity {
                     myUser.setWeight(weightSubmit);
                 }
 
-                Log.i("Login", "It worked");
+
+
+                ArrayList<Exercise> exerciseArray = (MyApplication.exerciseList);
+                for (int childPos = 0; childPos < (scroll.getChildCount()-1); childPos++) {
+                    int exerciseID = exerciseArray.get(childPos).ID;
+                    ConstraintLayout childView = (ConstraintLayout) scroll.getChildAt(childPos);
+                    TextView tempView = (TextView) childView.findViewById(R.id.maxWeight);
+                    String weightChangedString = tempView.getText().toString().trim();
+                    int weightChanged = Integer.parseInt(weightChangedString);
+                    myUser.setUser_max(exerciseID, weightChanged);
+                }
+
+
+
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 finish();
 
@@ -283,7 +314,6 @@ public class Profile extends AppCompatActivity {
 
         ///////// Current user values, set view texts/checked to user values
         if(myUser.profile_pic != null) {
-            Log.d("USER", "setting profile");
             ivImage.setImageBitmap(myUser.profile_pic);
         }
 

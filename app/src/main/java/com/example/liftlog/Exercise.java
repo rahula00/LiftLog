@@ -16,22 +16,23 @@ public class Exercise {
     public String name;
     public String instructions;
     // for taking the specific image for the exercise and setting it as an ImageView
-//    public Bitmap image;
+    public Bitmap image;
 //    public ImageView description;
 
+
+    public Exercise(int id, String exerciseName, String directions, Bitmap exImage) {
+        ID = id;
+        name = exerciseName;
+        instructions = directions;
+        image = exImage;
+    }
 
     public Exercise(int id, String exerciseName, String directions) {
         ID = id;
         name = exerciseName;
         instructions = directions;
-        // using open() requires this try/catch statement but probably won't throw an error
-
-        //image stuff. commented out for now
-//        try {
-//            image = BitmapFactory.decodeStream(MyApplication.getAppContext().getAssets().open(assetName));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        description.setImageBitmap(image);
+        image = null;
     }
+
+
 }
