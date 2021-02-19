@@ -14,12 +14,14 @@ import java.util.Hashtable;
 public class MyApplication extends Application {
     private static Context context;
     public static User user;
+    public static ArrayList<Exercise> exerciseList;
 
 
 
     public void onCreate() {
         super.onCreate();
         MyApplication.context = getApplicationContext();
+        this.exerciseList = new ArrayList<Exercise>();
     }
 
 
