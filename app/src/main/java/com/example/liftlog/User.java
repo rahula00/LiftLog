@@ -57,6 +57,8 @@ public class User{
         init_max_list.add(init_max);
         this.user_max = new Hashtable<Integer, ArrayList<Pair<Calendar, Integer>>>();
         //Creates max of "0" for each exercise in array
+
+//        Todo: change this to wherever the new exercise list is
         ArrayList<Exercise> exerciseArray = (MyApplication.exerciseList);
 
         for(int aI = 0; aI < exerciseArray.size(); aI++) {
