@@ -17,6 +17,8 @@ import java.util.Calendar;
 public class RoutineView extends AppCompatActivity {
     FirebaseAuth fAuth;
     Button mStartBtn;
+    //This was just for a test in which I removed the queue<workout> parameter, it will workwithout it as well
+    // Todo: fix the parameters or it won't work
     User myUser = new User("email", "name", Calendar.getInstance(), true, 0, 0, 0, null);
     Routine routine = new Routine(0,"nSuns","nSuns 531 is an beginner/intermediate program focused on multiple sets of main lifts. It takes advantage of the compound engagement of main lifts and slow, small increases in overall weight. Accessory lifts should be used to target muscles that aren't included in main lifts. The ones suggested can be switched out for others, depending on the goals of the user.\n" +
             "\n" +
