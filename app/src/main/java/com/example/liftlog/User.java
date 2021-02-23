@@ -47,8 +47,7 @@ public class User{
         //random values
         this.email = nEmail;
         this.name = "";
-        Calendar date = Calendar.getInstance();
-        this.birthDate = date;
+        this.birthDate = null;
         this.sex = true;
         this.height = new Pair<>(0, 0);
         this.weight = 0;
@@ -91,10 +90,13 @@ public class User{
     }
 
     boolean setDate(Integer year, Integer month, Integer day){
-        Calendar cal = Calendar.getInstance();
+        Calendar date = Calendar.getInstance();
+        if (birthDate == null){
+            birthDate = date;
+        }
         birthDate.set(year, month, day);
         //kind of a bad way to check the date. checks if the day they put in was less than the current date
-        if(birthDate.get(Calendar.DAY_OF_YEAR) < cal.get(Calendar.DAY_OF_YEAR) && birthDate.get(Calendar.YEAR) < cal.get(Calendar.YEAR)){
+        if(birthDate.get(Calendar.DAY_OF_YEAR) < date.get(Calendar.DAY_OF_YEAR) && birthDate.get(Calendar.YEAR) < date.get(Calendar.YEAR)){
             return true;
         }
         return false;

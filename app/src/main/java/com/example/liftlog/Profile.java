@@ -187,16 +187,21 @@ public class Profile extends AppCompatActivity {
         mName.setText(nameText);
 
         java.util.Calendar currentDob = myUser.birthDate;
-        int monthHint = currentDob.get(Calendar.MONTH);
-        int dayHint = currentDob.get(Calendar.DAY_OF_MONTH);
-        int yearHint = currentDob.get(Calendar.YEAR);
-        StringBuilder dobHint = new StringBuilder();
-        dobHint.append(monthHint+1);
-        dobHint.append("/");
-        dobHint.append(dayHint);
-        dobHint.append("/");
-        dobHint.append(yearHint);
-        mDob.setText(dobHint);
+        if(currentDob != null) {
+            int monthHint = currentDob.get(Calendar.MONTH);
+            int dayHint = currentDob.get(Calendar.DAY_OF_MONTH);
+            int yearHint = currentDob.get(Calendar.YEAR);
+            StringBuilder dobHint = new StringBuilder();
+            dobHint.append(monthHint + 1);
+            dobHint.append("/");
+            dobHint.append(dayHint);
+            dobHint.append("/");
+            dobHint.append(yearHint);
+            mDob.setText(dobHint);
+        }
+        else {
+            mDob.setHint("Birthdate");
+        }
 
         String emailText = myUser.email;
         mEmail.setHint(emailText);
