@@ -16,7 +16,6 @@ public class Exercise {
     public ImageView description;
 
     public Exercise(int id, String exerciseName, String directions, String assetName) {
-//        MyApplication app = ((MyApplication)getApplication());
         ID = id;
         name = exerciseName;
         instructions = directions;
