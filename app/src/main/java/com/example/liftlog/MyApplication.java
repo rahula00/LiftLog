@@ -2,12 +2,9 @@ package com.example.liftlog;
 
 import android.app.Application;
 import android.content.Context;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
 
 public class MyApplication extends Application {
