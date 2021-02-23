@@ -1,12 +1,20 @@
 package com.example.liftlog;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import androidx.core.util.Pair;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.regex.Pattern;
@@ -20,10 +28,10 @@ public class User{
     public Pair<Integer,Integer> height;
     public float weight;
     public float routine_id;
-    public Hashtable<Integer, ArrayList<Pair<Calendar,Integer>>> user_max;
-    public Queue<Workout> user_workout;
+    public HashMap<String, ArrayList<Pair<Calendar,Integer>>> user_max;
+    public List<Workout> user_workout;
 
-    public User(String nEmail, String nName, Calendar nBirthDate, boolean nSex, Integer feet, Integer inches, float nWeight, Queue<Workout> queueWorkout){
+    public User(String nEmail, String nName, Calendar nBirthDate, boolean nSex, Integer feet, Integer inches, float nWeight, List<Workout> queueWorkout){
         //random values
         this.email = nEmail;
         this.name = nName;
@@ -34,8 +42,8 @@ public class User{
         ArrayList<Pair<Calendar,Integer>> init_max_list = new ArrayList<Pair<Calendar,Integer>>();
         Pair<Calendar, Integer> init_max = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
         init_max_list.add(init_max);
-        this.user_max = new Hashtable<Integer, ArrayList<Pair<Calendar, Integer>>>();
-        this.user_max.put(0,init_max_list); //0 because the initial id is 0 probably needs a fix
+        this.user_max = new HashMap<String, ArrayList<Pair<Calendar, Integer>>>();
+        this.user_max.put("0",init_max_list); //0 because the initial id is 0 probably needs a fix
         this.user_workout = queueWorkout;
    }
 
@@ -43,15 +51,14 @@ public class User{
         //random values
         this.email = nEmail;
         this.name = "";
-        Calendar date = Calendar.getInstance();
-        this.birthDate = date;
+        this.birthDate = Calendar.getInstance();
         this.sex = true;
         this.height = new Pair<>(0, 0);
         this.weight = 0;
         ArrayList<Pair<Calendar,Integer>> init_max_list = new ArrayList<Pair<Calendar,Integer>>();
         Pair<Calendar, Integer> init_max = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
         init_max_list.add(init_max);
-        this.user_max = new Hashtable<Integer, ArrayList<Pair<Calendar, Integer>>>();
+        this.user_max = new HashMap<String, ArrayList<Pair<Calendar, Integer>>>();
         //Creates max of "0" for each exercise in array
 
 //        Todo: change this to wherever the new exercise list is
@@ -61,11 +68,11 @@ public class User{
             Pair<Calendar, Integer> temp_max = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
             ArrayList<Pair<Calendar,Integer>> tempList = new ArrayList<Pair<Calendar,Integer>>();
             tempList.add(temp_max);
-            int exId = exerciseArray.get(aI).ID;
+            String exId = ""+exerciseArray.get(aI).ID;
             this.user_max.put(exId,tempList);
         }
 
-        this.user_workout = new PriorityQueue<>();
+        this.user_workout = new ArrayList<>();
         this.profile_pic = null;
     }
 
@@ -121,7 +128,7 @@ public class User{
         routine_id = id;
     }
 
-    boolean setUser_max(Integer id, Integer weight){
+    boolean setUser_max(String id, Integer weight){
         if(weight>0){
             Pair<Calendar, Integer> new_max = new Pair<Calendar,Integer> (Calendar.getInstance(), weight);
             ArrayList<Pair<Calendar,Integer>> current_max_list = this.user_max.get(id);
@@ -134,5 +141,50 @@ public class User{
 
     void setProfile_pic(Bitmap newImage){
         this.profile_pic = newImage;
+    }
+
+    void updateToFireBase()
+    {
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference dataRef = database.getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+
+        Pair<Calendar, Integer> temp_max = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
+        ArrayList<Pair<Calendar,Integer>> tempList = new ArrayList<Pair<Calendar,Integer>>();
+        tempList.add(temp_max);
+        int exId = 3;
+
+
+        user_max.put(exId+"", tempList);
+        user_max.put(exId+1+"", tempList);
+        user_max.put(exId+2+"", tempList);
+        List<ArrayList<Pair<Calendar,Integer>>> list = new ArrayList<>(user_max.values());
+        Log.i("UserTest", tempList.toString());
+        Log.i("UserTest", user_max.toString());
+        Log.i("UserTest", list.toString());
+
+        Queue<ExerciseStats> esQueue = new LinkedList<ExerciseStats>();
+        ExerciseStats myExStat = new ExerciseStats(1,0,0,0);
+        esQueue.add(myExStat);
+        Workout temp = new Workout(1,"test", "test", esQueue);
+        user_workout.add(temp);
+        dataRef.setValue(this);
+        //dataRef.child("user_max").setValue(list);
+        //dataRef.child("email").setValue(email);
+        //dataRef.child("profile_pic").setValue(profile_pic);
+        //dataRef.child("name").setValue(name);
+        //dataRef.child("birthDate").setValue(birthDate);
+        //dataRef.child("sex").setValue(sex);
+        //dataRef.child("height").setValue(height);
+        //dataRef.child("weight").setValue(weight);
+        //dataRef.child("routine_id").setValue(routine_id);
+        //dataRef.child("user_max").setValue(user_max);
+        //dataRef.child("queue").setValue(user_workout);
+
+        //public Hashtable<Integer, ArrayList<Pair<Calendar,Integer>>> user_max;
+        //public Queue<Workout> user_workout;
+
+        Log.d("User", "Pushed test + "+MyApplication.fUser.getUid());
+
     }
 }

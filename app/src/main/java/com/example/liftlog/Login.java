@@ -95,13 +95,18 @@ public class Login extends AppCompatActivity {
                         //Navigate to the profile page or main page respectively
                         if(task.isSuccessful()){
                             FirebaseUser user = fAuth.getCurrentUser();
-                            MyApplication.user = new User(user.getEmail());
                             //If email was verified, then allow login
                             if(user.isEmailVerified()) {
                                 Toast.makeText(Login.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
                                 //Grab the UID and check if the user has a name set up in their profile
                                 //If no name, then assume the profile isn't set up and thus navigate to there instead
                                 //This is how querying for data works in this language... Its scuff
+                                Log.i("Counter", "Ver3");
+                                MyApplication.user = new User(user.getEmail());
+                                MyApplication.fUser = user;
+                                MyApplication.dataRef = FirebaseDatabase.getInstance();
+
+                                MyApplication.user.updateToFireBase();
                                 String UID = user.getUid();
                                 DatabaseReference nameRef= FirebaseDatabase.getInstance().getReference("Users").child(UID).child("Name");
                                 nameRef.addValueEventListener(new ValueEventListener() {
@@ -116,6 +121,11 @@ public class Login extends AppCompatActivity {
                                         }
                                         else
                                         {
+                                            Log.i("TestUser", "Pushed test + "+MyApplication.fUser.getUid());
+                                            User Testuser = new User(user.getEmail());
+                                            Testuser.updateToFireBase();
+
+                                            Log.i("Login", "Need To Register");
                                             progressBar.setVisibility(View.GONE);
                                             startActivity(new Intent(getApplicationContext(),Profile.class));
                                             finish();
