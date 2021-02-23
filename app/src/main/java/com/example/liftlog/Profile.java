@@ -57,7 +57,6 @@ public class Profile extends AppCompatActivity {
                 } else if (items[i].equals("Gallery")) {
                     Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     intent.setType("image/*");
-                    //startActivityForResult(intent.createChooser(intent, "Select File"), SELECT_FILE);
                     startActivityForResult(intent, SELECT_FILE);
                 } else if (items[i].equals("Cancel")) {
                     dialogInterface.dismiss();
@@ -78,14 +77,12 @@ public class Profile extends AppCompatActivity {
 
                 Bundle bundle = data.getExtras();
                 final Bitmap bmp = (Bitmap) bundle.get("data");
-                //TODO: associate bitmap w user class
                 ivImage.setImageBitmap(bmp);
                 newProfile = bmp;
 
             }else if(requestCode==SELECT_FILE){
 
                 Uri selectedImageUri = data.getData();
-                //TODO: associate bitmap w user class
                 ivImage.setImageURI(selectedImageUri);
                 try {
                     newProfile = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
@@ -345,7 +342,6 @@ public class Profile extends AppCompatActivity {
                         myCalendar.set(Calendar.YEAR, selectedyear);
                         myCalendar.set(Calendar.MONTH, selectedmonth);
                         myCalendar.set(Calendar.DAY_OF_MONTH, selectedday);
-                        //Will be reformatted
                         String myFormat = "MM/dd/yyyy";
                         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                         yourEditText.setText(sdf.format(myCalendar.getTime()));
@@ -355,7 +351,6 @@ public class Profile extends AppCompatActivity {
                         mYear = selectedyear;
                     }
                 }, mYear, mMonth, mDay);
-                //mDatePicker.setTitle("Select date");
                 mDatePicker.show();
             }
         });
@@ -364,7 +359,6 @@ public class Profile extends AppCompatActivity {
     @Override
     public void onBackPressed()
     {
-        // code here to show dialog
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
         finish();
     }

@@ -126,15 +126,14 @@ public class User{
     }
 
     boolean setUser_max(Integer id, Integer weight){
-        ArrayList<Pair<java.util.Calendar, Integer>> currentWeightArray = this.user_max.get(id);
+        ArrayList<Pair<java.util.Calendar, Integer>> currentWeightArray = user_max.get(id);
         if(weight == currentWeightArray.get(currentWeightArray.size()-1).second){
             return true;
         }
         if(weight>0){
             Pair<Calendar, Integer> new_max = new Pair<Calendar,Integer> (Calendar.getInstance(), weight);
-            ArrayList<Pair<Calendar,Integer>> current_max_list = user_max.get(id);
-            current_max_list.add(new_max);
-            user_max.put(id,current_max_list);
+            currentWeightArray.add(new_max);
+            user_max.put(id,currentWeightArray);
             return true;
         }
         return false;
