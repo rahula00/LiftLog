@@ -95,6 +95,7 @@ public class Login extends AppCompatActivity {
                         //Navigate to the profile page or main page respectively
                         if(task.isSuccessful()){
                             FirebaseUser user = fAuth.getCurrentUser();
+                            MyApplication.user = new User(user.getEmail());
                             //If email was verified, then allow login
                             if(user.isEmailVerified()) {
                                 Toast.makeText(Login.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
