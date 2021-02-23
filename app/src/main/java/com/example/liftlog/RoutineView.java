@@ -42,6 +42,7 @@ public class RoutineView extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 myUser.setRoutine(routine.id, routine.workouts);
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 finish();
             }
         });
