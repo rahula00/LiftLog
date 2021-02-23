@@ -27,7 +27,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        thisApp = getApplication();
+        thisApp = this;
         this.exerciseList = new ArrayList<Exercise>();
     }
 }
