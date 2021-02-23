@@ -7,6 +7,7 @@ import androidx.core.util.Pair;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Hashtable;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.regex.Pattern;
 
@@ -37,6 +38,36 @@ public class User{
         this.user_max.put(0,init_max_list); //0 because the initial id is 0 probably needs a fix
         this.user_workout = queueWorkout;
    }
+
+    public User(String nEmail){
+        //random values
+        this.email = nEmail;
+        this.name = "";
+        Calendar date = Calendar.getInstance();
+        this.birthDate = date;
+        this.sex = true;
+        this.height = new Pair<>(0, 0);
+        this.weight = 0;
+        ArrayList<Pair<Calendar,Integer>> init_max_list = new ArrayList<Pair<Calendar,Integer>>();
+        Pair<Calendar, Integer> init_max = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
+        init_max_list.add(init_max);
+        this.user_max = new Hashtable<Integer, ArrayList<Pair<Calendar, Integer>>>();
+        //Creates max of "0" for each exercise in array
+
+//        Todo: change this to wherever the new exercise list is
+        ArrayList<Exercise> exerciseArray = (MyApplication.exerciseList);
+
+        for(int aI = 0; aI < exerciseArray.size(); aI++) {
+            Pair<Calendar, Integer> temp_max = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
+            ArrayList<Pair<Calendar,Integer>> tempList = new ArrayList<Pair<Calendar,Integer>>();
+            tempList.add(temp_max);
+            int exId = exerciseArray.get(aI).ID;
+            this.user_max.put(exId,tempList);
+        }
+
+        this.user_workout = new PriorityQueue<>();
+        this.profile_pic = null;
+    }
 
     boolean setEmail(String nEmail){
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+

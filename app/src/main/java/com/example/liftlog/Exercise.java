@@ -21,7 +21,7 @@ public class Exercise {
         instructions = directions;
         // using open() requires this try/catch statement but probably won't throw an error
         try {
-            image = BitmapFactory.decodeStream(MyApplication.getAppContext().getAssets().open(assetName));
+            image = BitmapFactory.decodeStream(MyApplication.getContext().getAssets().open(assetName));
         } catch (IOException e) {
             e.printStackTrace();
         }
