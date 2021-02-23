@@ -1,15 +1,16 @@
 package com.example.liftlog;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class Workout {
     public int id;
     public String name;
     public String description;
-    public Queue<ExerciseStats> statsList;
+    public LinkedList<ExerciseStats> statsList;
 
-    public Workout(int id, String workoutName, String description,  Queue<ExerciseStats> exercisesStats)
+    public Workout(int id, String workoutName, String description,  LinkedList<ExerciseStats> exercisesStats)
     {
         this.id = id;
         this.name = workoutName;

@@ -95,6 +95,11 @@ public class Login extends AppCompatActivity {
                         //Navigate to the profile page or main page respectively
                         if(task.isSuccessful()){
                             FirebaseUser user = fAuth.getCurrentUser();
+<<<<<<< Updated upstream
+=======
+                            MyApplication.user = new User(user.getEmail());
+
+>>>>>>> Stashed changes
                             //If email was verified, then allow login
                             if(user.isEmailVerified()) {
                                 Toast.makeText(Login.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
@@ -121,11 +126,15 @@ public class Login extends AppCompatActivity {
                                         }
                                         else
                                         {
+<<<<<<< Updated upstream
                                             Log.i("TestUser", "Pushed test + "+MyApplication.fUser.getUid());
                                             User Testuser = new User(user.getEmail());
                                             Testuser.updateToFireBase();
 
                                             Log.i("Login", "Need To Register");
+=======
+                                            MyApplication.user.updateToFireBase();
+>>>>>>> Stashed changes
                                             progressBar.setVisibility(View.GONE);
                                             startActivity(new Intent(getApplicationContext(),Profile.class));
                                             finish();
