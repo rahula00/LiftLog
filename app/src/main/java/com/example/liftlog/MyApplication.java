@@ -28,6 +28,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         thisApp = this;
+        this.exerciseList = new ArrayList<Exercise>();
     }
 }
 
