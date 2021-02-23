@@ -16,12 +16,13 @@ public class Exercise {
     public ImageView description;
 
     public Exercise(int id, String exerciseName, String directions, String assetName) {
+//        MyApplication app = ((MyApplication)getApplication());
         ID = id;
         name = exerciseName;
         instructions = directions;
         // using open() requires this try/catch statement but probably won't throw an error
         try {
-            image = BitmapFactory.decodeStream(MyApplication.getAppContext().getAssets().open(assetName));
+            image = BitmapFactory.decodeStream(MyApplication.getContext().getAssets().open(assetName));
         } catch (IOException e) {
             e.printStackTrace();
         }

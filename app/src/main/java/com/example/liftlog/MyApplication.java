@@ -11,19 +11,26 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class MyApplication extends Application {
-    private static Context context;
+
+    private static Application thisApp;
     public static FirebaseAuth fAuth;
     public static FirebaseUser fUser;
     public static DatabaseReference dataRef;
     public static User user;
     public static ArrayList<Exercise> exerciseList;
 
-    public void onCreate() {
-        super.onCreate();
-        MyApplication.context = getApplicationContext();
+    public static Application getApplication() {
+        return thisApp;
     }
 
-    public static Context getAppContext(){
-        return MyApplication.context;
+    public static Context getContext() {
+        return getApplication().getApplicationContext();
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        thisApp = this;
     }
 }
+
