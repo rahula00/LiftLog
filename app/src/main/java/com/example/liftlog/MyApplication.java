@@ -21,13 +21,13 @@ public class MyApplication extends Application {
     }
 
     public static Context getContext() {
-        return getApplication().getApplicationContext();
+        return thisApp.getApplicationContext();
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        thisApp = this;
+        thisApp = getApplication();
         this.exerciseList = new ArrayList<Exercise>();
     }
 }
