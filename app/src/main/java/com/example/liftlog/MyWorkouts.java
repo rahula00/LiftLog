@@ -19,15 +19,12 @@ public class MyWorkouts extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_workouts);
-        Queue<ExerciseStats> statList = new LinkedList<ExerciseStats>();
-        statList.add(new ExerciseStats(1, 60, 10, 5));
-        statList.add(new ExerciseStats(2, 50, 10, 5));
         listView = findViewById(R.id.listView);
         // This array list will take the workouts of the Routine
-        ArrayList<Workout> arrayList = new ArrayList<>();
-        
-        WorkoutAdapter adapter = new WorkoutAdapter(this, R.layout.myworkoutlistelement, arrayList);
-        listView.setAdapter(adapter);
+        ArrayList<Workout> workoutList = new ArrayList<>();
+
+        WorkoutAdapter viewAdapter = new WorkoutAdapter(this, R.layout.myworkoutlistelement, workoutList);
+        listView.setAdapter(viewAdapter);
     }
 
     //Handle back buttonfunctionalities.
