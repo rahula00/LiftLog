@@ -26,6 +26,7 @@
         <activity android:name=".Profile" />
         <activity android:name=".Routines" />
         <activity android:name=".Progress" />
+        <activity android:name=".RoutineView"/>
         <activity android:name=".MyWorkouts" />
     </application>
 
