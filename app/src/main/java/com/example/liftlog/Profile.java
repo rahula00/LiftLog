@@ -268,8 +268,17 @@ public class Profile extends AppCompatActivity {
                 }
 
                 String dobSubmit = mDob.getText().toString().trim();
-                if (!TextUtils.isEmpty(dobSubmit)) {
-                    myUser.setDate(mYear, mMonth, mDay);
+                java.util.Calendar today = java.util.Calendar.getInstance();
+                if(mDay < today.get(java.util.Calendar.DAY_OF_YEAR) && mYear < today.get(java.util.Calendar.YEAR)){
+                    if (!TextUtils.isEmpty(dobSubmit)) {
+                        myUser.setDate(mYear, mMonth, mDay);
+                    }
+                }
+                else{
+                    mDob.setFocusable(true);
+                    mDob.setError("This is not a valid birthdate.");
+                    mDob.requestFocus();
+                    return;
                 }
 
 
@@ -277,8 +286,15 @@ public class Profile extends AppCompatActivity {
                 String inPre = mInches.getText().toString().trim();
                 int ftSubmit = Integer.parseInt(ftPre);
                 int inSubmit = Integer.parseInt(inPre);
-                if ( (!TextUtils.isEmpty(ftPre)) && (!TextUtils.isEmpty(inPre)) ){
-                    myUser.setHeight(ftSubmit, inSubmit);
+                if(inSubmit<0 || inSubmit>12){
+                    mInches.requestFocus();
+                    mInches.setError("Inches must be less than 13.");
+                    return;
+                }
+                else {
+                    if ((!TextUtils.isEmpty(ftPre)) && (!TextUtils.isEmpty(inPre))) {
+                        myUser.setHeight(ftSubmit, inSubmit);
+                    }
                 }
 
                 String weightPre = mWeight.getText().toString().trim();
