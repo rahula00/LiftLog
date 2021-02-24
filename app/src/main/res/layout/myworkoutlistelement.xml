@@ -5,52 +5,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:padding="16dp"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/day"
         style="@style/TextAppearance.AppCompat.Title"
-        android:layout_width="wrap_content"
-        android:layout_height="31dp"
+        android:layout_width="80dp"
+        android:layout_height="26dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="0dp"
         android:text="Day"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:textColor="@color/green_af"
-        />
-
-    <TextView
-        android:id="@+id/exerciseName"
-        style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/day"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:maxLength="50"
-        android:maxLines="2"
-        android:singleLine="true"
-        android:text="Exercise Name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/day"
-        android:textColor="@color/white"/>
-
-    <TextView
-        android:id="@+id/exerciseDesc"
-        style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/day"
-        android:layout_marginStart="128dp"
-        android:layout_marginLeft="128dp"
-        android:layout_marginTop="36dp"
-        android:maxLength="50"
-        android:maxLines="2"
-        android:singleLine="true"
-        android:text="This exercise is to work on"
-        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/exercisesText"
+        style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+        android:layout_width="75dp"
+        android:layout_height="19dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="3dp"
+        android:text="Exercises:"
+        android:textColor="@color/white"
+        android:textSize="13dp"
+        app:layout_constraintStart_toStartOf="@+id/day"
+        app:layout_constraintTop_toBottomOf="@+id/day" />
+
+    <TextView
+        android:id="@+id/descriptionText"
+        style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+        android:layout_width="84dp"
+        android:layout_height="19dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginLeft="3dp"
+        android:text="Description:"
+        android:textColor="@color/white"
+        android:textSize="13dp"
+        app:layout_constraintStart_toStartOf="@+id/day"
+        app:layout_constraintTop_toBottomOf="@+id/day" />
+
+    <TextView
+        android:id="@+id/numExercises"
+        style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/day"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:maxLength="50"
+        android:maxLines="2"
+        android:singleLine="true"
+        android:text="#"
+        android:textColor="@color/white"
+        android:textSize="13dp"
+        app:layout_constraintStart_toEndOf="@+id/day"
+        app:layout_constraintTop_toTopOf="@+id/exercisesText" />
+
+    <TextView
+        android:id="@+id/workoutDesc"
+        style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/day"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="20dp"
+        android:maxLength="50"
+        android:maxLines="2"
+        android:singleLine="false"
+        android:text="This exercise is to work on stuff"
+        android:textColor="@color/white"
+        android:textSize="13dp"
+        app:layout_constraintStart_toEndOf="@+id/day"
+        app:layout_constraintTop_toBottomOf="@+id/day" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lighter_divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/workoutDesc"
+        android:layout_marginTop="10dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

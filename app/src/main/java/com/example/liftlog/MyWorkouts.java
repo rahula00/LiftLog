@@ -9,6 +9,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class MyWorkouts extends AppCompatActivity {
     ListView listView;
@@ -17,17 +19,19 @@ public class MyWorkouts extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_workouts);
-
+        Queue<ExerciseStats> statList = new LinkedList<ExerciseStats>();
+        statList.add(new ExerciseStats(1, 60, 10, 5));
+        statList.add(new ExerciseStats(2, 50, 10, 5));
         listView = findViewById(R.id.listView);
-        ArrayList<Exercise> arrayList = new ArrayList<>();
-        arrayList.add(new Exercise(1,"BenchPress", "Hold the bar"));
-        arrayList.add(new Exercise(2,"Curls", "Curl the thing" ));
-        arrayList.add(new Exercise(3,"LegPress", "Push with legs"));
-        arrayList.add(new Exercise(4,"BenchPress", "Hold the bar"));
-        arrayList.add(new Exercise(5,"Curls", "Curl the thing" ));
-        arrayList.add(new Exercise(6,"LegPress", "Push with legs"));
-        arrayList.add(new Exercise(7,"Incline", "Hold the bar"));
-        WorkoutExerciseAdapter adapter = new WorkoutExerciseAdapter(this, R.layout.myworkoutlistelement, arrayList);
+        ArrayList<Workout> arrayList = new ArrayList<>();
+        arrayList.add(new Workout(1, "BenchPress", "Lifting the bar. Lifting the bar. Lifting the bar. Lifting the bar.", statList));
+        arrayList.add(new Workout(2, "LegPress", "Push against the weight.", statList));
+        arrayList.add(new Workout(3, "BenchPress", "Lifting the bar.", statList));
+        arrayList.add(new Workout(4, "LegPress", "Push against the weight.", statList));
+        arrayList.add(new Workout(5, "BenchPress", "Lifting the bar.", statList));
+        arrayList.add(new Workout(6, "LegPress", "Push against the weight.", statList));
+        arrayList.add(new Workout(7, "BenchPress", "Lifting the bar.", statList));
+        WorkoutAdapter adapter = new WorkoutAdapter(this, R.layout.myworkoutlistelement, arrayList);
         listView.setAdapter(adapter);
     }
 

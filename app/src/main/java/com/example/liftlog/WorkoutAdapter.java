@@ -12,10 +12,10 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public class WorkoutExerciseAdapter extends ArrayAdapter<Exercise> {
+public class WorkoutAdapter extends ArrayAdapter<Workout> {
     private Context mContext;
     private int mResource;
-    public WorkoutExerciseAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Exercise> objects){
+    public WorkoutAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Workout> objects){
         super(context, resource, objects);
         this.mContext = context;
         this.mResource = resource;
@@ -27,11 +27,12 @@ public class WorkoutExerciseAdapter extends ArrayAdapter<Exercise> {
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         convertView = layoutInflater.inflate(mResource, parent, false);
         TextView day = convertView.findViewById((R.id.day));
-        TextView exerciseName = convertView.findViewById(R.id.exerciseName);
-        TextView exerciseDesc = convertView.findViewById((R.id.exerciseDesc));
+        TextView numExercises = convertView.findViewById(R.id.numExercises);
+        TextView workoutDesc = convertView.findViewById((R.id.workoutDesc));
         day.setText("Day " + (position+1));
-        exerciseName.setText(getItem(position).name);
-        exerciseDesc.setText(getItem(position).instructions);
+        System.out.println(getItem(position).statsList.size());
+        numExercises.setText("" + getItem(position).statsList.size());
+        workoutDesc.setText(getItem(position).description);
         return convertView;
     }
 }
