@@ -1,8 +1,12 @@
 package com.example.liftlog;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
+import android.graphics.BitmapFactory;
+import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.util.Pair;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,6 +23,7 @@ import java.util.LinkedList;
 import java.util.regex.Pattern;
 
 public class User{
+    private Context context;
     public String email;
     public Bitmap profile_pic;
     public String name;
@@ -32,6 +37,7 @@ public class User{
 
     public User(String nEmail, String nName, GregorianCalendar nBirthDate, boolean nSex, Integer feet, Integer inches, float nWeight, LinkedList<Workout> queueWorkout){
         //random values
+        this.context = MyApplication.getContext();
         this.email = nEmail;
         this.name = nName;
         this.birthDate = nBirthDate;
@@ -41,11 +47,12 @@ public class User{
         this.user_max = new HashMap<>();
         user_max.put("0_k",0); //0 because the initial id is 0 probably needs a fix
         this.user_workout = queueWorkout;
-
+        this.profile_pic = BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_default);
    }
 
     public User(String nEmail){
         //random values
+        this.context = MyApplication.getContext();
         this.email = nEmail;
         this.name = "";
         this.birthDate = new GregorianCalendar();
@@ -131,7 +138,8 @@ public class User{
             birthDate = cal;
             return true;
         }
-        return false;
+        birthDate.set(year, month, day);
+        return true;
     }
 
     void setSex(boolean nSex){
@@ -155,8 +163,9 @@ public class User{
         return false;
     }
 
-    void setRoutine_id(Integer id){
-        routine_id = id;
+    void setRoutine(Integer id, Queue<Workout> workoutQueue){
+        this.routine_id = id;
+        this.user_workout = workoutQueue;
     }
 
     boolean setUser_max(String id, Integer weight){

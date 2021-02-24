@@ -7,6 +7,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class MyApplication extends Application {
 
@@ -15,6 +17,7 @@ public class MyApplication extends Application {
     public static FirebaseUser fUser;
     public static FirebaseDatabase dataRef;
     public static User user;
+    public static ArrayList<Routine> routineList;
     public static ArrayList<Exercise> exerciseList;
 
     public static Application getApplication() {
