@@ -95,29 +95,15 @@ public class Login extends AppCompatActivity {
                         //Navigate to the profile page or main page respectively
                         if(task.isSuccessful()){
                             FirebaseUser user = fAuth.getCurrentUser();
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-                            MyApplication.user = new User(user.getEmail());
-
->>>>>>> Stashed changes
-=======
 
                             //MyApplication.user = new User(user.getEmail());
                             //MyApplication.user.updateToFirebase();
->>>>>>> Stashed changes
                             //If email was verified, then allow login
                             if(user.isEmailVerified()) {
                                 Toast.makeText(Login.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
                                 //Grab the UID and check if the user has a name set up in their profile
                                 //If no name, then assume the profile isn't set up and thus navigate to there instead
                                 //This is how querying for data works in this language... Its scuff
-                                Log.i("Counter", "Ver3");
-                                MyApplication.user = new User(user.getEmail());
-                                MyApplication.fUser = user;
-                                MyApplication.dataRef = FirebaseDatabase.getInstance();
-
-                                MyApplication.user.updateToFireBase();
                                 String UID = user.getUid();
 
                                 DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference("Users").child(UID);
@@ -126,37 +112,12 @@ public class Login extends AppCompatActivity {
                                 dataRef.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
-<<<<<<< Updated upstream
-                                        if(dataSnapshot.getValue(String.class)!= null)
-                                        {
-                                            Log.i("Login", "It worked");
-                                            progressBar.setVisibility(View.GONE);
-                                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                                            finish();
-                                        }
-                                        else
-                                        {
-<<<<<<< Updated upstream
-                                            Log.i("TestUser", "Pushed test + "+MyApplication.fUser.getUid());
-                                            User Testuser = new User(user.getEmail());
-                                            Testuser.updateToFireBase();
-
-                                            Log.i("Login", "Need To Register");
-=======
-                                            MyApplication.user.updateToFireBase();
->>>>>>> Stashed changes
-                                            progressBar.setVisibility(View.GONE);
-                                            startActivity(new Intent(getApplicationContext(),Profile.class));
-                                            finish();
-                                        }
-=======
                                         MyApplication.user = dataSnapshot.getValue(User.class);
                                         Log.i("Login", "It worked");
                                         progressBar.setVisibility(View.GONE);
                                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
                                         finish();
 
->>>>>>> Stashed changes
                                     }
                                     @Override
                                     public void onCancelled(DatabaseError databaseError) {
