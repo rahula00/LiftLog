@@ -13,9 +13,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
+=======
+import java.util.Hashtable;
+import java.util.LinkedList;
+>>>>>>> Stashed changes
 import java.util.PriorityQueue;
 import java.util.Queue;
 =======
@@ -36,9 +41,15 @@ public class User{
     public float routine_id;
     public HashMap<String, ArrayList<Pair<Calendar,Integer>>> user_max;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public List<Workout> user_workout;
 
     public User(String nEmail, String nName, Calendar nBirthDate, boolean nSex, Integer feet, Integer inches, float nWeight, List<Workout> queueWorkout){
+=======
+    public LinkedList<Workout> user_workout;
+
+    public User(String nEmail, String nName, Calendar nBirthDate, boolean nSex, Integer feet, Integer inches, float nWeight, LinkedList<Workout> queueWorkout){
+>>>>>>> Stashed changes
 =======
     public LinkedList<Workout> user_workout;
 
@@ -55,7 +66,11 @@ public class User{
         Pair<Calendar, Integer> init_max = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
         init_max_list.add(init_max);
         this.user_max = new HashMap<String, ArrayList<Pair<Calendar, Integer>>>();
+<<<<<<< Updated upstream
         this.user_max.put("0",init_max_list); //0 because the initial id is 0 probably needs a fix
+=======
+        this.user_max.put("0_K",init_max_list); //0 because the initial id is 0 probably needs a fix
+>>>>>>> Stashed changes
         this.user_workout = queueWorkout;
    }
 
@@ -81,6 +96,7 @@ public class User{
             ArrayList<Pair<Calendar,Integer>> tempList = new ArrayList<Pair<Calendar,Integer>>();
             tempList.add(temp_max);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             String exId = ""+exerciseArray.get(aI).ID;
             this.user_max.put(exId,tempList);
         }
@@ -93,8 +109,17 @@ public class User{
 
         this.user_workout = new LinkedList<Workout>();
 >>>>>>> Stashed changes
+=======
+            String exId = "" + exerciseArray.get(aI).ID;
+            this.user_max.put(exId,tempList);
+        }
+
+        this.user_workout = new LinkedList<>();
+>>>>>>> Stashed changes
         this.profile_pic = null;
     }
+
+    public User(){}
 
     boolean setEmail(String nEmail){
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
@@ -163,6 +188,7 @@ public class User{
         this.profile_pic = newImage;
     }
 
+<<<<<<< Updated upstream
     void updateToFireBase()
     {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -218,5 +244,12 @@ public class User{
         //Log.d("User", "Pushed test + "+MyApplication.fUser.getUid());
 >>>>>>> Stashed changes
 
+=======
+    void updateToFirebase()
+    {
+        String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference uploadRef = FirebaseDatabase.getInstance().getReference("Users").child(UID);
+        uploadRef.setValue(this);
+>>>>>>> Stashed changes
     }
 }

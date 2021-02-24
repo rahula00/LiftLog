@@ -96,9 +96,15 @@ public class Login extends AppCompatActivity {
                         if(task.isSuccessful()){
                             FirebaseUser user = fAuth.getCurrentUser();
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
                             MyApplication.user = new User(user.getEmail());
 
+>>>>>>> Stashed changes
+=======
+
+                            //MyApplication.user = new User(user.getEmail());
+                            //MyApplication.user.updateToFirebase();
 >>>>>>> Stashed changes
                             //If email was verified, then allow login
                             if(user.isEmailVerified()) {
@@ -113,10 +119,14 @@ public class Login extends AppCompatActivity {
 
                                 MyApplication.user.updateToFireBase();
                                 String UID = user.getUid();
-                                DatabaseReference nameRef= FirebaseDatabase.getInstance().getReference("Users").child(UID).child("Name");
-                                nameRef.addValueEventListener(new ValueEventListener() {
+
+                                DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference("Users").child(UID);
+                                DatabaseReference nameRef= dataRef.child("Name");
+
+                                dataRef.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
+<<<<<<< Updated upstream
                                         if(dataSnapshot.getValue(String.class)!= null)
                                         {
                                             Log.i("Login", "It worked");
@@ -139,6 +149,14 @@ public class Login extends AppCompatActivity {
                                             startActivity(new Intent(getApplicationContext(),Profile.class));
                                             finish();
                                         }
+=======
+                                        MyApplication.user = dataSnapshot.getValue(User.class);
+                                        Log.i("Login", "It worked");
+                                        progressBar.setVisibility(View.GONE);
+                                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                        finish();
+
+>>>>>>> Stashed changes
                                     }
                                     @Override
                                     public void onCancelled(DatabaseError databaseError) {
