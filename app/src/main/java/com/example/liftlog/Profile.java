@@ -38,7 +38,6 @@ import java.util.Locale;
 public class Profile extends AppCompatActivity {
     User myUser = MyApplication.user;
 
-
     // Used to select profile image
     private void SelectImage(){
         final CharSequence[] items={"Camera","Gallery", "Cancel"};
@@ -63,7 +62,6 @@ public class Profile extends AppCompatActivity {
             }
         });
         builder.show();
-
     }
     // Used to select profile image
     @Override
@@ -79,7 +77,7 @@ public class Profile extends AppCompatActivity {
                 ivImage.setImageBitmap(bmp);
                 newProfile = bmp;
 
-            }else if(requestCode==SELECT_FILE){
+            } else if(requestCode==SELECT_FILE){
 
                 Uri selectedImageUri = data.getData();
                 ivImage.setImageURI(selectedImageUri);
@@ -89,11 +87,8 @@ public class Profile extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-
         }
     }
-
-
 
     EditText mName,mDob, mEmail, mFeet, mInches, mWeight;
     LinearLayout scroll;
@@ -111,11 +106,6 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-
-
-
-
-
         // Reference to text/check boxes, buttons, etc
         mName = (EditText) findViewById(R.id.name);
         mDob = (EditText) findViewById(R.id.dob);
@@ -127,9 +117,6 @@ public class Profile extends AppCompatActivity {
         mFemale = (CheckBox) findViewById(R.id.female);
         mSaveBtn = (Button) findViewById(R.id.btnSave);
 
-
-
-
         //Todo: change exerciseArray. Everything below is dependant on this
         scroll = (LinearLayout) findViewById(R.id.linearInScroll);
         ArrayList<Exercise> exerciseArray = (MyApplication.exerciseList);
@@ -138,7 +125,6 @@ public class Profile extends AppCompatActivity {
         for( int aI = 0; aI < exerciseArray.size(); aI++) {
             String exerciseName = exerciseArray.get(aI).name;
         }
-
 
         Hashtable<Integer, ArrayList<Pair<java.util.Calendar, Integer>>> maxHashTable = myUser.user_max;
         LayoutInflater inflater = getLayoutInflater();
@@ -175,10 +161,6 @@ public class Profile extends AppCompatActivity {
             ConstraintLayout spacer = (ConstraintLayout) inflater.inflate(R.layout.spacer, scroll, false);
             scroll.addView(spacer);
         }
-
-
-
-
 
         // set hints
         String nameText = myUser.name;
@@ -221,9 +203,6 @@ public class Profile extends AppCompatActivity {
             mFemale.setChecked(false);
         }
 
-
-
-
         //Unchecks "female" checkbox on click of male checkbox
         mMale.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -240,7 +219,6 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-
         // Save Btn on click
         mSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -250,7 +228,6 @@ public class Profile extends AppCompatActivity {
                 if(newProfile != null){
                     myUser.setProfile_pic(newProfile);
                 }
-
 
                 Boolean sexSubmit = mMale.isChecked();
                 myUser.setSex(sexSubmit);
@@ -281,7 +258,6 @@ public class Profile extends AppCompatActivity {
                     return;
                 }
 
-
                 String ftPre = mFeet.getText().toString().trim();
                 String inPre = mInches.getText().toString().trim();
                 int ftSubmit = Integer.parseInt(ftPre);
@@ -303,8 +279,6 @@ public class Profile extends AppCompatActivity {
                     myUser.setWeight(weightSubmit);
                 }
 
-
-
                 ArrayList<Exercise> exerciseArray = (MyApplication.exerciseList);
                 for (int childPos = 0; childPos < (scroll.getChildCount()-1); childPos++) {
                     int exerciseID = exerciseArray.get(childPos).ID;
@@ -315,14 +289,10 @@ public class Profile extends AppCompatActivity {
                     myUser.setUser_max(exerciseID, weightChanged);
                 }
 
-
-
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 finish();
-
             }
         });
-
 
         // Used to select image on click of profile pic
         ivImage = (ImageView) findViewById(R.id.profile_image);
@@ -353,7 +323,6 @@ public class Profile extends AppCompatActivity {
                 mMonth = mcurrentDate.get(Calendar.MONTH);
                 mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
 
-
                 DatePickerDialog mDatePicker = new DatePickerDialog(Profile.this, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
                     public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
                         Calendar myCalendar = Calendar.getInstance();
@@ -372,8 +341,8 @@ public class Profile extends AppCompatActivity {
                 mDatePicker.show();
             }
         });
-
     }
+
     @Override
     public void onBackPressed()
     {

@@ -58,9 +58,7 @@ public class User{
         ArrayList<Pair<Calendar,Integer>> init_max_list = new ArrayList<Pair<Calendar,Integer>>();
         Pair<Calendar, Integer> init_max = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
         init_max_list.add(init_max);
-
         this.user_max = new Hashtable<Integer, ArrayList<Pair<Calendar, Integer>>>();
-
         //Creates max of "0" for each exercise in array
         for(Exercise loopEx: (MyApplication.exerciseList)){
             user_max.put(loopEx.ID, new ArrayList<Pair<Calendar, Integer>>());
