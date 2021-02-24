@@ -18,6 +18,7 @@ public class RoutineView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
         setContentView(R.layout.activity_routine);
         MyApplication.fAuth = FirebaseAuth.getInstance();
         mStartBtn = findViewById(R.id.startButton);
@@ -25,8 +26,8 @@ public class RoutineView extends AppCompatActivity {
         mName = findViewById(R.id.routineName);
         mDescription = findViewById(R.id.routineDescription);
 
-        String nameText = MyApplication.routine.name;
-        String DescriptionText = MyApplication.routine.description;
+        String nameText = MyApplication.routineList.get(intent.getIntExtra("RoutineID", 0)).name;
+        String DescriptionText = MyApplication.routineList.get(intent.getIntExtra("RoutineID",0)).description;
 
         mName.setText(nameText);
         mDescription.setText(DescriptionText);
@@ -35,7 +36,7 @@ public class RoutineView extends AppCompatActivity {
         mStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                MyApplication.user.setRoutine(MyApplication.routine.id, MyApplication.routine.workouts);
+                MyApplication.user.setRoutine(MyApplication.routineList.get(intent.getIntExtra("RoutineID",0)).id, MyApplication.routineList.get(intent.getIntExtra("RoutineID",0)).workouts);
                 //This will change to becoming Routine.class instead of MainActivity.class
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 finish();

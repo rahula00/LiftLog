@@ -34,6 +34,7 @@
     <activity android:name=".Routines" />
     <activity android:name=".Progress" />
     <activity android:name=".MyWorkouts" />
+    <activity android:name=".RoutineView"/>
 </application>
 
 </manifest>
