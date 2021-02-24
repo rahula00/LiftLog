@@ -246,8 +246,6 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                /////Things being submitted
-
                 // Submit new profile pic if one was chosen
                 if(newProfile != null){
                     myUser.setProfile_pic(newProfile);
@@ -268,8 +266,10 @@ public class Profile extends AppCompatActivity {
                 }
 
                 String dobSubmit = mDob.getText().toString().trim();
-                java.util.Calendar today = java.util.Calendar.getInstance();
-                if(mDay < today.get(java.util.Calendar.DAY_OF_YEAR) && mYear < today.get(java.util.Calendar.YEAR)){
+                Calendar today = Calendar.getInstance();
+                Calendar dob =  Calendar.getInstance();
+                dob.set(mYear, mMonth, mDay);
+                if(dob.before(today)){
                     if (!TextUtils.isEmpty(dobSubmit)) {
                         myUser.setDate(mYear, mMonth, mDay);
                     }
