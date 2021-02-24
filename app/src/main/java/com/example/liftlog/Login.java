@@ -111,7 +111,6 @@ public class Login extends AppCompatActivity {
                                             MyApplication.user = new User(user.getEmail());
                                             MyApplication.user.updateToFirebase();
                                         }
-                                        MyApplication.user.printOut();
                                         progressBar.setVisibility(View.GONE);
                                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
                                         finish();
