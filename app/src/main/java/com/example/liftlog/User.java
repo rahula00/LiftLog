@@ -117,8 +117,9 @@ public class User{
         return false;
     }
 
-    void setRoutine_id(Integer id){
-        routine_id = id;
+    void setRoutine(Integer id, Queue<Workout> workoutQueue){
+        this.routine_id = id;
+        this.user_workout = workoutQueue;
     }
 
     boolean setUser_max(Integer id, Integer weight){
