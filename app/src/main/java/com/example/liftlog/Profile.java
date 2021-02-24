@@ -28,6 +28,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -63,7 +64,7 @@ public class Profile extends AppCompatActivity {
         });
         builder.show();
     }
-    
+
     // Used to select profile image
     @Override
     public  void onActivityResult(int requestCode, int resultCode, Intent data){
@@ -347,7 +348,17 @@ public class Profile extends AppCompatActivity {
     @Override
     public void onBackPressed()
     {
-        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-        finish();
+        if(myUser.name.equals("")){
+            MyApplication.fAuth.signOut();
+            Intent intent = new Intent(getApplicationContext(), Login.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            Toast.makeText(getApplicationContext() , "You have been signed out", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        else {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+        }
     }
 }
