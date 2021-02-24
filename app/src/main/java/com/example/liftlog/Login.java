@@ -109,7 +109,6 @@ public class Login extends AppCompatActivity {
                                         progressBar.setVisibility(View.GONE);
                                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
                                         finish();
-
                                     }
                                     @Override
                                     public void onCancelled(DatabaseError databaseError) {

@@ -23,14 +23,10 @@ public class ExerciseStats {
         sets = numsets;
         trigger_max_change = trigger;
     }
-
-
-
     public ExerciseStats copy()
     {
         return new ExerciseStats(exercise, weight, reps, sets, trigger_max_change);
     }
-
     @NonNull
     @Override
     public String toString() {
