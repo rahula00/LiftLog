@@ -105,7 +105,13 @@ public class Login extends AppCompatActivity {
                                 dataRef.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
-                                        MyApplication.user = new User(dataSnapshot);
+                                        if(dataSnapshot.getValue() != null)
+                                            MyApplication.user = new User(dataSnapshot);
+                                        else {
+                                            MyApplication.user = new User(user.getEmail());
+                                            MyApplication.user.updateToFirebase();
+                                        }
+                                        MyApplication.user.printOut();
                                         progressBar.setVisibility(View.GONE);
                                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
                                         finish();

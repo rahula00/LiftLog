@@ -135,8 +135,7 @@ public class User{
         cal.set(year, month, day);
         //kind of a bad way to check the date. checks if the day they put in was less than the current date
         if(birthDate.get(Calendar.DAY_OF_YEAR) < cal.get(Calendar.DAY_OF_YEAR) && birthDate.get(Calendar.YEAR) < cal.get(Calendar.YEAR)){
-            birthDate = cal;
-            return true;
+            return false;
         }
         birthDate.set(year, month, day);
         return true;
@@ -163,7 +162,7 @@ public class User{
         return false;
     }
 
-    void setRoutine(Integer id, Queue<Workout> workoutQueue){
+    void setRoutine(Integer id, LinkedList<Workout> workoutQueue){
         this.routine_id = id;
         this.user_workout = workoutQueue;
     }
