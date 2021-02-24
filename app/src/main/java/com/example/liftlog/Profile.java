@@ -349,7 +349,7 @@ public class Profile extends AppCompatActivity {
     public void onBackPressed()
     {
         if(myUser.name.equals("")){
-            MyApplication.fAuth.signOut();
+            MyApplication.fAuth.getInstance().signOut();
             Intent intent = new Intent(getApplicationContext(), Login.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
