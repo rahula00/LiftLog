@@ -23,14 +23,9 @@ public class MyWorkouts extends AppCompatActivity {
         statList.add(new ExerciseStats(1, 60, 10, 5));
         statList.add(new ExerciseStats(2, 50, 10, 5));
         listView = findViewById(R.id.listView);
+        // This array list will take the workouts of the Routine
         ArrayList<Workout> arrayList = new ArrayList<>();
-        arrayList.add(new Workout(1, "BenchPress", "Lifting the bar. Lifting the bar. Lifting the bar. Lifting the bar.", statList));
-        arrayList.add(new Workout(2, "LegPress", "Push against the weight.", statList));
-        arrayList.add(new Workout(3, "BenchPress", "Lifting the bar.", statList));
-        arrayList.add(new Workout(4, "LegPress", "Push against the weight.", statList));
-        arrayList.add(new Workout(5, "BenchPress", "Lifting the bar.", statList));
-        arrayList.add(new Workout(6, "LegPress", "Push against the weight.", statList));
-        arrayList.add(new Workout(7, "BenchPress", "Lifting the bar.", statList));
+        
         WorkoutAdapter adapter = new WorkoutAdapter(this, R.layout.myworkoutlistelement, arrayList);
         listView.setAdapter(adapter);
     }
