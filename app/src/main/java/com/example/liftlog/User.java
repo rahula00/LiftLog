@@ -12,22 +12,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-import java.util.Hashtable;
-import java.util.LinkedList;
-import java.util.List;
-=======
-import java.util.Hashtable;
-import java.util.LinkedList;
->>>>>>> Stashed changes
-import java.util.PriorityQueue;
-import java.util.Queue;
-=======
 import java.util.LinkedList;
 import java.util.List;
 
->>>>>>> Stashed changes
+import java.util.LinkedList;
+import java.util.List;
+
 import java.util.regex.Pattern;
 
 public class User{
@@ -40,21 +30,9 @@ public class User{
     public float weight;
     public float routine_id;
     public HashMap<String, ArrayList<Pair<Calendar,Integer>>> user_max;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    public List<Workout> user_workout;
-
-    public User(String nEmail, String nName, Calendar nBirthDate, boolean nSex, Integer feet, Integer inches, float nWeight, List<Workout> queueWorkout){
-=======
     public LinkedList<Workout> user_workout;
 
     public User(String nEmail, String nName, Calendar nBirthDate, boolean nSex, Integer feet, Integer inches, float nWeight, LinkedList<Workout> queueWorkout){
->>>>>>> Stashed changes
-=======
-    public LinkedList<Workout> user_workout;
-
-    public User(String nEmail, String nName, Calendar nBirthDate, boolean nSex, Integer feet, Integer inches, float nWeight, LinkedList<Workout> queueWorkout){
->>>>>>> Stashed changes
         //random values
         this.email = nEmail;
         this.name = nName;
@@ -66,11 +44,7 @@ public class User{
         Pair<Calendar, Integer> init_max = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
         init_max_list.add(init_max);
         this.user_max = new HashMap<String, ArrayList<Pair<Calendar, Integer>>>();
-<<<<<<< Updated upstream
-        this.user_max.put("0",init_max_list); //0 because the initial id is 0 probably needs a fix
-=======
-        this.user_max.put("0_K",init_max_list); //0 because the initial id is 0 probably needs a fix
->>>>>>> Stashed changes
+        user_max.put("0_K",init_max_list); //0 because the initial id is 0 probably needs a fix
         this.user_workout = queueWorkout;
    }
 
@@ -95,27 +69,10 @@ public class User{
             Pair<Calendar, Integer> temp_max = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
             ArrayList<Pair<Calendar,Integer>> tempList = new ArrayList<Pair<Calendar,Integer>>();
             tempList.add(temp_max);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
             String exId = ""+exerciseArray.get(aI).ID;
             this.user_max.put(exId,tempList);
         }
-
-        this.user_workout = new ArrayList<>();
-=======
-            String exId = exerciseArray.get(aI).ID+"";
-            this.user_max.put(exId,tempList);
-        }
-
-        this.user_workout = new LinkedList<Workout>();
->>>>>>> Stashed changes
-=======
-            String exId = "" + exerciseArray.get(aI).ID;
-            this.user_max.put(exId,tempList);
-        }
-
         this.user_workout = new LinkedList<>();
->>>>>>> Stashed changes
         this.profile_pic = null;
     }
 
@@ -188,68 +145,10 @@ public class User{
         this.profile_pic = newImage;
     }
 
-<<<<<<< Updated upstream
-    void updateToFireBase()
-    {
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference dataRef = database.getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-
-
-        Pair<Calendar, Integer> temp_max = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
-        ArrayList<Pair<Calendar,Integer>> tempList = new ArrayList<Pair<Calendar,Integer>>();
-        tempList.add(temp_max);
-<<<<<<< Updated upstream
-        int exId = 3;
-=======
-        int exId = 1;
->>>>>>> Stashed changes
-
-
-        user_max.put(exId+"", tempList);
-        user_max.put(exId+1+"", tempList);
-        user_max.put(exId+2+"", tempList);
-        List<ArrayList<Pair<Calendar,Integer>>> list = new ArrayList<>(user_max.values());
-        Log.i("UserTest", tempList.toString());
-        Log.i("UserTest", user_max.toString());
-        Log.i("UserTest", list.toString());
-
-<<<<<<< Updated upstream
-        Queue<ExerciseStats> esQueue = new LinkedList<ExerciseStats>();
-=======
-        LinkedList<ExerciseStats> esQueue = new LinkedList<ExerciseStats>();
->>>>>>> Stashed changes
-        ExerciseStats myExStat = new ExerciseStats(1,0,0,0);
-        esQueue.add(myExStat);
-        Workout temp = new Workout(1,"test", "test", esQueue);
-        user_workout.add(temp);
-        dataRef.setValue(this);
-        //dataRef.child("user_max").setValue(list);
-        //dataRef.child("email").setValue(email);
-        //dataRef.child("profile_pic").setValue(profile_pic);
-        //dataRef.child("name").setValue(name);
-        //dataRef.child("birthDate").setValue(birthDate);
-        //dataRef.child("sex").setValue(sex);
-        //dataRef.child("height").setValue(height);
-        //dataRef.child("weight").setValue(weight);
-        //dataRef.child("routine_id").setValue(routine_id);
-        //dataRef.child("user_max").setValue(user_max);
-        //dataRef.child("queue").setValue(user_workout);
-
-        //public Hashtable<Integer, ArrayList<Pair<Calendar,Integer>>> user_max;
-        //public Queue<Workout> user_workout;
-
-<<<<<<< Updated upstream
-        Log.d("User", "Pushed test + "+MyApplication.fUser.getUid());
-=======
-        //Log.d("User", "Pushed test + "+MyApplication.fUser.getUid());
->>>>>>> Stashed changes
-
-=======
     void updateToFirebase()
     {
         String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference uploadRef = FirebaseDatabase.getInstance().getReference("Users").child(UID);
         uploadRef.setValue(this);
->>>>>>> Stashed changes
     }
 }
