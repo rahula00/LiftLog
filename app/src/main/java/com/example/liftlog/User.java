@@ -131,8 +131,7 @@ public class User{
             return true;
         }
         if(weight>0){
-            Pair<Calendar, Integer> new_max = new Pair<Calendar,Integer> (Calendar.getInstance(), weight);
-            currentWeightArray.add(new_max);
+            currentWeightArray.add(new Pair<>(Calendar.getInstance(), weight));
             user_max.put(id,currentWeightArray);
             return true;
         }
