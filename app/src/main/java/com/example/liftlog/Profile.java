@@ -63,6 +63,7 @@ public class Profile extends AppCompatActivity {
         });
         builder.show();
     }
+    
     // Used to select profile image
     @Override
     public  void onActivityResult(int requestCode, int resultCode, Intent data){
