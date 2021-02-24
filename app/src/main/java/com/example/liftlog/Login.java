@@ -109,7 +109,6 @@ public class Login extends AppCompatActivity {
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         if(dataSnapshot.getValue(String.class)!= null)
                                         {
-                                            Log.i("Login", "It worked");
                                             progressBar.setVisibility(View.GONE);
                                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                                             finish();
