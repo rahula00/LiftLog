@@ -59,19 +59,15 @@ public class User{
         ArrayList<Pair<Calendar,Integer>> init_max_list = new ArrayList<Pair<Calendar,Integer>>();
         Pair<Calendar, Integer> init_max = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
         init_max_list.add(init_max);
+
         this.user_max = new Hashtable<Integer, ArrayList<Pair<Calendar, Integer>>>();
+
         //Creates max of "0" for each exercise in array
-
-//        Todo: change this to wherever the new exercise list is
-        ArrayList<Exercise> exerciseArray = (MyApplication.exerciseList);
-
-        for(int aI = 0; aI < exerciseArray.size(); aI++) {
-            Pair<Calendar, Integer> temp_max = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
-            ArrayList<Pair<Calendar,Integer>> tempList = new ArrayList<Pair<Calendar,Integer>>();
-            tempList.add(temp_max);
-            int exId = exerciseArray.get(aI).ID;
-            this.user_max.put(exId,tempList);
+        for(Exercise loopEx: (MyApplication.exerciseList)){
+            user_max.put(loopEx.ID, new ArrayList<Pair<Calendar, Integer>>());
+            user_max.get(loopEx.ID).add(new Pair<Calendar,Integer> (Calendar.getInstance(), 0));
         }
+
 
         this.user_workout = new PriorityQueue<>();
         this.profile_pic = BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_default);
