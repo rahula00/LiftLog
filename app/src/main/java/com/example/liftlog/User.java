@@ -11,7 +11,6 @@ import androidx.core.util.Pair;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.regex.Pattern;
@@ -121,8 +120,9 @@ public class User{
         return false;
     }
 
-    void setRoutine_id(Integer id){
-        routine_id = id;
+    void setRoutine(Integer id, Queue<Workout> workoutQueue){
+        this.routine_id = id;
+        this.user_workout = workoutQueue;
     }
 
     boolean setUser_max(Integer id, Integer weight){
