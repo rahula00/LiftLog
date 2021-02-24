@@ -95,25 +95,17 @@ public class Login extends AppCompatActivity {
                         //Navigate to the profile page or main page respectively
                         if(task.isSuccessful()){
                             FirebaseUser user = fAuth.getCurrentUser();
-
-                            //MyApplication.user = new User(user.getEmail());
-                            //MyApplication.user.updateToFirebase();
                             //If email was verified, then allow login
                             if(user.isEmailVerified()) {
                                 Toast.makeText(Login.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
                                 //Grab the UID and check if the user has a name set up in their profile
-                                //If no name, then assume the profile isn't set up and thus navigate to there instead
                                 //This is how querying for data works in this language... Its scuff
                                 String UID = user.getUid();
-
                                 DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference("Users").child(UID);
-                                DatabaseReference nameRef= dataRef.child("Name");
-
                                 dataRef.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
-                                        MyApplication.user = dataSnapshot.getValue(User.class);
-                                        Log.i("Login", "It worked");
+                                        MyApplication.user = new User(dataSnapshot);
                                         progressBar.setVisibility(View.GONE);
                                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
                                         finish();
