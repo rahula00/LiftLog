@@ -39,7 +39,6 @@ public class Profile extends AppCompatActivity {
     User myUser = MyApplication.user;
 
 
-    ////PROFILE PIC//////////////////////////////////////////////////////////////////////////////
     // Used to select profile image
     private void SelectImage(){
         final CharSequence[] items={"Camera","Gallery", "Cancel"};
@@ -93,7 +92,6 @@ public class Profile extends AppCompatActivity {
 
         }
     }
-    ////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -118,7 +116,7 @@ public class Profile extends AppCompatActivity {
 
 
 
-        ///////// Reference to text/check boxes, buttons, etc
+        // Reference to text/check boxes, buttons, etc
         mName = (EditText) findViewById(R.id.name);
         mDob = (EditText) findViewById(R.id.dob);
         mEmail = (EditText) findViewById(R.id.email);
@@ -128,7 +126,7 @@ public class Profile extends AppCompatActivity {
         mMale = (CheckBox) findViewById(R.id.male);
         mFemale = (CheckBox) findViewById(R.id.female);
         mSaveBtn = (Button) findViewById(R.id.btnSave);
-        /////////
+
 
 
 
@@ -182,7 +180,7 @@ public class Profile extends AppCompatActivity {
 
 
 
-        ///////////////////// set hints
+        // set hints
         String nameText = myUser.name;
         mName.setText(nameText);
 
@@ -222,7 +220,6 @@ public class Profile extends AppCompatActivity {
             mMale.setChecked(false);
             mFemale.setChecked(false);
         }
-        /////////
 
 
 
@@ -327,7 +324,7 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        //////////////////////// Calendar Select
+        // Calendar Select
         yourEditText = (EditText) findViewById(R.id.dob);
         yourEditText.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -359,7 +356,7 @@ public class Profile extends AppCompatActivity {
                 mDatePicker.show();
             }
         });
-        /////////////////////////
+
     }
     @Override
     public void onBackPressed()
