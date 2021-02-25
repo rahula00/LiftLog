@@ -45,7 +45,7 @@ public class User{
         this.height = new Pair<>(feet, inches);
         this.weight = nWeight;
         this.user_max = new HashMap<>();
-        user_max.put("0_k",0); //0 because the initial id is 0 probably needs a fix
+        initExerciseMaxes();
         this.user_workout = queueWorkout;
         this.profile_pic = BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_default);
    }
@@ -60,8 +60,7 @@ public class User{
         this.height = new Pair<Integer, Integer>(0, 0);
         this.weight = 0;
         this.user_max = new HashMap<String, Integer>();
-        user_max.put("0_k",0);
-
+        initExerciseMaxes();
         this.user_workout = new ArrayList<>();
         ExerciseStats tempEx = new ExerciseStats(0,0,0,0);
         LinkedList<ExerciseStats> tempList2 = new LinkedList<>();
@@ -108,10 +107,26 @@ public class User{
         long T1 = (long) dataObj.child("birthDate").child("timeInMillis").getValue();
         this.birthDate = new GregorianCalendar();
         this.birthDate.setTimeInMillis(T1);
-        this.user_max = (HashMap<String,Integer>) dataObj.child("user_max").getValue();
+        HashMap<String, Long> tempMap = (HashMap<String,Long>) dataObj.child("user_max").getValue();
+        this.user_max = new HashMap<String, Integer>();
+        initExerciseMaxes();
+        for (HashMap.Entry<String, Long> entry : tempMap.entrySet()) {
+            user_max.put(entry.getKey(), entry.getValue().intValue());
+        }
+
     }
 
     public User(){}
+
+    void initExerciseMaxes(){
+        ArrayList<Exercise> exerciseArray = (MyApplication.exerciseList);
+        for(Exercise tempEx : exerciseArray) {
+            StringBuilder exID = new StringBuilder();
+            exID.append(tempEx.ID);
+            exID.append("_k");
+            user_max.put(exID.toString(),0);
+        }
+    }
 
     boolean setEmail(String nEmail){
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
