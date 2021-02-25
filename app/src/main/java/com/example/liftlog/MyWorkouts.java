@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class MyWorkouts extends AppCompatActivity {
@@ -20,10 +21,8 @@ public class MyWorkouts extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_workouts);
         listView = findViewById(R.id.listView);
-        // This array list will take the workouts of the Routine
-        ArrayList<Workout> workoutList = new ArrayList<>();
-
-        WorkoutAdapter viewAdapter = new WorkoutAdapter(this, R.layout.myworkoutlistelement, workoutList);
+        User myUser = MyApplication.user;
+        WorkoutAdapter viewAdapter = new WorkoutAdapter(this, R.layout.myworkoutlistelement, (ArrayList)myUser.user_workouts);
         listView.setAdapter(viewAdapter);
     }
 

@@ -29,7 +29,7 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
         TextView day = convertView.findViewById((R.id.day));
         TextView numExercises = convertView.findViewById(R.id.numExercises);
         TextView workoutDesc = convertView.findViewById((R.id.workoutDesc));
-        day.setText("Day " + (position+1));
+        day.setText(getItem(position).name);
         System.out.println(getItem(position).statsList.size());
         numExercises.setText("" + getItem(position).statsList.size());
         workoutDesc.setText(getItem(position).description);

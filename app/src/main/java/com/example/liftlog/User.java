@@ -4,9 +4,12 @@ import android.graphics.Bitmap;
 
 import androidx.core.util.Pair;
 
+import java.util.AbstractQueue;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Hashtable;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.regex.Pattern;
@@ -21,9 +24,9 @@ public class User{
     public float weight;
     public float routine_id;
     public Hashtable<Integer, ArrayList<Pair<Calendar,Integer>>> user_max;
-    public Queue<Workout> user_workout;
+    public List<Workout> user_workouts;
 
-    public User(String nEmail, String nName, Calendar nBirthDate, boolean nSex, Integer feet, Integer inches, float nWeight, Queue<Workout> queueWorkout){
+    public User(String nEmail, String nName, Calendar nBirthDate, boolean nSex, Integer feet, Integer inches, float nWeight, List<Workout> queueWorkout){
         //random values
         this.email = nEmail;
         this.name = nName;
@@ -36,7 +39,7 @@ public class User{
         init_max_list.add(init_max);
         this.user_max = new Hashtable<Integer, ArrayList<Pair<Calendar, Integer>>>();
         this.user_max.put(0,init_max_list); //0 because the initial id is 0 probably needs a fix
-        this.user_workout = queueWorkout;
+        this.user_workouts = queueWorkout;
    }
 
     public User(String nEmail){
@@ -65,7 +68,7 @@ public class User{
             this.user_max.put(exId,tempList);
         }
 
-        this.user_workout = new PriorityQueue<>();
+        this.user_workouts = new ArrayList<>();
         this.profile_pic = null;
     }
 
@@ -117,9 +120,9 @@ public class User{
         return false;
     }
 
-    void setRoutine(Integer id, Queue<Workout> workoutQueue){
+    void setRoutine(Integer id, List<Workout> workoutQueue){
         this.routine_id = id;
-        this.user_workout = workoutQueue;
+        this.user_workouts = workoutQueue;
     }
 
     boolean setUser_max(Integer id, Integer weight){

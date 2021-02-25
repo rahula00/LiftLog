@@ -1,6 +1,7 @@
 package com.example.liftlog;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 
@@ -9,9 +10,9 @@ public class Routine{
     public String name;
     public String description;
     public String imageUrl;
-    public Queue<Workout> workouts;
+    public List<Workout> workouts;
 
-    public Routine(int new_id, String new_routineName, String new_description, String new_imageUrl, Queue<Workout> new_workouts)
+    public Routine(int new_id, String new_routineName, String new_description, String new_imageUrl, List<Workout> new_workouts)
     {
         this.id = new_id;
         this.name = new_routineName;
