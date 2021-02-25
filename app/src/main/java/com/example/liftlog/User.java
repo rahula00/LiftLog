@@ -1,6 +1,8 @@
 package com.example.liftlog;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import androidx.core.util.Pair;
 
@@ -15,6 +17,7 @@ import java.util.Queue;
 import java.util.regex.Pattern;
 
 public class User{
+    private Context context;
     public String email;
     public Bitmap profile_pic;
     public String name;
@@ -28,6 +31,7 @@ public class User{
 
     public User(String nEmail, String nName, Calendar nBirthDate, boolean nSex, Integer feet, Integer inches, float nWeight, List<Workout> queueWorkout){
         //random values
+        this.context = MyApplication.getContext();
         this.email = nEmail;
         this.name = nName;
         this.birthDate = nBirthDate;
@@ -40,10 +44,12 @@ public class User{
         this.user_max = new Hashtable<Integer, ArrayList<Pair<Calendar, Integer>>>();
         this.user_max.put(0,init_max_list); //0 because the initial id is 0 probably needs a fix
         this.user_workouts = queueWorkout;
+        this.profile_pic = BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_default);
    }
 
     public User(String nEmail){
         //random values
+        this.context = MyApplication.getContext();
         this.email = nEmail;
         this.name = "";
         Calendar date = Calendar.getInstance();
@@ -69,7 +75,7 @@ public class User{
         }
 
         this.user_workouts = new ArrayList<>();
-        this.profile_pic = null;
+        this.profile_pic = BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_default);
     }
 
     boolean setEmail(String nEmail){

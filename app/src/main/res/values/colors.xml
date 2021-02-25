@@ -11,5 +11,7 @@
     <color name="green_af">#FF50dc00</color>
     <color name="std_text_color">#FF9c9c9c</color>
     <color name="text_box_grey">#FF2f2f2f</color>
+    <color name="darker_grey">#FFAAAAAA</color>
+    <color name="dark_divider">#FF6B6B6B</color>
     <color name="lighter_divider">#FF3a3a3a</color>
 </resources>
