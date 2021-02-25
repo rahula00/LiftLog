@@ -1,6 +1,6 @@
 package com.example.liftlog;
 
-import java.lang.reflect.Array;
+import java.util.List;
 import java.util.ArrayList;
 
 
@@ -9,9 +9,9 @@ public class Routine{
     public String name;
     public String description;
     public String imageUrl;
-    public ArrayList<Workout> workouts;
+    public List<Workout> workouts;
 
-    public Routine(int new_id, String new_routineName, String new_description, String new_imageUrl, ArrayList<Workout> new_workouts)
+    public Routine(int new_id, String new_routineName, String new_description, String new_imageUrl, List<Workout> new_workouts)
     {
         this.id = new_id;
         this.name = new_routineName;

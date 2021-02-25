@@ -5,15 +5,16 @@ import android.graphics.Bitmap;
 import android.util.Log;
 import android.graphics.BitmapFactory;
 import androidx.core.util.Pair;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.regex.Pattern;
 
 public class User{
@@ -25,11 +26,11 @@ public class User{
     public boolean sex;
     public Pair<Integer,Integer> height;
     public float weight;
-    public int routine_id;
+    public float routine_id;
     public HashMap<String, Integer> user_max;
-    public ArrayList<Workout> user_workout;
+    public List<Workout> user_workouts;
 
-    public User(String nEmail, String nName, GregorianCalendar nBirthDate, boolean nSex, Integer feet, Integer inches, float nWeight, ArrayList<Workout> queueWorkout){
+    public User(String nEmail, String nName, GregorianCalendar nBirthDate, boolean nSex, Integer feet, Integer inches, float nWeight, List<Workout> queueWorkout){
         //random values
         this.context = MyApplication.getContext();
         this.email = nEmail;
@@ -39,8 +40,9 @@ public class User{
         this.height = new Pair<>(feet, inches);
         this.weight = nWeight;
         this.user_max = new HashMap<>();
+
         initExerciseMaxes();
-        this.user_workout = queueWorkout;
+        this.user_workouts = queueWorkout;
         this.profile_pic = BitmapFactory.decodeResource(context.getResources(), R.drawable.resource_default);
    }
 
@@ -55,11 +57,11 @@ public class User{
         this.weight = 0;
         this.user_max = new HashMap<String, Integer>();
         initExerciseMaxes();
-        this.user_workout = new ArrayList<>();
+        this.user_workouts = new ArrayList<>();
         ExerciseStats tempEx = new ExerciseStats(0,0,0,0);
         LinkedList<ExerciseStats> tempList2 = new LinkedList<>();
         tempList2.add(tempEx);
-        user_workout.add(new Workout(0, "0","0",  tempList2));
+        user_workouts.add(new Workout(0, "0","0",  tempList2));
 
         this.profile_pic = null;
     }
@@ -78,10 +80,10 @@ public class User{
         long R1 = (long)dataObj.child("routine_id").getValue();
         this.routine_id = (int) R1;
 
-        this.user_workout = new ArrayList<>();
-        for(DataSnapshot workSnap : dataObj.child("user_workout").getChildren())
+        this.user_workouts = new ArrayList<>();
+        for(DataSnapshot workSnap : dataObj.child("user_workouts").getChildren())
         {
-            Workout newWork = new Workout((Long) workSnap.child("id").getValue(), (String) workSnap.child("description").getValue(), (String) workSnap.child("name").getValue());
+            Workout newWork = new Workout((Long) workSnap.child("id").getValue(), (String) workSnap.child("name").getValue(), (String) workSnap.child("description").getValue());
             if(workSnap.child("statsList")!= null) {
                 ArrayList<ExerciseStats> tempArrayList = new ArrayList<>();
                 for(DataSnapshot exerSnap : workSnap.child("statsList").getChildren())
@@ -96,7 +98,7 @@ public class User{
                 }
                 newWork.statsList = new LinkedList<>(tempArrayList);
             }
-            user_workout.add(newWork);
+            user_workouts.add(newWork);
         }
         long T1 = (long) dataObj.child("birthDate").child("timeInMillis").getValue();
         this.birthDate = new GregorianCalendar();
@@ -114,6 +116,7 @@ public class User{
 
     void initExerciseMaxes(){
         ArrayList<Exercise> exerciseArray = (MyApplication.exerciseList);
+        user_max.put("0_k",0);
         for(Exercise tempEx : exerciseArray) {
             StringBuilder exID = new StringBuilder();
             exID.append(tempEx.ID);
@@ -171,9 +174,9 @@ public class User{
         return false;
     }
 
-    void setRoutine(Integer id, ArrayList<Workout> workoutQueue){
+    void setRoutine(Integer id, List<Workout> workoutQueue){
         this.routine_id = id;
-        this.user_workout = workoutQueue;
+        this.user_workouts = workoutQueue;
     }
 
     boolean setUser_max(String id, Integer weight){
@@ -199,7 +202,7 @@ public class User{
     void printOut()
     {
         String printMe = "\nemail:" +email+"\nname:" +name+"\nbirthDate:" +birthDate+"\nsex:" +sex+"\nheight:" +height+
-                "\nweight:" +weight+"\nroutine:" +routine_id+"\nuser_max:" +user_max+"\nuser_workout:" +user_workout;
+                "\nweight:" +weight+"\nroutine:" +routine_id+"\nuser_max:" +user_max+"\nuser_workouts:" +user_workouts;
         Log.i("printOut", printMe);
     }
 }
