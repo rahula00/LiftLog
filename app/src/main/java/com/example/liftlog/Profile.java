@@ -33,6 +33,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Locale;
 
@@ -128,18 +129,17 @@ public class Profile extends AppCompatActivity {
             String exerciseName = exerciseArray.get(aI).name;
         }
 
-        Hashtable<Integer, ArrayList<Pair<java.util.Calendar, Integer>>> maxHashTable = myUser.user_max;
+        HashMap maxHashTable = myUser.user_max;
         LayoutInflater inflater = getLayoutInflater();
         // Layout inflater: inflates layout for each element in Array List
         for( int aI = 0; aI < exerciseArray.size(); aI++) {
             // get most recent max weight from user
             int exerciseID = exerciseArray.get(aI).ID;
-            ArrayList<Pair<java.util.Calendar, Integer>> currentWeightArray = maxHashTable.get(exerciseID);
-            Pair<java.util.Calendar, Integer> currentWeightPair = currentWeightArray.get(currentWeightArray.size() - 1);
-            int currentWeight = currentWeightPair.second;
-            for(int temp = 0; temp<currentWeightArray.size(); temp++){
-                int tempLog = currentWeightArray.get(temp).second;
-            }
+            StringBuilder exID = new StringBuilder();
+            exID.append(exerciseID);
+            exID.append("_k");
+
+            int currentWeight = (int) maxHashTable.get(exID.toString());
 
             String exerciseFromArray = exerciseArray.get(aI).name;
             ConstraintLayout newLayout = (ConstraintLayout) inflater.inflate(R.layout.exercise_template, scroll,false);
@@ -157,6 +157,7 @@ public class Profile extends AppCompatActivity {
 
             scroll.addView(newLayout);
         }
+
 
         //"spacer" view to add extra space below the scroll list (to be able to get to the bottom)
         if(exerciseArray.size() > 1) {
@@ -288,7 +289,10 @@ public class Profile extends AppCompatActivity {
                     TextView tempView = (TextView) childView.findViewById(R.id.maxWeight);
                     String weightChangedString = tempView.getText().toString().trim();
                     int weightChanged = Integer.parseInt(weightChangedString);
-                    myUser.setUser_max(exerciseID, weightChanged);
+                    StringBuilder exID = new StringBuilder();
+                    exID.append(exerciseID);
+                    exID.append("_k");
+                    myUser.setUser_max(exID.toString(), weightChanged);
                 }
 
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
