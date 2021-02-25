@@ -4,22 +4,16 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.graphics.BitmapFactory;
-import android.widget.TextView;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.util.Pair;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.LinkedList;
-
 import java.util.regex.Pattern;
 
 public class User{
