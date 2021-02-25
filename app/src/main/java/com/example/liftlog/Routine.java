@@ -3,6 +3,8 @@ package com.example.liftlog;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 
 public class Routine{
@@ -19,7 +21,7 @@ public class Routine{
         this.description = new_description;
         this.imageUrl = new_imageUrl;
 
-        this.workouts = new LinkedList<>();
+        this.workouts = new ArrayList<Workout>();
         for(Workout i : new_workouts)
             this.workouts.add(i.copy());
     }
@@ -29,9 +31,9 @@ public class Routine{
         return new Routine(id, name, description, imageUrl, workouts);
     }
 
-    Queue<Workout> copyWorkouts()
+    ArrayList<Workout> copyWorkouts()
     {
-        Queue<Workout> workout_queue = new LinkedList<>();
+        ArrayList<Workout> workout_queue = new ArrayList<>();
         for(Workout i : workouts)
             workout_queue.add(i.copy());
         return workout_queue;
