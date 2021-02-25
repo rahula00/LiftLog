@@ -1,17 +1,12 @@
 package com.example.liftlog;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ListView;
-
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
 
 public class MyWorkouts extends AppCompatActivity {
     ListView listView;
