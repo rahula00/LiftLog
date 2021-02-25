@@ -294,7 +294,7 @@ public class Profile extends AppCompatActivity {
                     exID.append("_k");
                     myUser.setUser_max(exID.toString(), weightChanged);
                 }
-
+                myUser.updateToFirebase();
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 finish();
             }
