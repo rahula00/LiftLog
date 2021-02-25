@@ -3,7 +3,9 @@ package com.example.liftlog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.util.Pair;
 
 import java.util.AbstractQueue;
@@ -52,8 +54,7 @@ public class User{
         this.context = MyApplication.getContext();
         this.email = nEmail;
         this.name = "";
-        Calendar date = Calendar.getInstance();
-        this.birthDate = date;
+        this.birthDate = null;
         this.sex = true;
         this.height = new Pair<>(0, 0);
         this.weight = 0;
@@ -62,16 +63,9 @@ public class User{
         init_max_list.add(init_max);
         this.user_max = new Hashtable<Integer, ArrayList<Pair<Calendar, Integer>>>();
         //Creates max of "0" for each exercise in array
-
-//        Todo: change this to wherever the new exercise list is
-        ArrayList<Exercise> exerciseArray = (MyApplication.exerciseList);
-
-        for(int aI = 0; aI < exerciseArray.size(); aI++) {
-            Pair<Calendar, Integer> temp_max = new Pair<Calendar,Integer> (Calendar.getInstance(), 0);
-            ArrayList<Pair<Calendar,Integer>> tempList = new ArrayList<Pair<Calendar,Integer>>();
-            tempList.add(temp_max);
-            int exId = exerciseArray.get(aI).ID;
-            this.user_max.put(exId,tempList);
+        for(Exercise loopEx: (MyApplication.exerciseList)){
+            user_max.put(loopEx.ID, new ArrayList<Pair<Calendar, Integer>>());
+            user_max.get(loopEx.ID).add(new Pair<Calendar,Integer> (Calendar.getInstance(), 0));
         }
 
         this.user_workouts = new ArrayList<>();
@@ -96,13 +90,13 @@ public class User{
     }
 
     boolean setDate(Integer year, Integer month, Integer day){
-        Calendar cal = Calendar.getInstance();
-        birthDate.set(year, month, day);
+        Calendar date = Calendar.getInstance();
         //kind of a bad way to check the date. checks if the day they put in was less than the current date
-        if(birthDate.get(Calendar.DAY_OF_YEAR) < cal.get(Calendar.DAY_OF_YEAR) && birthDate.get(Calendar.YEAR) < cal.get(Calendar.YEAR)){
-            return true;
+        if (birthDate == null){
+            birthDate = date;
         }
-        return false;
+        birthDate.set(year, month, day);
+        return true;
     }
 
     void setSex(boolean nSex){
@@ -132,11 +126,13 @@ public class User{
     }
 
     boolean setUser_max(Integer id, Integer weight){
+        ArrayList<Pair<java.util.Calendar, Integer>> currentWeightArray = user_max.get(id);
+        if(weight == currentWeightArray.get(currentWeightArray.size()-1).second){
+            return true;
+        }
         if(weight>0){
-            Pair<Calendar, Integer> new_max = new Pair<Calendar,Integer> (Calendar.getInstance(), weight);
-            ArrayList<Pair<Calendar,Integer>> current_max_list = this.user_max.get(id);
-            current_max_list.add(new_max);
-            this.user_max.put(id,current_max_list);
+            currentWeightArray.add(new Pair<>(Calendar.getInstance(), weight));
+            user_max.put(id,currentWeightArray);
             return true;
         }
         return false;
