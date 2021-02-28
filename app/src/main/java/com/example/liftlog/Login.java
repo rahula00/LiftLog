@@ -99,26 +99,21 @@ public class Login extends AppCompatActivity {
                             if(user.isEmailVerified()) {
                                 Toast.makeText(Login.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
                                 //Grab the UID and check if the user has a name set up in their profile
-                                //If no name, then assume the profile isn't set up and thus navigate to there instead
                                 //This is how querying for data works in this language... Its scuff
                                 String UID = user.getUid();
-                                DatabaseReference nameRef= FirebaseDatabase.getInstance().getReference("Users").child(UID).child("Name");
-                                nameRef.addValueEventListener(new ValueEventListener() {
+                                DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference("Users").child(UID);
+                                dataRef.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
-                                        if(dataSnapshot.getValue(String.class)!= null)
-                                        {
-                                            Log.i("Login", "It worked");
-                                            progressBar.setVisibility(View.GONE);
-                                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                                            finish();
+                                        if(dataSnapshot.getValue() != null)
+                                            MyApplication.user = new User(dataSnapshot);
+                                        else {
+                                            MyApplication.user = new User(user.getEmail());
+                                            MyApplication.user.updateToFirebase();
                                         }
-                                        else
-                                        {
-                                            progressBar.setVisibility(View.GONE);
-                                            startActivity(new Intent(getApplicationContext(),Profile.class));
-                                            finish();
-                                        }
+                                        progressBar.setVisibility(View.GONE);
+                                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                        finish();
                                     }
                                     @Override
                                     public void onCancelled(DatabaseError databaseError) {

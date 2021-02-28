@@ -4,15 +4,394 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     tools:context=".Profile">
 
-    <TextView
-        android:id="@+id/textView2"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="329dp"
+        android:layout_height="445dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineR"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guidelineL"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".Profile">
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="124dp"
+            android:background="@drawable/roundedges"
+            android:ems="10"
+            android:fontFamily="@font/roboto_bold"
+            android:hint="Name"
+            android:inputType="text"
+            android:paddingStart="15dp"
+            android:paddingLeft="15dp"
+            android:textColor="#9c9c9c"
+            android:textColorHint="#9c9c9c"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <EditText
+            android:id="@+id/dob"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/roundedges"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:fontFamily="@font/roboto_bold"
+            android:hint="DOB"
+            android:inputType="none"
+
+            android:paddingStart="15dp"
+            android:paddingLeft="15dp"
+            android:textColor="#9c9c9c"
+            android:textColorHint="#9c9c9c"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            tools:ignore="HardcodedText" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/roundedges"
+            android:ems="10"
+            android:fontFamily="@font/roboto_bold"
+            android:hint="Email"
+            android:inputType="text"
+            android:paddingStart="15dp"
+            android:paddingLeft="15dp"
+            android:textColor="#9c9c9c"
+            android:textColorHint="#9c9c9c"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dob"
+            tools:ignore="HardcodedText" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/textGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.65" />
+
+        <EditText
+            android:id="@+id/height"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Height"
+            android:textColor="#9c9c9c"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textGuideline" />
+
+        <EditText
+            android:id="@+id/weight"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="188dp"
+            android:layout_marginLeft="188dp"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Weight"
+            android:textColor="#9c9c9c"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textGuideline" />
+
+        <EditText
+            android:id="@+id/feet"
+            android:layout_width="75dp"
+            android:layout_height="45dp"
+            android:background="@drawable/roundedges"
+            android:ems="10"
+            android:fontFamily="@font/roboto_bold"
+            android:hint="Feet"
+            android:inputType="number"
+            android:paddingStart="15dp"
+            android:paddingLeft="15dp"
+            android:textColor="#9c9c9c"
+            android:textColorHint="#9c9c9c"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/height"
+            tools:ignore="HardcodedText" />
+
+        <EditText
+            android:id="@+id/inches"
+            android:layout_width="75dp"
+            android:layout_height="45dp"
+            android:background="@drawable/roundedges"
+            android:ems="10"
+            android:fontFamily="@font/roboto_bold"
+            android:hint="Inches"
+            android:inputType="number"
+            android:paddingStart="15dp"
+            android:paddingLeft="15dp"
+            android:textColor="#9c9c9c"
+            android:textColorHint="#9c9c9c"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.322"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/height"
+            tools:ignore="HardcodedText" />
+
+        <EditText
+            android:id="@+id/lbs"
+            android:layout_width="75dp"
+            android:layout_height="45dp"
+            android:background="@drawable/roundedges"
+            android:ems="10"
+            android:fontFamily="@font/roboto_bold"
+            android:hint="Lbs"
+            android:inputType="numberDecimal"
+            android:paddingStart="15dp"
+            android:paddingLeft="15dp"
+            android:textColor="#9c9c9c"
+            android:textColorHint="#9c9c9c"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.74"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/height"
+            tools:ignore="HardcodedText" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/resource_default"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingClass" />
+
+        <CheckBox
+            android:id="@+id/male"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/custom_checkbox"
+            android:backgroundTint="@color/std_text_color"
+            android:button="@null"
+            android:padding="0dp"
+            android:text=""
+            app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName"
+            app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName" />
+
+        <CheckBox
+            android:id="@+id/female"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/custom_checkbox"
+            android:backgroundTint="@color/std_text_color"
+            android:button="@null"
+            android:padding="0dp"
+            android:text=""
+            app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName2"
+            app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName2" />
+
+
+        <EditText
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="50dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Male"
+            android:textColor="@color/std_text_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.075"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/feet" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName2"
+            android:layout_width="75dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Female"
+            android:textColor="@color/std_text_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.362"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inches" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName4"
+            android:layout_width="7dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="75dp"
+            android:layout_marginLeft="75dp"
+            android:ems="10"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:padding="0dp"
+            android:text="'"
+            android:textColor="@color/std_text_color"
+            app:layout_constraintStart_toStartOf="@+id/feet"
+            app:layout_constraintTop_toBottomOf="@+id/height" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName5"
+            android:layout_width="7dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="158dp"
+            android:layout_marginLeft="158dp"
+            android:ems="10"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:padding="0dp"
+            android:text="''"
+            android:textColor="@color/std_text_color"
+            app:layout_constraintStart_toStartOf="@+id/feet"
+            app:layout_constraintTop_toBottomOf="@+id/height" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/dark_divider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <ScrollView
+        android:layout_width="329dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/constraintLayout"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineR"
+        app:layout_constraintStart_toStartOf="@+id/guidelineL"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <LinearLayout
+            android:id="@+id/linearInScroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="161dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/roundedges"
+        android:bottomLeftRadius="50dp"
+        android:bottomRightRadius="50dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Save"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:topLeftRadius="50dp"
+        android:topRightRadius="50dp"
+        app:backgroundTint="#50dc00"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.953"
+        tools:ignore="HardcodedText" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="419dp"
+        android:layout_height="146dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/gradient" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
