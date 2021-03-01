@@ -244,6 +244,12 @@ public class Profile extends AppCompatActivity {
                 if (!TextUtils.isEmpty(nameSubmit)) {
                     myUser.setName(nameSubmit);
                 }
+                else{
+                    mName.setFocusable(true);
+                    mName.setError("This is not a valid Name.");
+                    mName.requestFocus();
+                    return;
+                }
 
                 String dobSubmit = mDob.getText().toString().trim();
                 Calendar today = Calendar.getInstance();
