@@ -5,6 +5,7 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 
@@ -145,9 +146,9 @@ public class NSuns extends Routine{
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void init_workout(Workout to_init, int usr_max) {
+    public void init_workout(Workout to_init, HashMap<String, Integer> user_max) {
         to_init.statsList.forEach( exercise -> {
-            exercise.weight = (int) Math.floor(.90 * usr_max);
+            exercise.weight = (int) Math.floor(.90 * user_max.get(String.valueOf(exercise.exercise)));
             //ensure that weight set is divisble evenly by 5
             int remainder = exercise.weight % divisor;
             if (remainder != 0) {
