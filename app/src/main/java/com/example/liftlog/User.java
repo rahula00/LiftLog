@@ -58,11 +58,6 @@ public class User{
         this.user_max = new HashMap<String, Integer>();
         initExerciseMaxes();
         this.user_workouts = new ArrayList<>();
-        ExerciseStats tempEx = new ExerciseStats(0,0,0,0);
-        LinkedList<ExerciseStats> tempList2 = new LinkedList<>();
-        tempList2.add(tempEx);
-        user_workouts.add(new Workout(0, "0","0",  tempList2));
-
         this.profile_pic = null;
     }
 
@@ -116,6 +111,7 @@ public class User{
 
     void initExerciseMaxes(){
         ArrayList<Exercise> exerciseArray = (MyApplication.exerciseList);
+        //TODO: THIS IS HERE UNTIL DATA LOAD ADDED!
         user_max.put("0_k",0);
         for(Exercise tempEx : exerciseArray) {
             StringBuilder exID = new StringBuilder();
