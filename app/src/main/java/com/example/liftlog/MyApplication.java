@@ -30,7 +30,22 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         thisApp = this;
-        this.exerciseList = new ArrayList<Exercise>();
+        this.exerciseList = new ArrayList<Exercise>() {
+            {
+                add(new Exercise(0, "Bench Press", ""));
+                add(new Exercise(0, "Close Grip Bench Press", ""));
+                add(new Exercise(0, "Deadlift", ""));
+                add(new Exercise(0, "Front Squat",""));
+                add(new Exercise(0, "Overhead Press",""));
+                add(new Exercise(0, "Squat",""));
+                add(new Exercise(0, "Sumo Deadlift",""));
+            }
+        };
+        this.routineList = new ArrayList<Routine>() {
+            {
+                add(new NSuns());
+            }
+        };
     }
 }
 
