@@ -8,14 +8,17 @@ import java.util.List;
 import java.util.Queue;
 
 public class Workout {
-    public int id;
+    private static long id_counter = 0;
+    public long id;
     public String name;
     public String description;
     public LinkedList<ExerciseStats> statsList;
 
-    public Workout(int id, String workoutName, String description,  LinkedList<ExerciseStats> exercisesStats)
+    public Workout(long id, String workoutName, String description,  LinkedList<ExerciseStats> exercisesStats)
     {
-        this.id = id;
+        //see my comment in Routine.Java
+        this.id = id > 0 ? (id + id_counter) : id_counter;
+        id_counter = id > 0 ? (id_counter + id) : (id_counter + 1);
         this.name = workoutName;
         this.description = description;
 
@@ -24,9 +27,9 @@ public class Workout {
             statsList.add(i.copy());
     }
 
-    public Workout(Long id, String workoutName, String description)
+    public Workout(long id, String workoutName, String description)
     {
-        this.id = id.intValue();
+        this.id = id;
         this.name = workoutName;
         this.description = description;
 

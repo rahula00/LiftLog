@@ -83,7 +83,7 @@ public class User{
         this.user_workouts = new ArrayList<>();
         for(DataSnapshot workSnap : dataObj.child("user_workouts").getChildren())
         {
-            Workout newWork = new Workout((Long) workSnap.child("id").getValue(), (String) workSnap.child("name").getValue(), (String) workSnap.child("description").getValue());
+            Workout newWork = new Workout((long)workSnap.child("id").getValue(), (String) workSnap.child("name").getValue(), (String) workSnap.child("description").getValue());
             if(workSnap.child("statsList")!= null) {
                 ArrayList<ExerciseStats> tempArrayList = new ArrayList<>();
                 for(DataSnapshot exerSnap : workSnap.child("statsList").getChildren())
