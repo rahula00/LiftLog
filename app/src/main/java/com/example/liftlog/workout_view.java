@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.LinkedList;
 
@@ -86,6 +87,7 @@ public class workout_view extends AppCompatActivity {
                             }
                             else{
                                 Log.d("Where the reps at??", "enter some reps");
+                                Toast.makeText(MyApplication.getContext(), "Please enter your reps!", Toast.LENGTH_LONG).show();
                             }
                         }
 
