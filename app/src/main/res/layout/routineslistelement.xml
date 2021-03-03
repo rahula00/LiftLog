@@ -8,14 +8,14 @@
 
     <View
         android:id="@+id/view"
-        android:layout_width="365dp"
+        android:layout_width="340dp"
         android:layout_height="1dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@color/dark_divider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/routinesDesc" />
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="104dp"
+        android:background="@color/lighter_divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/routinesName"
@@ -32,11 +32,16 @@
 
     <TextView
         android:id="@+id/routinesDesc"
-        android:layout_width="227dp"
-        android:layout_height="31dp"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="8dp"
+        android:maxLength="60"
+        android:maxLines="2"
+        android:scrollHorizontally="true"
+        android:ellipsize="end"
+        android:singleLine="false"
         android:text="A program made for testing."
         android:textColor="@color/darker_grey"
         android:textSize="19dp"
