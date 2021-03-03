@@ -6,6 +6,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,6 +35,17 @@ public class workout_view extends AppCompatActivity {
         exerciseArray.add(deadlift);
         exerciseArray.add(overheadpress);
 
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            public void onClick(View view) {
+                TextView text = (TextView) view.getTag();
+
+                if(((Button) view).getText().equals("+"))
+                    text.setText(Integer.parseInt(text.getText().toString()) + 1 + "");
+                else
+                    text.setText(Integer.parseInt(text.getText().toString()) - 1 + "");
+            }
+        };
 
         LayoutInflater inflater = getLayoutInflater();
         for(ExerciseStats currentExercise : exerciseArray) {
