@@ -15,4 +15,6 @@
     <color name="dark_divider">#FF6B6B6B</color>
     <color name="lighter_divider">#FF3a3a3a</color>
     <color name="btn_yellow">#FFe0dc04</color>
+    <color name="red">#FFe80f0f</color>
+
 </resources>

@@ -4,6 +4,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -18,6 +21,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class workout_view extends AppCompatActivity {
@@ -47,7 +52,9 @@ public class workout_view extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_view);
+
         LinearLayout scroll = (LinearLayout) findViewById(R.id.linearInScroll);
+        ArrayList<Integer> checkList = new ArrayList<Integer>();
 
         Workout testW = new Workout(1, "myWorkout", "get big or die trying");
         ExerciseStats bench = new ExerciseStats(0, 150, 5, 1);
@@ -63,39 +70,52 @@ public class workout_view extends AppCompatActivity {
         exerciseArray.add(deadlift);
         exerciseArray.add(overheadpress);
 
-
         View.OnClickListener listener = new View.OnClickListener() {
+            @SuppressLint("UseCompatLoadingForColorStateLists")
             public void onClick(View view) {
+
                 int viewID = (int) view.getTag();
-                for (int i = 0; i < scroll.getChildCount(); i++) {
+                if(!checkList.contains(viewID)){
+                    checkList.add(viewID);
+                    view.setBackgroundTintList(MyApplication.getContext().getResources().getColorStateList(R.color.red));
+                }
+                else {
+                    for (int i = 0; i < scroll.getChildCount(); i++) {
 
-                    View v = scroll.getChildAt(i);
-                    int compareID = (int) v.getTag();
+                        View v = scroll.getChildAt(i);
+                        int compareID = (int) v.getTag();
 
-                    TextView exerciseName = (TextView) v.findViewById(R.id.exerciseName);
-                    boolean tempTrigger = (boolean) exerciseName.getTag();
+                        TextView exerciseName = (TextView) v.findViewById(R.id.exerciseName);
+                        boolean tempTrigger = (boolean) exerciseName.getTag();
 
-                    if(compareID == viewID){
-
-                        if(tempTrigger){
-                            TextView tempReps = (TextView) v.findViewById(R.id.exerciseReps);
-                            String maxRepsString = tempReps.getText().toString().trim();
-                            if (!TextUtils.isEmpty(maxRepsString)) {
-                                Log.d("Dam boi you flexing.. ", maxRepsString + " reps ?!?");
-                                int maxReps = Integer.parseInt(maxRepsString);
-                                removeExercise(viewID, maxReps, exerciseArray);
-                            }
-                            else{
-                                Log.d("Where the reps at??", "enter some reps");
-                                Toast.makeText(MyApplication.getContext(), "Please enter your reps!", Toast.LENGTH_LONG).show();
-                            }
-                        }
-
-                        else {
+                        if (compareID == viewID) {
                             removeExercise(viewID, exerciseArray);
                             scroll.removeView(v);
                         }
 
+                    }
+                }
+            }
+        };
+
+        View.OnClickListener listenerForMax = new View.OnClickListener() {
+            public void onClick(View view) {
+                int viewID = (int) view.getTag();
+                for (int i = 0; i < scroll.getChildCount(); i++) {
+                    View v = scroll.getChildAt(i);
+                    int compareID = (int) v.getTag();
+                    TextView exerciseName = (TextView) v.findViewById(R.id.exerciseName);
+                    if (compareID == viewID) {
+                        TextView tempReps = (TextView) v.findViewById(R.id.exerciseReps);
+                        String maxRepsString = tempReps.getText().toString().trim();
+                        if (!TextUtils.isEmpty(maxRepsString)) {
+                            Log.d("Dam boi you flexing.. ", maxRepsString + " reps ?!?");
+                            int maxReps = Integer.parseInt(maxRepsString);
+                            removeExercise(viewID, maxReps, exerciseArray);
+                        } else {
+                            Log.d("Where the reps at??", "enter some reps");
+                            Toast.makeText(MyApplication.getContext(), "Please enter your reps!", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
 
@@ -114,6 +134,7 @@ public class workout_view extends AppCompatActivity {
             // newLayout -> ID
             // exerciseName -> trigger_max_change
             // btn -> ID
+            // weight -> Color
 
 
             ConstraintLayout newLayout = (ConstraintLayout) inflater.inflate(R.layout.workout_template, scroll,false);
@@ -125,6 +146,8 @@ public class workout_view extends AppCompatActivity {
 
             TextView exerciseWeight = (TextView) newLayout.findViewById(R.id.exerciseWeight);
             exerciseWeight.setText(String.valueOf(exWeight));
+            if(!exTrigger) exerciseWeight.setTag(R.color.green_af);
+            else exerciseWeight.setTag(R.color.btn_yellow);
 
             TextView exerciseReps = (TextView) newLayout.findViewById(R.id.exerciseReps);
             if(!exTrigger) exerciseReps.setText(String.valueOf(exReps));
@@ -134,7 +157,9 @@ public class workout_view extends AppCompatActivity {
 
             Button btnDone = (Button) newLayout.findViewById(R.id.btnDone);
             btnDone.setTag(exID);
-            btnDone.setOnClickListener(listener);
+            if(!exTrigger) btnDone.setOnClickListener(listener);
+            else btnDone.setOnClickListener(listenerForMax);
+
 
             // Set push exercise stats
             if(exTrigger){
