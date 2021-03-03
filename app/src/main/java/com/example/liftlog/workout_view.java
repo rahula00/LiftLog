@@ -21,6 +21,26 @@ import java.util.LinkedList;
 
 public class workout_view extends AppCompatActivity {
 
+    private void removeExercise(int id, LinkedList<ExerciseStats> list) {
+        for(int rem = 0; rem < list.size(); rem ++) {
+            if(list.get(rem).exercise == id){
+                list.remove(rem);
+                Log.d("REMOVING ", "SUCCESSFULLY");
+                break;
+            }
+        }
+    };
+
+    private void removeExercise(int id, int reps, LinkedList<ExerciseStats> list) {
+        for(int rem = 0; rem < list.size(); rem ++) {
+            if(list.get(rem).exercise == id){
+                // Todo:!!!!!!!!
+                Log.d("UPDATING ", "SUCCESSFULLY");
+                break;
+            }
+        }
+    };
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +80,9 @@ public class workout_view extends AppCompatActivity {
                             TextView tempReps = (TextView) v.findViewById(R.id.exerciseReps);
                             String maxRepsString = tempReps.getText().toString().trim();
                             if (!TextUtils.isEmpty(maxRepsString)) {
-                                int maxReps = Integer.parseInt(maxRepsString);
                                 Log.d("Dam boi you flexing.. ", maxRepsString + " reps ?!?");
+                                int maxReps = Integer.parseInt(maxRepsString);
+                                removeExercise(viewID, maxReps, exerciseArray);
                             }
                             else{
                                 Log.d("Where the reps at??", "enter some reps");
@@ -69,6 +90,7 @@ public class workout_view extends AppCompatActivity {
                         }
 
                         else {
+                            removeExercise(viewID, exerciseArray);
                             scroll.removeView(v);
                         }
 
