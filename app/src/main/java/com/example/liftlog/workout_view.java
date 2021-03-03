@@ -134,7 +134,6 @@ public class workout_view extends AppCompatActivity {
             // newLayout -> ID
             // exerciseName -> trigger_max_change
             // btn -> ID
-            // weight -> Color
 
 
             ConstraintLayout newLayout = (ConstraintLayout) inflater.inflate(R.layout.workout_template, scroll,false);
@@ -146,8 +145,6 @@ public class workout_view extends AppCompatActivity {
 
             TextView exerciseWeight = (TextView) newLayout.findViewById(R.id.exerciseWeight);
             exerciseWeight.setText(String.valueOf(exWeight));
-            if(!exTrigger) exerciseWeight.setTag(R.color.green_af);
-            else exerciseWeight.setTag(R.color.btn_yellow);
 
             TextView exerciseReps = (TextView) newLayout.findViewById(R.id.exerciseReps);
             if(!exTrigger) exerciseReps.setText(String.valueOf(exReps));
@@ -158,13 +155,12 @@ public class workout_view extends AppCompatActivity {
             Button btnDone = (Button) newLayout.findViewById(R.id.btnDone);
             btnDone.setTag(exID);
             if(!exTrigger) btnDone.setOnClickListener(listener);
-            else btnDone.setOnClickListener(listenerForMax);
-
 
             // Set push exercise stats
             if(exTrigger){
                 btnDone.setBackgroundTintList(MyApplication.getContext().getResources().getColorStateList(R.color.btn_yellow));
                 btnDone.setTextColor(getResources().getColor(R.color.black));
+                btnDone.setOnClickListener(listenerForMax);
                 exerciseName.setTextColor(getResources().getColor(R.color.btn_yellow));
                 exerciseReps.setHint("∞");
                 exerciseReps.setClickable(true);
