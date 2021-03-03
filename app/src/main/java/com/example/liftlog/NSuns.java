@@ -146,7 +146,7 @@ public class NSuns extends Routine{
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void init_workout(Workout to_init, HashMap<String, Integer> user_max) {
+    public static void init_workout(Workout to_init, HashMap<String, Integer> user_max) {
         to_init.statsList.forEach( exercise -> {
             exercise.weight = (int) Math.floor(.90 * user_max.get(String.valueOf(exercise.exercise)));
             //ensure that weight set is divisble evenly by 5
