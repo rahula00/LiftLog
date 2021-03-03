@@ -25,8 +25,6 @@ public class Routines extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                System.out.println(position);
-                System.out.println(id);
                 Intent intent = new Intent(getApplicationContext(), RoutineView.class);
                 intent.putExtra("position", position);
                 startActivity(intent);
