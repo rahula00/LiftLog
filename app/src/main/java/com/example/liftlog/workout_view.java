@@ -38,12 +38,9 @@ public class workout_view extends AppCompatActivity {
 
         View.OnClickListener listener = new View.OnClickListener() {
             public void onClick(View view) {
-                TextView text = (TextView) view.getTag();
+                int viewID = (int) view.getTag();
 
-                if(((Button) view).getText().equals("+"))
-                    text.setText(Integer.parseInt(text.getText().toString()) + 1 + "");
-                else
-                    text.setText(Integer.parseInt(text.getText().toString()) - 1 + "");
+
             }
         };
 
@@ -56,6 +53,7 @@ public class workout_view extends AppCompatActivity {
 
 
             ConstraintLayout newLayout = (ConstraintLayout) inflater.inflate(R.layout.workout_template, scroll,false);
+            newLayout.setTag(exID);
 
             TextView exerciseName = (TextView) newLayout.findViewById(R.id.exerciseName);
             exerciseName.setText("ID: " + exID);
@@ -69,6 +67,9 @@ public class workout_view extends AppCompatActivity {
             TextView exerciseSets = (TextView) newLayout.findViewById(R.id.exerciseSets);
             exerciseSets.setText(String.valueOf(exSets));
 
+            Button btnDone = (Button) newLayout.findViewById(R.id.btnDone);
+            btnDone.setTag(exID);
+            btnDone.setOnClickListener(listener);
 
             scroll.addView(newLayout);
         }
