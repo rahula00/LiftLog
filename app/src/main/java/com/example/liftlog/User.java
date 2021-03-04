@@ -2,8 +2,11 @@ package com.example.liftlog;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.util.Log;
 import android.graphics.BitmapFactory;
+
+import androidx.annotation.RequiresApi;
 import androidx.core.util.Pair;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -58,11 +61,6 @@ public class User{
         this.user_max = new HashMap<String, Integer>();
         initExerciseMaxes();
         this.user_workouts = new ArrayList<>();
-        ExerciseStats tempEx = new ExerciseStats(0,0,0,0);
-        LinkedList<ExerciseStats> tempList2 = new LinkedList<>();
-        tempList2.add(tempEx);
-        user_workouts.add(new Workout(0, "0","0",  tempList2));
-
         this.profile_pic = null;
     }
 
@@ -174,9 +172,14 @@ public class User{
         return false;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     void setRoutine(Integer id, List<Workout> workoutQueue){
         this.routine_id = id;
-        this.user_workouts = workoutQueue;
+        this.user_workouts = new ArrayList(workoutQueue);
+        //TODO fix NSuns init functionality DR
+        /*this.user_workouts.forEach(workout -> {
+            NSuns.init_workout(workout, this.user_max);
+        });*/
     }
 
     boolean setUser_max(String id, Integer weight){
