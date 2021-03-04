@@ -112,8 +112,14 @@ public class Login extends AppCompatActivity {
                                             MyApplication.user.updateToFirebase();
                                         }
                                         progressBar.setVisibility(View.GONE);
-                                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                                        finish();
+                                        if(MyApplication.user.name.equals("")) {
+                                            startActivity(new Intent(getApplicationContext(), Profile.class));
+                                            finish();
+                                        }
+                                        else {
+                                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                            finish();
+                                        }
                                     }
                                     @Override
                                     public void onCancelled(DatabaseError databaseError) {
