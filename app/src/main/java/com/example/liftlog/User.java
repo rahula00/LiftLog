@@ -111,7 +111,6 @@ public class User{
 
     void initExerciseMaxes(){
         ArrayList<Exercise> exerciseArray = (MyApplication.exerciseList);
-        //TODO: THIS IS HERE UNTIL DATA LOAD ADDED!
         user_max.put("0_k",0);
         for(Exercise tempEx : exerciseArray) {
             StringBuilder exID = new StringBuilder();
