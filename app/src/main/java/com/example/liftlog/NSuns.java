@@ -10,15 +10,15 @@ import java.util.LinkedList;
 
 
 public class NSuns extends Routine{
-    static final int divisor = 5;
-    static final int bench = 0;
-    static final int c_g_bench = 1;
-    static final int deadlift = 2;
-    static final int front_squat = 3;
-    static final int oh_press = 4;
-    static final int squat = 5;
-    static final int s_deadlift = 6;
-    static final boolean push = true;
+    static final int divisor     =      5;
+    static final int bench       =      0;
+    static final int c_g_bench   =      1;
+    static final int deadlift    =      2;
+    static final int front_squat =      3;
+    static final int oh_press    =      4;
+    static final int squat       =      5;
+    static final int s_deadlift  =      6;
+    static final boolean push    =      true;
 
     static final String nsun_descr = "nSuns 5/3/1 is a linear progression powerlifting program" +
             " that was inspired by Jim Wendler’s 5/3/1 strength program. It progresses on a" +
@@ -120,6 +120,104 @@ public class NSuns extends Routine{
             });
         }
     };
+    static final ArrayList<ArrayList<Double>> weight_modifiers = new ArrayList<ArrayList<Double>>() {{
+        //Monday
+        add(new ArrayList<Double>() {
+            {
+                //Bench modifiers
+                add(.65);
+                add(.75);
+                add(.85);
+                add(.85);
+                add(.85);
+                add(.8);
+                add(.75);
+                add(.7);
+                add(.65);
+                //OHP modifiers
+                add(.5);
+                add(.6);
+                add(.7);
+                add(.7);
+                add(.7);
+                add(.7);
+                add(.7);
+                add(.7);
+            }
+        });
+        //Tuesday
+        add(new ArrayList<Double>() {
+            {
+                //Squat modifiers
+                add(.75);
+                add(.85);
+                add(.95);
+                add(.9);
+                add(.85);
+                add(.8);
+                add(.75);
+                add(.7);
+                add(.65);
+                //Sumo modifiers
+                add(.5);
+                add(.6);
+                add(.7);
+                add(.7);
+                add(.7);
+                add(.7);
+                add(.7);
+                add(.7);
+            }
+        });
+        //Thursday
+        add(new ArrayList<Double>() {
+            {
+                //bench modifiers
+                add(.75);
+                add(.85);
+                add(.95);
+                add(.9);
+                add(.85);
+                add(.8);
+                add(.75);
+                add(.7);
+                add(.65);
+                //CG modifiers
+                add(.4);
+                add(.5);
+                add(.6);
+                add(.6);
+                add(.6);
+                add(.6);
+                add(.6);
+                add(.6);
+            }
+        });
+        //Friday
+        add(new ArrayList<Double>() {
+            {
+                //Deadlift modifiers
+                add(.75);
+                add(.85);
+                add(.95);
+                add(.9);
+                add(.85);
+                add(.8);
+                add(.75);
+                add(.7);
+                add(.65);
+                //Front Squat modifiers
+                add(.35);
+                add(.45);
+                add(.55);
+                add(.55);
+                add(.55);
+                add(.55);
+                add(.55);
+                add(.55);
+            }
+        });
+    }};
     static final String[] names = {"Monday","Tuesday","Thursday","Friday"};
     static final String[] descrs = {
             "Bench Press and Overhead Press",
@@ -145,10 +243,39 @@ public class NSuns extends Routine{
         }
     }
 
+    public static void init_workout(Workout to_init, HashMap<String, Integer> user_max) {
+        int training_max1, training_max2;
+        switch ((int) to_init.id) {
+            case 0: {
+                training_max1 = (int) Math.floor(.90 * user_max.get(String.valueOf(bench)));
+                training_max2 = (int) Math.floor(.90 * user_max.get(String.valueOf(oh_press)));
+                break;
+            }
+            case 1: {
+                training_max1 = (int) Math.floor(.90 * user_max.get(String.valueOf(squat)));
+                training_max2 = (int) Math.floor(.90 * user_max.get(String.valueOf(s_deadlift)));
+                break;
+            }
+            case 2: {
+                training_max1 = (int) Math.floor(.90 * user_max.get(String.valueOf(bench)));
+                training_max2 = (int) Math.floor(.90 * user_max.get(String.valueOf(c_g_bench)));
+                break;
+            }
+            case 3: {
+                training_max1 = (int) Math.floor(.90 * user_max.get(String.valueOf(deadlift)));
+                training_max2 = (int) Math.floor(.90 * user_max.get(String.valueOf(front_squat)));
+                break;
+            }
+        }
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void init_workout(Workout to_init, HashMap<String, Integer> user_max) {
-        to_init.statsList.forEach( exercise -> {
-            exercise.weight = (int) Math.floor(.90 * user_max.get(String.valueOf(exercise.exercise)));
+    private void set_workout_max(Workout to_init, int train_max1, int train_max2) {
+        ArrayList<Double> modifiers = weight_modifiers.get((int) to_init.id);
+        int index = 0;
+        to_init.statsList.forEach(exercise -> {
+            int curr_max = index < 9 ? train_max1 : train_max2;
+            exercise.weight = (int) Math.floor(modifiers.get(index) * curr_max);
             //ensure that weight set is divisble evenly by 5
             int remainder = exercise.weight % divisor;
             if (remainder != 0) {
