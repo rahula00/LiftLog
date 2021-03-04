@@ -1,12 +1,14 @@
 package com.example.liftlog;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,19 +28,21 @@ public class RoutineView extends AppCompatActivity {
         mName = findViewById(R.id.routineName);
         mDescription = findViewById(R.id.routineDescription);
 
-        String nameText = MyApplication.routineList.get(intent.getIntExtra("RoutineID", 0)).name;
-        String DescriptionText = MyApplication.routineList.get(intent.getIntExtra("RoutineID",0)).description;
+        String nameText = MyApplication.routineList.get(intent.getIntExtra("position", 0)).name;
+        String DescriptionText = MyApplication.routineList.get(intent.getIntExtra("position",0)).description;
 
         mName.setText(nameText);
         mDescription.setText(DescriptionText);
 
         mDescription.setMovementMethod(new ScrollingMovementMethod());
         mStartBtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v){
-                MyApplication.user.setRoutine(MyApplication.routineList.get(intent.getIntExtra("RoutineID",0)).id, MyApplication.routineList.get(intent.getIntExtra("RoutineID",0)).workouts);
+                MyApplication.user.setRoutine(MyApplication.routineList.get(intent.getIntExtra("position",0)).id, MyApplication.routineList.get(intent.getIntExtra("position",0)).workouts);
                 //This will change to becoming Routine.class instead of MainActivity.class
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                MyApplication.user.updateToFirebase();
+                startActivity(new Intent(getApplicationContext(),MyWorkouts.class));
                 finish();
             }
         });
@@ -46,7 +50,7 @@ public class RoutineView extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        startActivity(new Intent(getApplicationContext(), Routines.class));
         finish();
     }
 }

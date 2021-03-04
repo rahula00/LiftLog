@@ -4,15 +4,34 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Routines extends AppCompatActivity {
+    ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_routines);
+        listView = findViewById(R.id.routineListView);
+        RoutinesAdapter viewAdapter = new RoutinesAdapter(this, R.layout.routineslistelement, MyApplication.routineList);
+        listView.setAdapter(viewAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                Intent intent = new Intent(getApplicationContext(), RoutineView.class);
+                intent.putExtra("position", position);
+                startActivity(intent);
+            }
+        });
     }
+
 
     //Handle back button functionalities.
     @Override
