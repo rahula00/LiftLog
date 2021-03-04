@@ -27,29 +27,11 @@ import java.util.LinkedList;
 
 public class workout_view extends AppCompatActivity {
 
-    private void removeExercise(int id, LinkedList<ExerciseStats> list) {
-        for(int rem = 0; rem < list.size(); rem ++) {
-            if(list.get(rem).exercise == id){
-                list.remove(rem);
-                Log.d("REMOVING ", "SUCCESSFULLY");
-                break;
-            }
-        }
-    };
-
-    private void removeExercise(int id, int reps, LinkedList<ExerciseStats> list) {
-        for(int rem = 0; rem < list.size(); rem ++) {
-            if(list.get(rem).exercise == id){
-                // Todo:!!!!!!!!
-                Log.d("UPDATING ", "SUCCESSFULLY");
-                break;
-            }
-        }
-    };
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        User myUser = MyApplication.user;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_view);
 
@@ -63,7 +45,7 @@ public class workout_view extends AppCompatActivity {
         ExerciseStats overheadpress = new ExerciseStats(3, 100, 5, 1);
         squat.trigger_max_change = true;
 
-
+        //TODO: set exerciseArray to the proper array
         LinkedList<ExerciseStats> exerciseArray = testW.statsList;
         exerciseArray.add(bench);
         exerciseArray.add(squat);
@@ -78,6 +60,9 @@ public class workout_view extends AppCompatActivity {
                 if(!checkList.contains(viewID)){
                     checkList.add(viewID);
                     view.setBackgroundTintList(MyApplication.getContext().getResources().getColorStateList(R.color.red));
+                    Button b = (Button) view;
+                    b.setText("Confirm");
+                    b.setTextSize(10);
                 }
                 else {
                     for (int i = 0; i < scroll.getChildCount(); i++) {
@@ -89,8 +74,9 @@ public class workout_view extends AppCompatActivity {
                         boolean tempTrigger = (boolean) exerciseName.getTag();
 
                         if (compareID == viewID) {
-                            removeExercise(viewID, exerciseArray);
+                            exerciseArray.remove(viewID);
                             scroll.removeView(v);
+                            checkList.remove(viewID);
                         }
 
                     }
@@ -109,9 +95,14 @@ public class workout_view extends AppCompatActivity {
                         TextView tempReps = (TextView) v.findViewById(R.id.exerciseReps);
                         String maxRepsString = tempReps.getText().toString().trim();
                         if (!TextUtils.isEmpty(maxRepsString)) {
-                            Log.d("Dam boi you flexing.. ", maxRepsString + " reps ?!?");
+                            scroll.removeView(v);
                             int maxReps = Integer.parseInt(maxRepsString);
-                            removeExercise(viewID, maxReps, exerciseArray);
+                            String exKey = String.valueOf(exerciseArray.get(viewID).exercise);
+                            //TODO: add "_k" to each key???
+                            //TODO: update max (when testing with actual user)
+                            //myUser.user_max.put(exKey, maxReps);
+                            exerciseArray.remove(viewID);
+
                         } else {
                             Log.d("Where the reps at??", "enter some reps");
                             Toast.makeText(MyApplication.getContext(), "Please enter your reps!", Toast.LENGTH_LONG).show();
@@ -123,8 +114,12 @@ public class workout_view extends AppCompatActivity {
         };
 
         LayoutInflater inflater = getLayoutInflater();
-        for(ExerciseStats currentExercise : exerciseArray) {
-            int exID = currentExercise.exercise;
+
+
+        for(int i = 0; i < exerciseArray.size(); i++){
+            ExerciseStats currentExercise = exerciseArray.get(i);
+            int exEx = currentExercise.exercise;
+            int exID = i;
             int exWeight = currentExercise.weight;
             int exReps = currentExercise.reps;
             int exSets = currentExercise.sets;
@@ -135,12 +130,12 @@ public class workout_view extends AppCompatActivity {
             // exerciseName -> trigger_max_change
             // btn -> ID
 
-
             ConstraintLayout newLayout = (ConstraintLayout) inflater.inflate(R.layout.workout_template, scroll,false);
             newLayout.setTag(exID);
 
             TextView exerciseName = (TextView) newLayout.findViewById(R.id.exerciseName);
-            exerciseName.setText("ID: " + exID);
+            String exerciseNameTemp = MyApplication.exerciseList.get(exEx).name;
+            exerciseName.setText(exerciseNameTemp);
             exerciseName.setTag(exTrigger);
 
             TextView exerciseWeight = (TextView) newLayout.findViewById(R.id.exerciseWeight);
@@ -171,7 +166,6 @@ public class workout_view extends AppCompatActivity {
 
             scroll.addView(newLayout);
         }
-
 
 
 

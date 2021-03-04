@@ -101,12 +101,12 @@
             app:srcCompat="@drawable/dumbbell_gradient_2" />
 
         <View
+            android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#FF6B6B6B"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView4"
@@ -143,8 +143,8 @@
 
         <Button
             android:id="@+id/btnDone"
-            android:layout_width="56dp"
-            android:layout_height="38dp"
+            android:layout_width="51dp"
+            android:layout_height="32dp"
             android:background="@drawable/roundedges"
             android:bottomLeftRadius="50dp"
             android:bottomRightRadius="50dp"
@@ -158,12 +158,10 @@
             android:topLeftRadius="50dp"
             android:topRightRadius="50dp"
             app:backgroundTint="#50dc00"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/textView5"
             app:layout_constraintEnd_toStartOf="@+id/exerciseImage"
             app:layout_constraintHorizontal_bias="0.842"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/exerciseName"
-            app:layout_constraintVertical_bias="0.488"
             tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
