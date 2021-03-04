@@ -243,6 +243,7 @@ public class NSuns extends Routine{
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public static void init_workout(Workout to_init, HashMap<String, Integer> user_max) {
         int training_max1, training_max2;
         switch ((int) to_init.id) {
@@ -266,11 +267,13 @@ public class NSuns extends Routine{
                 training_max2 = (int) Math.floor(.90 * user_max.get(String.valueOf(front_squat)));
                 break;
             }
+            default : { return; }
         }
+        set_workout_max(to_init, training_max1, training_max2);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void set_workout_max(Workout to_init, int train_max1, int train_max2) {
+    private static void set_workout_max(Workout to_init, int train_max1, int train_max2) {
         ArrayList<Double> modifiers = weight_modifiers.get((int) to_init.id);
         int index = 0;
         to_init.statsList.forEach(exercise -> {
