@@ -10,15 +10,16 @@ import java.util.LinkedList;
 
 
 public class NSuns extends Routine{
-    static final int divisor     =      5;
-    static final int bench       =      0;
-    static final int c_g_bench   =      1;
-    static final int deadlift    =      2;
-    static final int front_squat =      3;
-    static final int oh_press    =      4;
-    static final int squat       =      5;
-    static final int s_deadlift  =      6;
-    static final boolean push    =      true;
+    static final int divisor       =      5;
+    static final int bench         =      0;
+    static final int c_g_bench     =      1;
+    static final int deadlift      =      2;
+    static final int front_squat   =      3;
+    static final int oh_press      =      4;
+    static final int squat         =      5;
+    static final int s_deadlift    =      6;
+    static final int min_ex_weight =      45;
+    static final boolean push      =      true;
 
     static final String nsun_descr = "nSuns 5/3/1 is a linear progression powerlifting program" +
             " that was inspired by Jim Wendler’s 5/3/1 strength program. It progresses on a" +
@@ -280,6 +281,10 @@ public class NSuns extends Routine{
             int curr_max = index < 9 ? train_max1 : train_max2;
             exercise.weight = (int) Math.floor(modifiers.get(index) * curr_max);
             //ensure that weight set is divisble evenly by 5
+            if (exercise.weight < min_ex_weight) {
+                exercise.weight = min_ex_weight;
+                return;
+            }
             int remainder = exercise.weight % divisor;
             if (remainder != 0) {
                 exercise.weight = exercise.weight + (divisor - remainder);

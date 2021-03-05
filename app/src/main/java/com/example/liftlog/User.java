@@ -176,10 +176,10 @@ public class User{
     void setRoutine(Integer id, List<Workout> workoutQueue){
         this.routine_id = id;
         this.user_workouts = new ArrayList(workoutQueue);
-        //TODO fix NSuns init functionality DR
-        /*this.user_workouts.forEach(workout -> {
+        this.user_workouts.forEach(workout -> {
+
             NSuns.init_workout(workout, this.user_max);
-        });*/
+        });
     }
 
     boolean setUser_max(String id, Integer weight){
