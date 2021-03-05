@@ -24,7 +24,7 @@ public class NSuns extends Routine{
             " that was inspired by Jim Wendler’s 5/3/1 strength program. It progresses on a" +
             " weekly basis, making it well suited for late stage novice and early intermediate" +
             " lifters. It is known for its challenging amount of volume. Those who stick with " +
-            "it tend to find great results from the additional work capacity." +
+            "it tend to find great results from the additional work capacity.\n" +
             "EXPERIENCE LEVEL: BEGINNER, INTERMEDIATE\n" +
             "WEEKS: INDEFINITE\n" +
             "PERIODIZATION: LINEAR PERIODIZATION\n" +
