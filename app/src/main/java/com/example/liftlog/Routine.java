@@ -30,7 +30,6 @@ public class Routine{
         id_count = id > 0 ? (id_count + id) : (id_count + 1);
         this.name = new_routineName;
         this.description = new_description;
-
         this.workouts = new ArrayList<Workout>();
         for(Workout i : new_workouts)
             this.workouts.add(i.copy());
