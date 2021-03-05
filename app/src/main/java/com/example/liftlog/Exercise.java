@@ -37,7 +37,7 @@ public class Exercise {
         id_counter = id > 0 ? (id_counter + id) : (id_counter + 1);
         name = exerciseName;
         instructions = directions;
-        image = null;
+        image = BitmapFactory.decodeResource(MyApplication.getContext().getResources(), R.drawable.dumbbell_gradient_4);
     }
 
 

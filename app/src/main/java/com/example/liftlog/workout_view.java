@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -124,6 +125,7 @@ public class workout_view extends AppCompatActivity {
             int exReps = currentExercise.reps;
             int exSets = currentExercise.sets;
             boolean exTrigger = currentExercise.trigger_max_change;
+            Bitmap exImage = MyApplication.exerciseList.get(exEx).image;
 
             //KEY:
             // newLayout -> ID
@@ -150,6 +152,9 @@ public class workout_view extends AppCompatActivity {
             Button btnDone = (Button) newLayout.findViewById(R.id.btnDone);
             btnDone.setTag(exID);
             if(!exTrigger) btnDone.setOnClickListener(listener);
+
+            ImageView exerciseImage = (ImageView) newLayout.findViewById(R.id.exerciseImage);
+            exerciseImage.setImageBitmap(exImage);
 
             // Set push exercise stats
             if(exTrigger){
