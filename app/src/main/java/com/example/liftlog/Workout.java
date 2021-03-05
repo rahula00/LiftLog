@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Queue;
 
 public class Workout {
-    private static long id_counter = 0;
     public long id;
     public String name;
     public String description;
@@ -16,9 +15,8 @@ public class Workout {
 
     public Workout(long id, String workoutName, String description,  LinkedList<ExerciseStats> exercisesStats)
     {
-        //see my comment in Routine.Java
-        this.id = id > 0 ? (id + id_counter) : id_counter;
-        id_counter = id > 0 ? (id_counter + id) : (id_counter + 1);
+        //I hate this and I want to change it, but it creates bugs
+        this.id=id;
         this.name = workoutName;
         this.description = description;
 
@@ -32,7 +30,6 @@ public class Workout {
         this.id = id;
         this.name = workoutName;
         this.description = description;
-
         this.statsList = new LinkedList<ExerciseStats>();
     }
 
