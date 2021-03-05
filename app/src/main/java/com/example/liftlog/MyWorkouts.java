@@ -3,8 +3,10 @@ package com.example.liftlog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import java.util.ArrayList;
 
@@ -18,8 +20,20 @@ public class MyWorkouts extends AppCompatActivity {
         listView = findViewById(R.id.listView);
         User myUser = MyApplication.user;
         WorkoutAdapter viewAdapter = new WorkoutAdapter(this, R.layout.myworkoutlistelement, (ArrayList)myUser.user_workouts);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Workout selected = (Workout) listView.getItemAtPosition(position);
+                Intent intent = new Intent(MyApplication.getContext(), workout_view.class);
+                intent.putExtra("WORKOUT_ID", selected.id);
+                startActivity(intent);
+            }
+        });
+
         listView.setAdapter(viewAdapter);
     }
+
+
 
     //Handle back buttonfunctionalities.
     @Override

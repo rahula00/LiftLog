@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +27,7 @@ import android.widget.Toast;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class workout_view extends AppCompatActivity {
 
@@ -39,19 +42,11 @@ public class workout_view extends AppCompatActivity {
         LinearLayout scroll = (LinearLayout) findViewById(R.id.linearInScroll);
         ArrayList<Integer> checkList = new ArrayList<Integer>();
 
-        Workout testW = new Workout(1, "myWorkout", "get big or die trying");
-        ExerciseStats bench = new ExerciseStats(0, 150, 5, 1);
-        ExerciseStats squat = new ExerciseStats(1, 225, 5, 1);
-        ExerciseStats deadlift = new ExerciseStats(2, 300, 5, 1);
-        ExerciseStats overheadpress = new ExerciseStats(3, 100, 5, 1);
-        squat.trigger_max_change = true;
-
         //TODO: set exerciseArray to the proper array
-        LinkedList<ExerciseStats> exerciseArray = testW.statsList;
-        exerciseArray.add(bench);
-        exerciseArray.add(squat);
-        exerciseArray.add(deadlift);
-        exerciseArray.add(overheadpress);
+        Integer arrayID = (int) getIntent().getLongExtra("WORKOUT_ID", 0);
+        LinkedList<ExerciseStats> exerciseArray = myUser.user_workouts.get(arrayID).statsList;
+
+
 
         View.OnClickListener listener = new View.OnClickListener() {
             @SuppressLint("UseCompatLoadingForColorStateLists")
