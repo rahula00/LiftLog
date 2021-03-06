@@ -99,7 +99,9 @@ public class Profile extends AppCompatActivity {
     Button mSaveBtn;
     Integer REQUEST_CAMERA = 1, SELECT_FILE=0;
     EditText yourEditText;
-    int mYear, mMonth, mDay;
+    int mYear = MyApplication.user.birthDate.get(Calendar.YEAR);
+    int mMonth = MyApplication.user.birthDate.get(Calendar.MONTH);
+    int mDay = MyApplication.user.birthDate.get(Calendar.DAY_OF_MONTH);
     ImageView ivImage;
     Bitmap newProfile = null;
 
