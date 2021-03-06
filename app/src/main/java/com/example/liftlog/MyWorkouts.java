@@ -17,8 +17,13 @@ public class MyWorkouts extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_workouts);
-        listView = findViewById(R.id.listView);
+
         User myUser = MyApplication.user;
+        for(int i = 0; i< myUser.user_workouts.size(); i++){
+            myUser.user_workouts.get(i).id = i;
+        }
+
+        listView = findViewById(R.id.listView);
         WorkoutAdapter viewAdapter = new WorkoutAdapter(this, R.layout.myworkoutlistelement, (ArrayList)myUser.user_workouts);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -27,6 +32,7 @@ public class MyWorkouts extends AppCompatActivity {
                 Intent intent = new Intent(MyApplication.getContext(), workout_view.class);
                 intent.putExtra("WORKOUT_ID", selected.id);
                 startActivity(intent);
+                finish();
             }
         });
 

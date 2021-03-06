@@ -70,14 +70,21 @@ public class workout_view extends AppCompatActivity {
                         tempButton.setVisibility(View.VISIBLE);
                     }
                     else{
-                        myUser.user_workouts.remove(arrayID);
-                        Intent intent = new Intent(MyApplication.getContext(), MyWorkouts.class);
-                        startActivity(intent);
+                        Workout toRemove = myUser.user_workouts.get(arrayID);
+                        myUser.user_workouts.remove(toRemove);
+                        if(myUser.user_workouts.size() == 0){
+                            Toast.makeText(workout_view.this, "Week is complete!", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(MyApplication.getContext(), MainActivity.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            Intent intent = new Intent(MyApplication.getContext(), MyWorkouts.class);
+                            startActivity(intent);
+                        }
                     }
                 }
             }
         };
-
 
         View.OnClickListener listenerForMax = new View.OnClickListener() {
             public void onClick(View view) {
@@ -85,20 +92,18 @@ public class workout_view extends AppCompatActivity {
                 View v = scroll.getChildAt(0);
                 TextView tempReps = (TextView) v.findViewById(R.id.exerciseReps);
                 String maxRepsString = tempReps.getText().toString().trim();
+                scroll.removeView(v);
+                //TODO: direct towards popup
                 if (!TextUtils.isEmpty(maxRepsString)) {
-                    scroll.removeView(v);
                     int maxReps = Integer.parseInt(maxRepsString);
                     String exKey = String.valueOf(exerciseArray.get(viewID).exercise);
-                    //TODO: replace with popup. Currently sets your user max to your max reps.
                     myUser.user_max.put((exKey + "_k"), maxReps);
-                    exerciseArray.pop();
-                    if(scroll.getChildCount()>0){
-                        View v2 = scroll.getChildAt(0);
-                        Button tempButton = (Button) v2.findViewById(R.id.btnDone);
-                        tempButton.setVisibility(View.VISIBLE);
-                    }
-                } else {
-                    Toast.makeText(MyApplication.getContext(), "Please enter your reps!", Toast.LENGTH_LONG).show();
+                }
+                exerciseArray.pop();
+                if (scroll.getChildCount() > 0) {
+                    View v2 = scroll.getChildAt(0);
+                    Button tempButton = (Button) v2.findViewById(R.id.btnDone);
+                    tempButton.setVisibility(View.VISIBLE);
                 }
             }
         };
@@ -116,11 +121,6 @@ public class workout_view extends AppCompatActivity {
             boolean exTrigger = currentExercise.trigger_max_change;
             Bitmap exImage = MyApplication.exerciseList.get(exEx).image;
 
-            //KEY:
-            // newLayout -> ID
-            // exerciseName -> trigger_max_change
-            // btn -> ID
-
             ConstraintLayout newLayout = (ConstraintLayout) inflater.inflate(R.layout.workout_template, scroll,false);
             newLayout.setTag(exID);
 
@@ -131,6 +131,7 @@ public class workout_view extends AppCompatActivity {
 
             TextView exerciseWeight = (TextView) newLayout.findViewById(R.id.exerciseWeight);
             exerciseWeight.setText(String.valueOf(exWeight));
+            Log.d("WEIGHT: ", String.valueOf(exWeight));
 
             TextView exerciseReps = (TextView) newLayout.findViewById(R.id.exerciseReps);
             if(!exTrigger) exerciseReps.setText(String.valueOf(exReps));
@@ -152,18 +153,17 @@ public class workout_view extends AppCompatActivity {
                 btnDone.setOnClickListener(listenerForMax);
                 exerciseName.setTextColor(getResources().getColor(R.color.btn_yellow));
                 exerciseReps.setHint("∞");
-                exerciseReps.setClickable(true);
-                exerciseReps.setFocusable(true);
-                exerciseReps.setFocusableInTouchMode(true);
-                exerciseReps.setCursorVisible(true);
             }
 
             if(i != 0)btnDone.setVisibility(View.INVISIBLE);
 
             scroll.addView(newLayout);
         }
+    }
 
-
-
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), MyWorkouts.class));
+        finish();
     }
 }
