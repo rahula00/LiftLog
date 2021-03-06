@@ -69,6 +69,11 @@ public class workout_view extends AppCompatActivity {
                         Button tempButton = (Button) v2.findViewById(R.id.btnDone);
                         tempButton.setVisibility(View.VISIBLE);
                     }
+                    else{
+                        myUser.user_workouts.remove(arrayID);
+                        Intent intent = new Intent(MyApplication.getContext(), MyWorkouts.class);
+                        startActivity(intent);
+                    }
                 }
             }
         };
@@ -84,7 +89,7 @@ public class workout_view extends AppCompatActivity {
                     scroll.removeView(v);
                     int maxReps = Integer.parseInt(maxRepsString);
                     String exKey = String.valueOf(exerciseArray.get(viewID).exercise);
-                    //TODO: replace with popup
+                    //TODO: replace with popup. Currently sets your user max to your max reps.
                     myUser.user_max.put((exKey + "_k"), maxReps);
                     exerciseArray.pop();
                     if(scroll.getChildCount()>0){
@@ -93,7 +98,6 @@ public class workout_view extends AppCompatActivity {
                         tempButton.setVisibility(View.VISIBLE);
                     }
                 } else {
-                    Log.d("Where the reps at??", "enter some reps");
                     Toast.makeText(MyApplication.getContext(), "Please enter your reps!", Toast.LENGTH_LONG).show();
                 }
             }
