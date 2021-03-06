@@ -102,7 +102,7 @@ public class Login extends AppCompatActivity {
                                 //This is how querying for data works in this language... Its scuff
                                 String UID = user.getUid();
                                 DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference("Users").child(UID);
-                                dataRef.addValueEventListener(new ValueEventListener() {
+                                dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         if(dataSnapshot.getValue() != null)

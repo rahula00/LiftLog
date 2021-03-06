@@ -73,8 +73,10 @@ public class User{
         long H1 = (long) dataObj.child("height").child("first").getValue();
         long H2 = (long) dataObj.child("height").child("second").getValue();
         this.height = new Pair<>((int) H1, (int) H2);
-        long W1 = (long) dataObj.child("weight").getValue();
-        this.weight = (float) W1;
+        Object W1 = dataObj.child("weight").getValue();
+        if (W1 instanceof Number) {
+            weight = ((Number) W1).floatValue();
+        }
         long R1 = (long)dataObj.child("routine_id").getValue();
         this.routine_id = (int) R1;
 

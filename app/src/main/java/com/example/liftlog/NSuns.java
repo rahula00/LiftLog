@@ -21,6 +21,7 @@ public class NSuns extends Routine{
     static final int s_deadlift    =      6;
     static final int min_ex_weight =      45;
     static final boolean push      =      true;
+    static final String suffix     =      "_k";
 
     static final String nsun_descr = "nSuns 5/3/1 is a linear progression powerlifting program" +
             " that was inspired by Jim Wendler’s 5/3/1 strength program. It progresses on a" +
@@ -250,23 +251,23 @@ public class NSuns extends Routine{
         int training_max1, training_max2;
         switch ((int) to_init.id) {
             case 0: {
-                training_max1 = (int) Math.floor(.90 * user_max.get(bench + "_k"));
-                training_max2 = (int) Math.floor(.90 * user_max.get(oh_press + "_k"));
+                training_max1 = (int) Math.floor(.90 * user_max.get(bench+suffix));
+                training_max2 = (int) Math.floor(.90 * user_max.get(oh_press+suffix));
                 break;
             }
             case 1: {
-                training_max1 = (int) Math.floor(.90 * user_max.get(squat + "_k"));
-                training_max2 = (int) Math.floor(.90 * user_max.get(s_deadlift + "_k"));
+                training_max1 = (int) Math.floor(.90 * user_max.get(squat+suffix));
+                training_max2 = (int) Math.floor(.90 * user_max.get(s_deadlift+suffix));
                 break;
             }
             case 2: {
-                training_max1 = (int) Math.floor(.90 * user_max.get(bench + "_k"));
-                training_max2 = (int) Math.floor(.90 * user_max.get(c_g_bench + "_k"));
+                training_max1 = (int) Math.floor(.90 * user_max.get(bench+suffix));
+                training_max2 = (int) Math.floor(.90 * user_max.get(c_g_bench+suffix));
                 break;
             }
             case 3: {
-                training_max1 = (int) Math.floor(.90 * user_max.get(deadlift + "_k"));
-                training_max2 = (int) Math.floor(.90 * user_max.get(front_squat + "_k"));
+                training_max1 = (int) Math.floor(.90 * user_max.get(deadlift+suffix));
+                training_max2 = (int) Math.floor(.90 * user_max.get(front_squat+suffix));
                 break;
             }
             default : { return; }
