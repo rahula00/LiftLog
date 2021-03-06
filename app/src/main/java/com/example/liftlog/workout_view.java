@@ -73,36 +73,29 @@ public class workout_view extends AppCompatActivity {
             }
         };
 
+
         View.OnClickListener listenerForMax = new View.OnClickListener() {
             public void onClick(View view) {
                 int viewID = (int) view.getTag();
-                for (int i = 0; i < scroll.getChildCount(); i++) {
-                    View v = scroll.getChildAt(i);
-                    int compareID = (int) v.getTag();
-                    TextView exerciseName = (TextView) v.findViewById(R.id.exerciseName);
-                    if (compareID == viewID) {
-                        TextView tempReps = (TextView) v.findViewById(R.id.exerciseReps);
-                        String maxRepsString = tempReps.getText().toString().trim();
-                        if (!TextUtils.isEmpty(maxRepsString)) {
-                            scroll.removeView(v);
-                            int maxReps = Integer.parseInt(maxRepsString);
-                            String exKey = String.valueOf(exerciseArray.get(viewID).exercise);
-                            //TODO: add "_k" to each key???
-                            //TODO: update max (when testing with actual user)
-                            //myUser.user_max.put(exKey, maxReps);
-                            exerciseArray.pop();
-                            if(scroll.getChildCount()>0){
-                                View v2 = scroll.getChildAt(0);
-                                Button tempButton = (Button) v2.findViewById(R.id.btnDone);
-                                tempButton.setVisibility(View.VISIBLE);
-                            }
-                        } else {
-                            Log.d("Where the reps at??", "enter some reps");
-                            Toast.makeText(MyApplication.getContext(), "Please enter your reps!", Toast.LENGTH_LONG).show();
-                        }
+                View v = scroll.getChildAt(0);
+                TextView tempReps = (TextView) v.findViewById(R.id.exerciseReps);
+                String maxRepsString = tempReps.getText().toString().trim();
+                if (!TextUtils.isEmpty(maxRepsString)) {
+                    scroll.removeView(v);
+                    int maxReps = Integer.parseInt(maxRepsString);
+                    String exKey = String.valueOf(exerciseArray.get(viewID).exercise);
+                    //TODO: replace with popup
+                    myUser.user_max.put((exKey + "_k"), maxReps);
+                    exerciseArray.pop();
+                    if(scroll.getChildCount()>0){
+                        View v2 = scroll.getChildAt(0);
+                        Button tempButton = (Button) v2.findViewById(R.id.btnDone);
+                        tempButton.setVisibility(View.VISIBLE);
                     }
+                } else {
+                    Log.d("Where the reps at??", "enter some reps");
+                    Toast.makeText(MyApplication.getContext(), "Please enter your reps!", Toast.LENGTH_LONG).show();
                 }
-
             }
         };
 
