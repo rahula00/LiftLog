@@ -70,23 +70,6 @@ public class workout_view extends AppCompatActivity {
                         tempButton.setVisibility(View.VISIBLE);
                     }
                 }
-//                else {
-//                    for (int i = 0; i < scroll.getChildCount(); i++) {
-//
-//                        View v = scroll.getChildAt(i);
-//                        int compareID = (int) v.getTag();
-//
-//                        TextView exerciseName = (TextView) v.findViewById(R.id.exerciseName);
-//                        boolean tempTrigger = (boolean) exerciseName.getTag();
-//
-//                        if (compareID == viewID) {
-////                            exerciseArray.remove(viewID);
-//                            scroll.removeView(v);
-////                            checkList.remove(viewID);
-//                        }
-//
-//                    }
-//                }
             }
         };
 
@@ -107,7 +90,12 @@ public class workout_view extends AppCompatActivity {
                             //TODO: add "_k" to each key???
                             //TODO: update max (when testing with actual user)
                             //myUser.user_max.put(exKey, maxReps);
-                            exerciseArray.remove(viewID);
+                            exerciseArray.pop();
+                            if(scroll.getChildCount()>0){
+                                View v2 = scroll.getChildAt(0);
+                                Button tempButton = (Button) v2.findViewById(R.id.btnDone);
+                                tempButton.setVisibility(View.VISIBLE);
+                            }
                         } else {
                             Log.d("Where the reps at??", "enter some reps");
                             Toast.makeText(MyApplication.getContext(), "Please enter your reps!", Toast.LENGTH_LONG).show();
