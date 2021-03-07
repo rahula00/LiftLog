@@ -39,8 +39,6 @@ public class MyWorkouts extends AppCompatActivity {
         listView.setAdapter(viewAdapter);
     }
 
-
-
     //Handle back buttonfunctionalities.
     @Override
     public void onBackPressed() {

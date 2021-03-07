@@ -7,8 +7,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,18 +14,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class workout_view extends AppCompatActivity {
 
@@ -42,71 +35,67 @@ public class workout_view extends AppCompatActivity {
         LinearLayout scroll = (LinearLayout) findViewById(R.id.linearInScroll);
         ArrayList<Integer> checkList = new ArrayList<Integer>();
 
-        //TODO: set exerciseArray to the proper array
         Integer arrayID = (int) getIntent().getLongExtra("WORKOUT_ID", 0);
         LinkedList<ExerciseStats> exerciseArray = myUser.user_workouts.get(arrayID).statsList;
-
-
 
         View.OnClickListener listener = new View.OnClickListener() {
             @SuppressLint("UseCompatLoadingForColorStateLists")
             public void onClick(View view) {
 
                 int viewID = (int) view.getTag();
-                if(!checkList.contains(viewID)){
-                    checkList.add(viewID);
-                    view.setBackgroundTintList(MyApplication.getContext().getResources().getColorStateList(R.color.red));
-                    Button b = (Button) view;
-                    b.setText("Confirm");
-                    b.setTextSize(10);
-                }
-                else{
+                View parentView = (View) view.getParent();
+                TextView triggerTagView = (TextView) parentView.findViewById(R.id.exerciseName);
+                boolean trigger = (boolean) triggerTagView.getTag();
+
+                if (trigger) {
                     View v = scroll.getChildAt(0);
+                    TextView tempReps = (TextView) v.findViewById(R.id.exerciseReps);
+                    String maxRepsString = tempReps.getText().toString().trim();
                     scroll.removeView(v);
+                    //TODO: direct towards popup
+                    if (!TextUtils.isEmpty(maxRepsString)) {
+                        int maxReps = Integer.parseInt(maxRepsString);
+                        String exKey = String.valueOf(exerciseArray.get(viewID).exercise);
+                        myUser.user_max.put((exKey + "_k"), maxReps);
+                    }
                     exerciseArray.pop();
-                    if(scroll.getChildCount()>0){
+                    if (scroll.getChildCount() > 0) {
                         View v2 = scroll.getChildAt(0);
                         Button tempButton = (Button) v2.findViewById(R.id.btnDone);
                         tempButton.setVisibility(View.VISIBLE);
                     }
-                    else{
-                        Workout toRemove = myUser.user_workouts.get(arrayID);
-                        myUser.user_workouts.remove(toRemove);
-                        if(myUser.user_workouts.size() == 0){
-                            Toast.makeText(workout_view.this, "Week is complete!", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(MyApplication.getContext(), MainActivity.class);
-                            startActivity(intent);
-                        }
-                        else {
-                            Intent intent = new Intent(MyApplication.getContext(), MyWorkouts.class);
-                            startActivity(intent);
+                } else {
+                    if (!checkList.contains(viewID)) {
+                        checkList.add(viewID);
+                        view.setBackgroundTintList(MyApplication.getContext().getResources().getColorStateList(R.color.red));
+                        Button b = (Button) view;
+                        b.setText("Confirm");
+                        b.setTextSize(10);
+                    } else {
+                        View v = scroll.getChildAt(0);
+                        scroll.removeView(v);
+                        exerciseArray.pop();
+                        if (scroll.getChildCount() > 0) {
+                            View v2 = scroll.getChildAt(0);
+                            Button tempButton = (Button) v2.findViewById(R.id.btnDone);
+                            tempButton.setVisibility(View.VISIBLE);
+                        } else {
+                            Workout toRemove = myUser.user_workouts.get(arrayID);
+                            myUser.user_workouts.remove(toRemove);
+                            if (myUser.user_workouts.size() == 0) {
+                                Toast.makeText(workout_view.this, "Week is complete!", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(MyApplication.getContext(), MainActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Intent intent = new Intent(MyApplication.getContext(), MyWorkouts.class);
+                                startActivity(intent);
+                            }
                         }
                     }
                 }
             }
         };
 
-        View.OnClickListener listenerForMax = new View.OnClickListener() {
-            public void onClick(View view) {
-                int viewID = (int) view.getTag();
-                View v = scroll.getChildAt(0);
-                TextView tempReps = (TextView) v.findViewById(R.id.exerciseReps);
-                String maxRepsString = tempReps.getText().toString().trim();
-                scroll.removeView(v);
-                //TODO: direct towards popup
-                if (!TextUtils.isEmpty(maxRepsString)) {
-                    int maxReps = Integer.parseInt(maxRepsString);
-                    String exKey = String.valueOf(exerciseArray.get(viewID).exercise);
-                    myUser.user_max.put((exKey + "_k"), maxReps);
-                }
-                exerciseArray.pop();
-                if (scroll.getChildCount() > 0) {
-                    View v2 = scroll.getChildAt(0);
-                    Button tempButton = (Button) v2.findViewById(R.id.btnDone);
-                    tempButton.setVisibility(View.VISIBLE);
-                }
-            }
-        };
 
         LayoutInflater inflater = getLayoutInflater();
 
@@ -150,7 +139,7 @@ public class workout_view extends AppCompatActivity {
             if(exTrigger){
                 btnDone.setBackgroundTintList(MyApplication.getContext().getResources().getColorStateList(R.color.btn_yellow));
                 btnDone.setTextColor(getResources().getColor(R.color.black));
-                btnDone.setOnClickListener(listenerForMax);
+                btnDone.setOnClickListener(listener);
                 exerciseName.setTextColor(getResources().getColor(R.color.btn_yellow));
                 exerciseReps.setHint("∞");
             }
