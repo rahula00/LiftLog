@@ -47,49 +47,45 @@ public class workout_view extends AppCompatActivity {
                 TextView triggerTagView = (TextView) parentView.findViewById(R.id.exerciseName);
                 boolean trigger = (boolean) triggerTagView.getTag();
 
-                if (trigger) {
+                if ((!checkList.contains(viewID)) && !trigger) {
+                    checkList.add(viewID);
+                    view.setBackgroundTintList(MyApplication.getContext().getResources().getColorStateList(R.color.red));
+                    Button b = (Button) view;
+                    b.setText("Confirm");
+                    b.setTextSize(10);
+                }
+                else {
                     View v = scroll.getChildAt(0);
-                    TextView tempReps = (TextView) v.findViewById(R.id.exerciseReps);
-                    String maxRepsString = tempReps.getText().toString().trim();
-                    scroll.removeView(v);
-                    //TODO: direct towards popup
-                    if (!TextUtils.isEmpty(maxRepsString)) {
-                        int maxReps = Integer.parseInt(maxRepsString);
-                        String exKey = String.valueOf(exerciseArray.get(viewID).exercise);
-                        myUser.user_max.put((exKey + "_k"), maxReps);
+                    if (trigger) {
+                        TextView tempReps = (TextView) v.findViewById(R.id.exerciseReps);
+                        String maxRepsString = tempReps.getText().toString().trim();
+                        scroll.removeView(v);
+                        //TODO: direct towards popup
+                        if (!TextUtils.isEmpty(maxRepsString)) {
+                            int maxReps = Integer.parseInt(maxRepsString);
+                            String exKey = String.valueOf(exerciseArray.get(viewID).exercise);
+                            myUser.user_max.put((exKey + "_k"), maxReps);
+                        }
+                        //This pop will be moved into a conditional statement for the popup.
+                        exerciseArray.pop();
+                    } else {
+                        scroll.removeView(v);
+                        exerciseArray.pop();
                     }
-                    exerciseArray.pop();
                     if (scroll.getChildCount() > 0) {
                         View v2 = scroll.getChildAt(0);
                         Button tempButton = (Button) v2.findViewById(R.id.btnDone);
                         tempButton.setVisibility(View.VISIBLE);
-                    }
-                } else {
-                    if (!checkList.contains(viewID)) {
-                        checkList.add(viewID);
-                        view.setBackgroundTintList(MyApplication.getContext().getResources().getColorStateList(R.color.red));
-                        Button b = (Button) view;
-                        b.setText("Confirm");
-                        b.setTextSize(10);
                     } else {
-                        View v = scroll.getChildAt(0);
-                        scroll.removeView(v);
-                        exerciseArray.pop();
-                        if (scroll.getChildCount() > 0) {
-                            View v2 = scroll.getChildAt(0);
-                            Button tempButton = (Button) v2.findViewById(R.id.btnDone);
-                            tempButton.setVisibility(View.VISIBLE);
+                        Workout toRemove = myUser.user_workouts.get(arrayID);
+                        myUser.user_workouts.remove(toRemove);
+                        if (myUser.user_workouts.size() == 0) {
+                            Toast.makeText(workout_view.this, "Week is complete!", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(MyApplication.getContext(), MainActivity.class);
+                            startActivity(intent);
                         } else {
-                            Workout toRemove = myUser.user_workouts.get(arrayID);
-                            myUser.user_workouts.remove(toRemove);
-                            if (myUser.user_workouts.size() == 0) {
-                                Toast.makeText(workout_view.this, "Week is complete!", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(MyApplication.getContext(), MainActivity.class);
-                                startActivity(intent);
-                            } else {
-                                Intent intent = new Intent(MyApplication.getContext(), MyWorkouts.class);
-                                startActivity(intent);
-                            }
+                            Intent intent = new Intent(MyApplication.getContext(), MyWorkouts.class);
+                            startActivity(intent);
                         }
                     }
                 }
@@ -102,41 +98,35 @@ public class workout_view extends AppCompatActivity {
 
         for(int i = 0; i < exerciseArray.size(); i++){
             ExerciseStats currentExercise = exerciseArray.get(i);
-            int exEx = currentExercise.exercise;
-            int exID = i;
-            int exWeight = currentExercise.weight;
-            int exReps = currentExercise.reps;
-            int exSets = currentExercise.sets;
-            boolean exTrigger = currentExercise.trigger_max_change;
-            Bitmap exImage = MyApplication.exerciseList.get(exEx).image;
+            Bitmap exImage = MyApplication.exerciseList.get(currentExercise.exercise).image;
 
             ConstraintLayout newLayout = (ConstraintLayout) inflater.inflate(R.layout.workout_template, scroll,false);
-            newLayout.setTag(exID);
+            newLayout.setTag(i);
 
             TextView exerciseName = (TextView) newLayout.findViewById(R.id.exerciseName);
-            String exerciseNameTemp = MyApplication.exerciseList.get(exEx).name;
+            String exerciseNameTemp = MyApplication.exerciseList.get(currentExercise.exercise).name;
             exerciseName.setText(exerciseNameTemp);
-            exerciseName.setTag(exTrigger);
+            exerciseName.setTag(currentExercise.trigger_max_change);
 
             TextView exerciseWeight = (TextView) newLayout.findViewById(R.id.exerciseWeight);
-            exerciseWeight.setText(String.valueOf(exWeight));
-            Log.d("WEIGHT: ", String.valueOf(exWeight));
+            exerciseWeight.setText(String.valueOf(currentExercise.weight));
+            Log.d("WEIGHT: ", String.valueOf(currentExercise.weight));
 
             TextView exerciseReps = (TextView) newLayout.findViewById(R.id.exerciseReps);
-            if(!exTrigger) exerciseReps.setText(String.valueOf(exReps));
+            if(!currentExercise.trigger_max_change) exerciseReps.setText(String.valueOf(currentExercise.reps));
 
             TextView exerciseSets = (TextView) newLayout.findViewById(R.id.exerciseSets);
-            exerciseSets.setText(String.valueOf(exSets));
+            exerciseSets.setText(String.valueOf(currentExercise.sets));
 
             Button btnDone = (Button) newLayout.findViewById(R.id.btnDone);
-            btnDone.setTag(exID);
-            if(!exTrigger) btnDone.setOnClickListener(listener);
+            btnDone.setTag(i);
+            if(!currentExercise.trigger_max_change) btnDone.setOnClickListener(listener);
 
             ImageView exerciseImage = (ImageView) newLayout.findViewById(R.id.exerciseImage);
             exerciseImage.setImageBitmap(exImage);
 
             // Set push exercise stats
-            if(exTrigger){
+            if(currentExercise.trigger_max_change){
                 btnDone.setBackgroundTintList(MyApplication.getContext().getResources().getColorStateList(R.color.btn_yellow));
                 btnDone.setTextColor(getResources().getColor(R.color.black));
                 btnDone.setOnClickListener(listener);
