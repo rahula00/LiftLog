@@ -24,7 +24,8 @@ package="com.example.liftlog">
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
-    <activity android:name=".workout_view" />
+    <activity android:name=".workout_view"
+        android:label="Workout"/>
     <activity android:name=".MainActivity" />
     <activity android:name=".Register" />
     <activity
