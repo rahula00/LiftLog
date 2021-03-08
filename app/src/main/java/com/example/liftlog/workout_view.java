@@ -39,6 +39,7 @@ public class workout_view extends AppCompatActivity {
         LinkedList<ExerciseStats> exerciseArray = myUser.user_workouts.get(arrayID).statsList;
 
         View.OnClickListener listener = new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @SuppressLint("UseCompatLoadingForColorStateLists")
             public void onClick(View view) {
 
