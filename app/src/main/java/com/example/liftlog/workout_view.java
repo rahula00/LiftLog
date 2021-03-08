@@ -39,6 +39,7 @@ public class workout_view extends AppCompatActivity {
         LinkedList<ExerciseStats> exerciseArray = myUser.user_workouts.get(arrayID).statsList;
 
         View.OnClickListener listener = new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @SuppressLint("UseCompatLoadingForColorStateLists")
             public void onClick(View view) {
 
@@ -80,8 +81,9 @@ public class workout_view extends AppCompatActivity {
                         Workout toRemove = myUser.user_workouts.get(arrayID);
                         myUser.user_workouts.remove(toRemove);
                         if (myUser.user_workouts.size() == 0) {
-                            Toast.makeText(workout_view.this, "Week is complete!", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(MyApplication.getContext(), MainActivity.class);
+                            Toast.makeText(workout_view.this, "Week is complete! Restarted Routine.", Toast.LENGTH_LONG).show();
+                            MyApplication.user.setRoutine((int) MyApplication.user.routine_id, MyApplication.routineList.get(0).workouts);
+                            Intent intent = new Intent(MyApplication.getContext(), MyWorkouts.class);
                             startActivity(intent);
                         } else {
                             Intent intent = new Intent(MyApplication.getContext(), MyWorkouts.class);
