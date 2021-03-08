@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.liftlog">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+package="com.example.liftlog">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 <application
-    android:name="com.example.liftlog.MyApplication"
+    android:name=".MyApplication"
     android:allowBackup="true"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
@@ -25,15 +24,16 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
+    <activity android:name=".workout_view"
+        android:label="Workout"/>
     <activity android:name=".MainActivity" />
     <activity android:name=".Register" />
     <activity
         android:name=".Profile"
-        android:windowSoftInputMode="adjustPan"/>
-
+        android:windowSoftInputMode="adjustPan" />
     <activity android:name=".Routines" />
     <activity android:name=".MyWorkouts" />
-    <activity android:name=".RoutineView"/>
+    <activity android:name=".RoutineView" />
 </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import androidx.annotation.RequiresApi;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class NSuns extends Routine{
@@ -20,6 +21,7 @@ public class NSuns extends Routine{
     static final int s_deadlift    =      6;
     static final int min_ex_weight =      45;
     static final boolean push      =      true;
+    static final String suffix     =      "_k";
 
     static final String nsun_descr = "nSuns 5/3/1 is a linear progression powerlifting program" +
             " that was inspired by Jim Wendler’s 5/3/1 strength program. It progresses on a" +
@@ -240,7 +242,7 @@ public class NSuns extends Routine{
 
     public void init_workouts() {
         for (int i = 0; i < 4; ++i) {
-            this.workouts.add(new Workout(0, names[i], descrs[i], exercises.get(i)));
+            this.workouts.add(new Workout(i, names[i], descrs[i], exercises.get(i)));
         }
     }
 
@@ -249,23 +251,23 @@ public class NSuns extends Routine{
         int training_max1, training_max2;
         switch ((int) to_init.id) {
             case 0: {
-                training_max1 = (int) Math.floor(.90 * user_max.get(String.valueOf(bench)));
-                training_max2 = (int) Math.floor(.90 * user_max.get(String.valueOf(oh_press)));
+                training_max1 = (int) Math.floor(.90 * user_max.get(bench+suffix));
+                training_max2 = (int) Math.floor(.90 * user_max.get(oh_press+suffix));
                 break;
             }
             case 1: {
-                training_max1 = (int) Math.floor(.90 * user_max.get(String.valueOf(squat)));
-                training_max2 = (int) Math.floor(.90 * user_max.get(String.valueOf(s_deadlift)));
+                training_max1 = (int) Math.floor(.90 * user_max.get(squat+suffix));
+                training_max2 = (int) Math.floor(.90 * user_max.get(s_deadlift+suffix));
                 break;
             }
             case 2: {
-                training_max1 = (int) Math.floor(.90 * user_max.get(String.valueOf(bench)));
-                training_max2 = (int) Math.floor(.90 * user_max.get(String.valueOf(c_g_bench)));
+                training_max1 = (int) Math.floor(.90 * user_max.get(bench+suffix));
+                training_max2 = (int) Math.floor(.90 * user_max.get(c_g_bench+suffix));
                 break;
             }
             case 3: {
-                training_max1 = (int) Math.floor(.90 * user_max.get(String.valueOf(deadlift)));
-                training_max2 = (int) Math.floor(.90 * user_max.get(String.valueOf(front_squat)));
+                training_max1 = (int) Math.floor(.90 * user_max.get(deadlift+suffix));
+                training_max2 = (int) Math.floor(.90 * user_max.get(front_squat+suffix));
                 break;
             }
             default : { return; }
@@ -276,11 +278,12 @@ public class NSuns extends Routine{
     @RequiresApi(api = Build.VERSION_CODES.N)
     private static void set_workout_max(Workout to_init, int train_max1, int train_max2) {
         ArrayList<Double> modifiers = weight_modifiers.get((int) to_init.id);
-        int index = 0;
+        AtomicInteger index = new AtomicInteger();
         to_init.statsList.forEach(exercise -> {
-            int curr_max = index < 9 ? train_max1 : train_max2;
-            exercise.weight = (int) Math.floor(modifiers.get(index) * curr_max);
+            int curr_max = index.get() < 9 ? train_max1 : train_max2;
+            exercise.weight = (int) Math.floor(modifiers.get(index.get()) * curr_max);
             //ensure that weight set is divisble evenly by 5
+            index.getAndIncrement();
             if (exercise.weight < min_ex_weight) {
                 exercise.weight = min_ex_weight;
                 return;
