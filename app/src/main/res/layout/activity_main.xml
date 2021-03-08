@@ -35,7 +35,7 @@
         android:id="@+id/btnProfile"
         android:layout_width="254dp"
         android:layout_height="69dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="324dp"
         android:fontFamily="@font/roboto_bold"
         android:text="Profile"
         android:textSize="18sp"
@@ -43,7 +43,7 @@
         app:backgroundTint="@color/green_af"
         app:iconTint="#000000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,42 +51,28 @@
         android:id="@+id/btnRoutines"
         android:layout_width="254dp"
         android:layout_height="69dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_bold"
         android:text="Routines"
         android:textSize="18sp"
         app:backgroundTint="@color/green_af"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnProfile" />
-
-    <Button
-        android:id="@+id/btnProgress"
-        android:layout_width="254dp"
-        android:layout_height="69dp"
-        android:layout_marginTop="12dp"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Progress"
-        android:textSize="18sp"
-        app:backgroundTint="@color/green_af"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRoutines" />
 
     <Button
         android:id="@+id/btnMyWorkouts"
         android:layout_width="254dp"
         android:layout_height="69dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_bold"
         android:text="My Workouts"
         android:textSize="18sp"
         app:backgroundTint="@color/green_af"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnProgress" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRoutines" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
