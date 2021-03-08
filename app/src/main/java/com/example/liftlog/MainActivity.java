@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -18,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
     Button mLogoutBtn;
     Button mProfileBtn;
     Button mRoutinesBtn;
-    Button mProgressBtn;
     Button mMyWorkoutsBtn;
 
     @Override
@@ -27,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mProfileBtn = findViewById(R.id.btnProfile);
         mRoutinesBtn = findViewById(R.id.btnRoutines);
-        mProgressBtn = findViewById(R.id.btnProgress);
         mMyWorkoutsBtn = findViewById(R.id.btnMyWorkouts);
         mLogoutBtn = findViewById(R.id.btnLogout);
         fAuth = FirebaseAuth.getInstance();
@@ -43,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //On click of 'Progress' button
+        //On click of 'Routines' button
         mRoutinesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,18 +50,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //On click of 'Progress' button
-        mProgressBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Progress.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        //On click of 'Progress' button
+        //On click of 'MyWorkouts' button
         mMyWorkoutsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
