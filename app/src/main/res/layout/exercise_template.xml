@@ -38,6 +38,7 @@
             android:ems="10"
             android:gravity="center"
             android:hint="___"
+            android:maxLength="6"
             android:inputType="number"
             android:padding="0dp"
             android:textColor="@color/std_text_color"
