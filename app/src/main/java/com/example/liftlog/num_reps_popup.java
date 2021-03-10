@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,7 +50,9 @@ public class num_reps_popup extends Activity {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int)(width*.8), (int)(height*.2));
+        Window view = getWindow();
+        view.setLayout((int)(width*.8), (int)(height*.2));
+        view.setBackgroundDrawableResource(R.drawable.roundedges);
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;
         params.x = 0;

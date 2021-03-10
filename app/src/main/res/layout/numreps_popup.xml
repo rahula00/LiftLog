@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ok"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/black">
+    android:layout_height="match_parent">
 
     <Button
         android:id="@+id/btnOk"
@@ -18,7 +17,8 @@
         android:bottomLeftRadius="10dp"
         android:topLeftRadius="10dp"
         android:topRightRadius="10dp"
-        android:background="@color/green_af"
+        android:background="@drawable/roundedges"
+        android:backgroundTint="@color/green_af"
         android:fontFamily="@font/roboto_bold"
         app:backgroundTint="@color/green_af"
         app:layout_constraintBottom_toBottomOf="parent"
