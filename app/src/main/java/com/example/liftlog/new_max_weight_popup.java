@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -67,12 +68,14 @@ public class new_max_weight_popup extends Activity {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
-        int height = dm.heightPixels;
-        getWindow().setLayout((int)(width*.92), (int)(height*.275));
+        int height = 620;
+        Window view = getWindow();
+        view.setLayout((int)(width*.92), height);
+        view.setBackgroundDrawableResource(R.drawable.roundedges);
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;
         params.x = 0;
-        params.y = -20;
+        params.y = 0;
         getWindow().setAttributes(params);
     }
 
