@@ -26,14 +26,22 @@ package="com.example.liftlog">
     </activity>
     <activity android:name=".workout_view"
         android:label="Workout"/>
-    <activity android:name=".MainActivity" />
-    <activity android:name=".Register" />
+    <activity android:name=".MainActivity"
+        android:label="@string/app_name"/>
+    <activity android:name=".Register"
+        android:label="@string/app_name"/>
     <activity
         android:name=".Profile"
-        android:windowSoftInputMode="adjustPan" />
-    <activity android:name=".Routines" />
-    <activity android:name=".MyWorkouts" />
-    <activity android:name=".RoutineView" />
+        android:windowSoftInputMode="adjustPan"
+        android:label="Profile"/>
+    <activity android:name=".Routines"
+        android:label="Routines" />
+    <activity android:name=".MyWorkouts"
+        android:label="My Workouts" />
+    <activity android:name=".RoutineView"
+        android:label="Routine" />
+    <activity android:name=".num_reps_popup" android:theme="@style/DialogTheme.popup"/>
+    <activity android:name=".new_max_weight_popup" android:theme="@style/DialogTheme.popup"/>
 </application>
 
 </manifest>

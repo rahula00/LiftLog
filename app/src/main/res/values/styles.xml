@@ -9,4 +9,9 @@
         <item name="android:datePickerMode">spinner</item>
     </style>
 
+    <style name="DialogTheme.popup">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+    </style>
+
 </resources>

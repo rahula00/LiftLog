@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,16 +57,12 @@ public class workout_view extends AppCompatActivity {
                 else {
                     View v = scroll.getChildAt(0);
                     if (trigger) {
-                        TextView tempReps = (TextView) v.findViewById(R.id.exerciseReps);
-                        String maxRepsString = tempReps.getText().toString().trim();
+                        // create popup (set intent)
+                        Intent intent = new Intent(MyApplication.getContext(), num_reps_popup.class);
+                        intent.putExtra("workout_id", arrayID);
+                        intent.putExtra("view_id", viewID);
+                        startActivity(intent);
                         scroll.removeView(v);
-                        //TODO: direct towards popup
-                        if (!TextUtils.isEmpty(maxRepsString)) {
-                            int maxReps = Integer.parseInt(maxRepsString);
-                            String exKey = String.valueOf(exerciseArray.get(viewID).exercise);
-                            myUser.user_max.put((exKey + "_k"), maxReps);
-                        }
-                        //This pop will be moved into a conditional statement for the popup.
                         exerciseArray.pop();
                     } else {
                         scroll.removeView(v);
@@ -83,13 +78,11 @@ public class workout_view extends AppCompatActivity {
                         if (myUser.user_workouts.size() == 0) {
                             Toast.makeText(workout_view.this, "Week is complete! Restarted Routine.", Toast.LENGTH_LONG).show();
                             MyApplication.user.setRoutine((int) MyApplication.user.routine_id, MyApplication.routineList.get(0).workouts);
-                            Intent intent = new Intent(MyApplication.getContext(), MyWorkouts.class);
-                            startActivity(intent);
-                        } else {
-                            Intent intent = new Intent(MyApplication.getContext(), MyWorkouts.class);
-                            startActivity(intent);
                         }
+                        Intent intent = new Intent(MyApplication.getContext(), MyWorkouts.class);
+                        startActivity(intent);
                     }
+                    myUser.updateToFirebase();
                 }
             }
         };
