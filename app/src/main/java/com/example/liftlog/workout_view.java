@@ -78,12 +78,9 @@ public class workout_view extends AppCompatActivity {
                         if (myUser.user_workouts.size() == 0) {
                             Toast.makeText(workout_view.this, "Week is complete! Restarted Routine.", Toast.LENGTH_LONG).show();
                             MyApplication.user.setRoutine((int) MyApplication.user.routine_id, MyApplication.routineList.get(0).workouts);
-                            Intent intent = new Intent(MyApplication.getContext(), MyWorkouts.class);
-                            startActivity(intent);
-                        } else {
-                            Intent intent = new Intent(MyApplication.getContext(), MyWorkouts.class);
-                            startActivity(intent);
                         }
+                        Intent intent = new Intent(MyApplication.getContext(), MyWorkouts.class);
+                        startActivity(intent);
                     }
                     myUser.updateToFirebase();
                 }
