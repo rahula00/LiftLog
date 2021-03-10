@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.LinkedList;
@@ -24,8 +23,7 @@ public class new_max_weight_popup extends Activity {
         Intent intent = getIntent();
         setContentView(R.layout.newmaxweight_popup);
         User myUser = MyApplication.user;
-//        LinearLayout scroll = (LinearLayout) findViewById(R.id.linearInScroll);
-//        View v = scroll.getChildAt(0);
+
         int suggested_increase = intent.getIntExtra("suggested_increase", 0);
         int arrayID = intent.getIntExtra("workout_id", 0);
         int viewID = intent.getIntExtra("view_id", 0);
