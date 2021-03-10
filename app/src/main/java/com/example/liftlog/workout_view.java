@@ -73,15 +73,18 @@ public class workout_view extends AppCompatActivity {
                         View v2 = scroll.getChildAt(0);
                         Button tempButton = (Button) v2.findViewById(R.id.btnDone);
                         tempButton.setVisibility(View.VISIBLE);
+                        myUser.updateToFirebase();
                     } else {
                         Workout toRemove = myUser.user_workouts.get(arrayID);
                         myUser.user_workouts.remove(toRemove);
                         if (myUser.user_workouts.size() == 0) {
                             Toast.makeText(workout_view.this, "Week is complete! Restarted Routine.", Toast.LENGTH_LONG).show();
                             MyApplication.user.setRoutine((int) MyApplication.user.routine_id, MyApplication.routineList.get(0).workouts);
+                            myUser.updateToFirebase();
                             Intent intent = new Intent(MyApplication.getContext(), MyWorkouts.class);
                             startActivity(intent);
                         } else {
+                            myUser.updateToFirebase();
                             Intent intent = new Intent(MyApplication.getContext(), MyWorkouts.class);
                             startActivity(intent);
                         }

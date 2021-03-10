@@ -82,5 +82,14 @@ public class new_max_weight_popup extends Activity {
     }
 
     @Override
-    public void onBackPressed() {}
+    public void onBackPressed() {
+        Intent intent = getIntent();
+        int arrayID = intent.getIntExtra("workout_id", 0);
+        int viewID = intent.getIntExtra("view_id", 0);
+        Intent intent2 = new Intent(MyApplication.getContext(), num_reps_popup.class);
+        intent2.putExtra("workout_id", arrayID);
+        intent2.putExtra("view_id", viewID);
+        startActivity(intent2);
+        finish();
+    }
 }
