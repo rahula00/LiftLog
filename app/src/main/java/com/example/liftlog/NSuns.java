@@ -295,7 +295,7 @@ public class NSuns extends Routine{
         });
     }
 
-    public int suggest_increase(int reps_completed) {
+    public static int suggest_increase(int reps_completed) {
         switch (reps_completed) {
             case 0:
             case 1: {

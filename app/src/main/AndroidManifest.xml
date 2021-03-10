@@ -34,6 +34,8 @@ package="com.example.liftlog">
     <activity android:name=".Routines" />
     <activity android:name=".MyWorkouts" />
     <activity android:name=".RoutineView" />
+    <activity android:name=".num_reps_popup" android:theme="@style/DialogTheme.popup"/>
+    <activity android:name=".new_max_weight_popup" android:theme="@style/DialogTheme.popup"/>
 </application>
 
 </manifest>
