@@ -35,9 +35,8 @@ public class num_reps_popup extends Activity {
                     int numRepsInput = Integer.parseInt(input);
                     int arrayID = intent.getIntExtra("workout_id", 0);
                     int viewID = intent.getIntExtra("view_id", 0);
-                    NSuns nsuns = new NSuns();
                     Intent intent2 = new Intent(MyApplication.getContext(), new_max_weight_popup.class);
-                    intent2.putExtra("suggested_increase", nsuns.suggest_increase(numRepsInput));
+                    intent2.putExtra("suggested_increase", NSuns.suggest_increase(numRepsInput));
                     intent2.putExtra("workout_id", arrayID);
                     intent2.putExtra("view_id", viewID);
                     startActivity(intent2);
