@@ -57,6 +57,9 @@ public class new_max_weight_popup extends Activity {
                     if(newMaxWeight % 5 != 0){
                         mNewMaxWeight.setError("Max weight divisible by 5 is required.");
                     }
+                    else if(newMaxWeight == 0){
+                        mNewMaxWeight.setError("Max weight greater than 0 is required.");
+                    }
                     else{
                         myUser.user_max.put((exKey + "_k"), newMaxWeight);
                         myUser.updateToFirebase();
