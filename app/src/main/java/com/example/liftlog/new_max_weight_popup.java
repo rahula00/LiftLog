@@ -80,4 +80,7 @@ public class new_max_weight_popup extends Activity {
         params.y = -20;
         getWindow().setAttributes(params);
     }
+
+    @Override
+    public void onBackPressed() {}
 }

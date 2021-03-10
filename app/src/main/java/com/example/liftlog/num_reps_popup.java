@@ -56,4 +56,7 @@ public class num_reps_popup extends Activity {
         params.y = -20;
         getWindow().setAttributes(params);
     }
+
+    @Override
+    public void onBackPressed() {}
 }
