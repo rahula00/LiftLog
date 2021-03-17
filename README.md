@@ -1,2 +1,2 @@
 # Lift Log
-Lift Log Project Repository
+Workout app following the nSuns 4 day lifting program
