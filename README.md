@@ -1,2 +1,2 @@
-# the_high_five
-CSE115A Project Repository
+# Lift Log
+Lift Log Project Repository
